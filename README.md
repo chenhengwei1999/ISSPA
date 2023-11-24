@@ -6,5 +6,5 @@ This repo is used to develop and store codes for physical agents.
 
 - Ubuntu 20.04
 
-- ROS1 noetic
+- ROS2 humble
 
