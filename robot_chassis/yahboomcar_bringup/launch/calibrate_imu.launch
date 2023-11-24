@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- 底层驱动节点 Low-level driver node -->
+    <include file="$(find yahboomcar_bringup)/launch/yahboomcar.launch"/>
+    <!-- 校准imu安装时的一些误差 -->
+    <!-- Some errors during calibration of imu installation -->
+    <node pkg="imu_calib" type="do_calib" name="do_calib" output="screen" required="True">
+       <remap from="/sub_imu" to="/imu/imu_raw"/>
+        <param name="output_file" value="$(find yahboomcar_bringup)/param/imu_calib.yaml"/>
+    </node>
+</launch>

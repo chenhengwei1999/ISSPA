@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="rviz" type="rviz" name="odom_rviz" required="true"
+       args="-d $(find yahboomcar_bringup)/rviz/odom.rviz"/>
+</launch>

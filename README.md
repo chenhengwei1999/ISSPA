@@ -1,2 +1,10 @@
-# ISS-Robots
-Developing ISS(Intelligent Self-driving System)'s function of physical agent
+# ISSPA (Intelligent Self-driving System Physical Agent)
+
+This repo is used to develop and store codes for physical agents.
+
+## Developing Environment
+
+- Ubuntu 20.04
+
+- ROS1 noetic
+

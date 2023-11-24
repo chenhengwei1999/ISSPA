@@ -1,0 +1,28 @@
+<launch>
+    <arg name="use_gui" default="false"/>
+    <arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/>
+    <!-- 底层驱动节点 -->
+    <!-- Low-level driver node -->
+    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
+        <param name="xlinear_speed_limit" type="double" value="1.0"/>
+        <param name="ylinear_speed_limit" type="double" value="1.0"/>
+        <param name="angular_speed_limit" type="double" value="5.0"/>
+        <param name="imu_link" type="string" value="imu_link"/>
+        <remap from="/pub_vel" to="/vel_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_raw"/>
+        <remap from="/pub_mag" to="/mag/mag_raw"/>
+    </node>
+    <!--若车型不匹配，启动警告节点-->
+    <node pkg="yahboomcar_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
+    <!-- 仿真模型 -->
+    <!-- Simulation model -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder
+        '$(find yahboomcar_description)/urdf/yahboomcar_$(arg robot_type).urdf.xacro'" if="$(eval arg('robot_type') == 'R2')"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder
+        '$(find yahboomcar_description)/urdf/yahboomcar_$(arg robot_type).urdf'" if="$(eval arg('robot_type') == 'X3')"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"
+          if="$(arg use_gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
+          unless="$(arg use_gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+</launch>

@@ -1,0 +1,16 @@
+<launch>
+    <!-- 启动底层驱动 Start the underlying driver -->
+    <include file="$(find yahboomcar_bringup)/launch/bringup.launch"/>
+    <arg name="lidar_type" value="$(env RPLIDAR_TYPE)" doc="lidar_type [a1,4ROS]"/>
+    <include file="$(find rplidar_ros)/launch/rplidar.launch" if="$(eval arg('lidar_type') == 'a1')"/>
+    <include file="$(find ydlidar_ros_driver)/launch/TG.launch" if="$(eval arg('lidar_type') == '4ROS')"/>
+    
+    <node pkg="yahboomcar_bringup" type="patrol_a1.py" name="YahboomCarPatrol" required="true" output="screen" if="$(eval arg('lidar_type') == 'a1')">
+        <param name="circle_adjust" type="double" value="2.0"/>
+    </node>
+    
+    <node pkg="yahboomcar_bringup" type="patrol_4ROS.py" name="YahboomCarPatrol" required="true" output="screen" if="$(eval arg('lidar_type') == '4ROS')">
+        <param name="circle_adjust" type="double" value="2.0"/>
+    </node>
+    
+</launch>

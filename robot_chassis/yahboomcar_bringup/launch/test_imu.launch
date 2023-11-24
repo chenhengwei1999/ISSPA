@@ -1,0 +1,57 @@
+<launch>
+    <!-- PCB和PC之间通过USB串行通信 -->
+    <!---USB serial communication between PCB and PC -->
+    <arg name="debug" default="false"/>
+    <arg name="use_rviz" default="true"/>
+    <arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/>
+
+    <!-- 底层驱动节点 -->
+    <!-- Low-level driver node -->
+    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
+        <param name="xlinear_speed_limit" type="double" value="1.0"/>
+        <param name="ylinear_speed_limit" type="double" value="1.0"/>
+        <param name="angular_speed_limit" type="double" value="5.0"/>
+        <param name="imu_link" type="string" value="imu_link"/>
+        <remap from="/pub_vel" to="/vel_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_raw"/>
+        <remap from="/pub_mag" to="/mag/mag_raw"/>
+    </node>
+
+    <!--若车型不匹配，启动警告节点-->
+    <node pkg="yahboomcar_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
+    <!-- 发布里程计数据 -->
+    <!-- Publish odometer data -->
+    <node pkg="yahboomcar_bringup" type="base_node" name="odometry_publisher">
+        <param name="odom_frame" type="string" value="odom"/>
+        <param name="base_footprint_frame" type="string" value="base_footprint"/>
+        <param name="linear_scale_x" type="double" value="1.1"/>
+        <param name="linear_scale_y" type="double" value="1.0"/>
+        <remap from="/sub_vel" to="/vel_raw"/>
+        <remap from="/pub_odom" to="/odom_raw"/>
+    </node>
+
+    <!-- 过滤和融合imu数据 -->
+    <!-- Filter and fuse imu data -->
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick" output="screen">
+        <param name="fixed_frame" value="base_link"/>
+        <param name="use_mag" value="false"/>
+        <param name="publish_tf" value="false"/>
+        <param name="use_magnetic_field_msg" value="false"/>
+        <param name="world_frame" value="enu"/>
+        <param name="orientation_stddev" value="0.05"/>
+        <param name="angular_scale" value="1.0"/>
+        <remap from="/sub_imu" to="/imu/imu_raw"/>
+        <remap from="/sub_mag" to="/mag/mag_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_data"/>
+        <remap from="/pub_mag" to="/mag/mag_field"/>
+    </node>
+
+    <!-- 发布静态坐标系转换 -->
+    <!-- Post static coordinate system conversion -->
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_imu_link"
+          args="-0.1 0.01 0.01 0 0 0  /base_link /imu_link 100" if="$(arg robot_type)==R2"/>
+
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="odom_rviz" required="true"
+          args="-d $(find yahboomcar_bringup)/rviz/test_imu.rviz" if="$(arg use_rviz)"/>
+</launch>

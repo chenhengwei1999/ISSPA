@@ -1,0 +1,15 @@
+<launch>
+    <!--arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/-->
+    <!-- 底层驱动节点 -->
+    <!-- Low-level driver node -->
+    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen">
+        <param name="xlinear_speed_limit" type="double" value="1.0"/>
+        <param name="ylinear_speed_limit" type="double" value="1.0"/>
+        <param name="angular_speed_limit" type="double" value="5.0"/>
+        <param name="imu_link" type="string" value="imu_link"/>
+        <remap from="/pub_vel" to="/vel_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_raw"/>
+        <remap from="/pub_mag" to="/mag/mag_raw"/>
+    </node>
+    <include file="$(find yahboomcar_ctrl)/launch/yahboom_joy.launch"/>
+</launch>

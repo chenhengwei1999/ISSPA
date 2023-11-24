@@ -1,0 +1,90 @@
+<launch>
+    <!-- PCB和PC之间通过USB串行通信 -->
+    <!---USB serial communication between PCB and PC -->
+    <arg name="use_gui" default="false"/>
+    <arg name="use_rviz" default="false"/>
+    <arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/>
+
+    <!-- 底层驱动节点 -->
+    <!-- Low-level driver node -->
+    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
+        <param name="xlinear_speed_limit" type="double" value="1.0"/>
+        <param name="ylinear_speed_limit" type="double" value="1.0"/>
+        <param name="angular_speed_limit" type="double" value="5.0"/>
+        <param name="imu_link" type="string" value="imu_link"/>
+        <remap from="/pub_vel" to="/imu/vel_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_raw"/>
+        <remap from="/pub_mag" to="/mag/mag_raw"/>
+    </node>
+
+    <!--若车型不匹配，启动警告节点-->
+    <node pkg="yahboomcar_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
+    <!-- 发布里程计数据 -->
+    <!-- Publish odometer data -->
+    <node pkg="yahboomcar_bringup" type="base_node" name="odometry_publisher">
+        <param name="odom_frame" type="string" value="odom"/>
+        <param name="base_footprint_frame" type="string" value="base_footprint"/>
+        <param name="linear_scale_x" type="double" value="1.1"/>
+        <param name="linear_scale_y" type="double" value="1.0"/>
+        <remap from="/sub_vel" to="/vel_raw"/>
+        <remap from="/pub_odom" to="/odom_raw"/>
+    </node>
+    <!-- 校准imu安装时的一些误差 -->
+    <!-- Some errors during calibration of imu installation -->
+    <node pkg="imu_calib" type="apply_calib" name="apply_calib" output="screen" respawn="false">
+        <param name="calib_file" value="$(find yahboomcar_bringup)/param/imu_calib.yaml"/>
+        <param name="calibrate_gyros" value="true"/>
+        <remap from="/sub_imu" to="/imu/imu_raw"/>
+        <remap from="/sub_mag" to="/mag/mag_raw"/>
+        <remap from="/pub_imu" to="/imu/imu_calib"/>
+        <remap from="/pub_mag" to="/mag/mag_calib"/>
+    </node>
+    <!-- 过滤和融合imu数据 -->
+    <!-- Filter and fuse imu data -->
+    <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick" output="screen">
+        <param name="fixed_frame" value="base_link"/>
+        <param name="use_mag" value="true"/>
+        <param name="publish_tf" value="false"/>
+        <param name="use_magnetic_field_msg" value="true"/>
+        <param name="world_frame" value="enu"/>
+        <param name="orientation_stddev" value="0.05"/>
+        <param name="angular_scale" value="1.08"/>
+        <remap from="/sub_imu" to="/imu/imu_calib"/>
+        <remap from="/sub_mag" to="/mag/mag_calib"/>
+        <remap from="/pub_imu" to="/imu/imu_data"/>
+        <remap from="/pub_mag" to="/mag/mag_field"/>
+    </node>
+
+    <!-- 发布静态坐标系转换 -->
+    <!-- Post static coordinate system conversion -->
+    <node pkg="tf" type="static_transform_publisher" name="base_link_to_imu_link"
+          args="-0.1 0.01 0.01 1.5707 3.1415 0  /base_link /imu_link  100"/>
+
+    <!-- 扩展卡尔曼数据融合 -->
+    <!-- Extended Kalman data fusion -->
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="screen">
+        <remap from="odometry/filtered" to="odom"/>
+        <remap from="/imu0" to="/imu/imu_data"/>
+        <remap from="/odom0" to="odom_raw"/>
+        <param name="odom_frame" value="/odom"/>
+        <param name="world_frame" value="/odom"/>
+        <param name="base_link_frame" value="/base_footprint"/>
+        <rosparam command="load" file="$(find yahboomcar_bringup)/param/robot_localization.yaml"/>
+    </node>
+    <!-- 仿真模型 -->
+    <!-- Simulation model -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder
+        '$(find yahboomcar_description)/urdf/yahboomcar_R2.urdf.xacro'"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"
+          if="$(arg use_gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
+          unless="$(arg use_gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <!-- 手柄控制节点 -->
+    <!-- Handle control node -->
+    <include file="$(find yahboomcar_ctrl)/launch/yahboom_joy.launch"/>
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="odom_rviz" required="true"
+          args="-d $(find yahboomcar_bringup)/rviz/odom.rviz" if="$(arg use_rviz)"/>
+</launch>
