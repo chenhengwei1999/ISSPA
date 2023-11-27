@@ -2,6 +2,6 @@
 <launch>
     <!-- 启动角速度校准节点 -->
     <!-- Start angular velocity calibration node -->
-    <node name="calibrate_angular" pkg="yahboomcar_bringup" type="calibrate_angular.py" output="screen"/>
+    <node name="calibrate_angular" pkg="pavs_bringup" type="calibrate_angular.py" output="screen"/>
 </launch>
 

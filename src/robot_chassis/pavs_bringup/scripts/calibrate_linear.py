@@ -26,7 +26,7 @@ import dynamic_reconfigure.client
 from math import copysign, sqrt, pow
 from geometry_msgs.msg import Twist, Point
 from dynamic_reconfigure.server import Server
-from pav_s01_bringup.cfg import CalibrateLinearConfig
+from pavs_bringup.cfg import CalibrateLinearConfig
 
 
 class CalibrateLinear():

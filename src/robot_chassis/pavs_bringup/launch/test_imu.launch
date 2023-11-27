@@ -7,7 +7,7 @@
 
     <!-- 底层驱动节点 -->
     <!-- Low-level driver node -->
-    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
+    <node pkg="pavs_bringup" type="chassis_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
         <param name="xlinear_speed_limit" type="double" value="1.0"/>
         <param name="ylinear_speed_limit" type="double" value="1.0"/>
         <param name="angular_speed_limit" type="double" value="5.0"/>
@@ -18,10 +18,10 @@
     </node>
 
     <!--若车型不匹配，启动警告节点-->
-    <node pkg="yahboomcar_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
+    <node pkg="pavs_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
     <!-- 发布里程计数据 -->
     <!-- Publish odometer data -->
-    <node pkg="yahboomcar_bringup" type="base_node" name="odometry_publisher">
+    <node pkg="pavs_bringup" type="base_node" name="odometry_publisher">
         <param name="odom_frame" type="string" value="odom"/>
         <param name="base_footprint_frame" type="string" value="base_footprint"/>
         <param name="linear_scale_x" type="double" value="1.1"/>
@@ -53,5 +53,5 @@
 
     <!-- rviz -->
     <node pkg="rviz" type="rviz" name="odom_rviz" required="true"
-          args="-d $(find yahboomcar_bringup)/rviz/test_imu.rviz" if="$(arg use_rviz)"/>
+          args="-d $(find pavs_bringup)/rviz/test_imu.rviz" if="$(arg use_rviz)"/>
 </launch>

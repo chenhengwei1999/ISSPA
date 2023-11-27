@@ -27,7 +27,7 @@ from geometry_msgs.msg import Twist, Quaternion
 from nav_msgs.msg import Odometry
 from dynamic_reconfigure.server import Server
 import dynamic_reconfigure.client
-from pav_s01_bringup.cfg import CalibrateAngularConfig
+from pavs_bringup.cfg import CalibrateAngularConfig
 from math import radians, copysign
 from transform_utils import quat_to_angle, normalize_angle
 

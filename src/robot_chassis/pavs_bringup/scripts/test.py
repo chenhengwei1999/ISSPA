@@ -4,7 +4,7 @@ from Turn_Right import *
 class Turn():
     def __init__(self):
         self.sub_traffic_sign = rospy.Subscriber('/traffic_logo', Int32, self.excute, queue_size=1)
-        self.trun_right = PAVS01_CarPatrol()
+        self.trun_right = PAVS_CarPatrol()
     def excute(self,msg):
         if msg == 2:
             self.trun_right.process()

@@ -1,8 +1,8 @@
 <launch>
-    <arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/>
+    <!--arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/-->
     <!-- 底层驱动节点 -->
     <!-- Low-level driver node -->
-    <node pkg="yahboomcar_bringup" type="Mcnamu_driver.py" name="driver_node" required="true" output="screen" if="$(eval arg('robot_type') == 'R2')">
+    <node pkg="pavs_bringup" type="chassis_driver.py" name="driver_node" required="true" output="screen">
         <param name="xlinear_speed_limit" type="double" value="1.0"/>
         <param name="ylinear_speed_limit" type="double" value="1.0"/>
         <param name="angular_speed_limit" type="double" value="5.0"/>
@@ -11,7 +11,5 @@
         <remap from="/pub_imu" to="/imu/imu_raw"/>
         <remap from="/pub_mag" to="/mag/mag_raw"/>
     </node>
-
-    <!--若车型不匹配，启动警告节点-->
-    <node pkg="yahboomcar_bringup" type="warning.py" name="warning" required="true" output="screen" unless="$(eval arg('robot_type') == 'R2')"/>
+    <include file="$(find yahboomcar_ctrl)/launch/yahboom_joy.launch"/>
 </launch>

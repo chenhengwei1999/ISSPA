@@ -10,12 +10,12 @@ from sensor_msgs.msg import LaserScan
 from math import radians, copysign, sqrt, pow
 from geometry_msgs.msg import Twist, Point, Quaternion
 from transform_utils import quat_to_angle, normalize_angle
-from pav_s01_bringup.cfg import PatrolParamConfig
+from pavs_bringup.cfg import PatrolParamConfig
 from dynamic_reconfigure.server import Server
 import dynamic_reconfigure.client
 RAD2DEG = 180 / math.pi
 
-class PAVS01_CarPatrol():
+class PAVS_CarPatrol():
     def __init__(self):
         rospy.on_shutdown(self.cancel)
         self.r = rospy.Rate(20)
@@ -190,7 +190,7 @@ class PAVS01_CarPatrol():
             angle = (scan_data.angle_min + scan_data.angle_increment * i) * RAD2DEG
             # if angle > 90: print "i: {},angle: {},dist: {}".format(i, angle, scan_data.ranges[i])
             # 通过清除不需要的扇区的数据来保留有效的数据
-            if abs(angle) < self.LaserAngle:
+            if abs(angle) > (180 - self.LaserAngle):
                 if ranges[i] < self.ResponseDist: self.warning += 1
         # print ("warning: {}".format(self.warning))
 
@@ -308,7 +308,7 @@ class PAVS01_CarPatrol():
 
 
 if __name__ == '__main__':
-    rospy.init_node('PAVS01_CarPatrol', anonymous=False)
-    patrol = PAVS01_CarPatrol()
+    rospy.init_node('PAVS_CarPatrol', anonymous=False)
+    patrol = PAVS_CarPatrol()
     patrol.process()
     rospy.spin()

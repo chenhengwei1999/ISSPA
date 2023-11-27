@@ -12,7 +12,7 @@ from Rosmaster_Lib import Rosmaster
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Float32, Int32, Bool
 from dynamic_reconfigure.server import Server
-from pav_s01_bringup.cfg import PIDparamConfig
+from pavs_bringup.cfg import PIDparamConfig
 
 car_type_dic={
     'R2':5,
@@ -21,7 +21,7 @@ car_type_dic={
 }
 
 
-class pav_s01_driver:
+class pavs_driver:
     def __init__(self):
         global car_type_dic
         rospy.on_shutdown(self.cancel)
@@ -192,7 +192,7 @@ class pav_s01_driver:
 if __name__ == '__main__':
     rospy.init_node("driver_node", anonymous=False)
     try:
-        driver = pav_s01_driver()
+        driver = pavs_driver()
         driver.pub_data()
         rospy.spin()
     except:
