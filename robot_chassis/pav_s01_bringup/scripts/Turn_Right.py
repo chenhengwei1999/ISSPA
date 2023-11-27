@@ -10,12 +10,12 @@ from sensor_msgs.msg import LaserScan
 from math import radians, copysign, sqrt, pow
 from geometry_msgs.msg import Twist, Point, Quaternion
 from transform_utils import quat_to_angle, normalize_angle
-from yahboomcar_bringup.cfg import PatrolParamConfig
+from pav_s01_bringup.cfg import PatrolParamConfig
 #from dynamic_reconfigure.server import Server
 #import dynamic_reconfigure.client
 RAD2DEG = 180 / math.pi
 
-class YahboomCarPatrol():
+class PAVS01_CarPatrol():
     def __init__(self):
         #rospy.on_shutdown(self.cancel)
         #self.r = rospy.Rate(20)

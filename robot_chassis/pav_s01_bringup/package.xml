@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>yahboomcar_bringup</name>
+  <name>pav_s01_bringup</name>
   <version>0.0.0</version>
   <description>The yahboomcar_bringup package</description>
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(yahboomcar_bringup)
+project(pav_s01_bringup)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -122,7 +122,7 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-        include/yahboomcar_bringup
+        include/pav_s01_bringup
         ${catkin_INCLUDE_DIRS}
 )
 
