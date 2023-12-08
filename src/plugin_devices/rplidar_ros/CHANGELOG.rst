@@ -1,33 +1,14 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for package rplidar_ros
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-2.1.5 (2023-11-20)
-------------------
-* Update RPLIDAR SDK to 2.1.0
-  * Support RPLIDAR C1 (`#142 <https://github.com/Slamtec/rplidar_ros/issues/142>`_)
-  * Re-implemented the data retrieving logic based on async fetching and decoding mechanism to improve performance
-  * UltraDense protocol support
-  * support for stoppping A1 motor
-  * bugfix:start/stop_motor(service) cause lidar to stop scanning
-* Fix build with C++14 && --march=native
-* scan frequency configuration support
-* Add launch file for RPLIDAR a2m*,C1
-* Install udev rules via debian. (`#126 <https://github.com/Slamtec/rplidar_ros/issues/126>`_)
-* Bugfix:create_udev_rules.sh dose not take effect immediately.
-* When node starts to reset rplidar, if rplidar info is not obtained within 15 seconds, rplidar reset fails
-* Add initial_reset option to reset rplidar on node start
-* Compilation optimization
-* Contributors: Babak-SSh, Tim Clephas, Tony Baltovski, Ubuntu248, Victor Belov, Wang DeYou, WubinXia, kint, yzx
-
 2.0.0 (2021-10-8)
------------------
+------------------
 * Update RPLIDAR SDK to 2.0.0
 * [new feature] 1.redesign the skelton of the sdk. 2.support Rplidar S2
 * Contributors: tony,WubinXia
 
 1.10.0 (2019-02-22)
--------------------
+------------------
 * Update RPLIDAR SDK to 1.10.0
 * [new feature] support Rplidar S1
 * Contributors: tony,WubinXia

@@ -152,11 +152,6 @@ namespace rp { namespace standalone{ namespace rplidar {
 		return (_lidarDrv)->setLidarIpConf(conf, timeout);
 	}
 
-    u_result RPlidarDriver::getLidarIpConf(rplidar_ip_conf_t& conf, _u32 timeout)
-    {
-        return (_lidarDrv)->getLidarIpConf(conf, timeout);
-    }
-
     u_result RPlidarDriver::getDeviceMacAddr(_u8* macAddrArray, _u32 timeoutInMs)
 	{
 		return (_lidarDrv)->getDeviceMacAddr(macAddrArray, timeoutInMs);
@@ -189,7 +184,7 @@ namespace rp { namespace standalone{ namespace rplidar {
 
     u_result RPlidarDriver::startMotor()
     {
-        return (_lidarDrv)->setMotorSpeed(DEFAULT_MOTOR_SPEED);
+        return (_lidarDrv)->setMotorSpeed(600);
     }
     u_result RPlidarDriver::stopMotor()
     {

@@ -33,12 +33,6 @@
 
 #pragma once
 
-
-#if defined(_MSC_VER)
-#pragma warning(push)
-#pragma warning(disable:4200)
-#endif
-
 #include "sl_types.h"
 
 #define SL_LIDAR_CMD_SYNC_BYTE              0xA5
@@ -55,8 +49,6 @@
 #if defined(_WIN32)
 #pragma pack(1)
 #endif
-
-
 
 typedef struct sl_lidar_cmd_packet_t
 {
@@ -77,9 +69,4 @@ typedef struct sl_lidar_ans_header_t
 
 #if defined(_WIN32)
 #pragma pack()
-#endif
-
-
-#if defined(_MSC_VER)
-#pragma warning(pop)
 #endif

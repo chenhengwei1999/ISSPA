@@ -72,15 +72,8 @@ public:
     u_result terminate();
     void *getData() { return _data;}
     u_result join(unsigned long timeout = -1);
-	
-    // disabled as on platforms like Linux, the priority will be inherited by the child thread
-    // which may caused unexpected behavior.
-    // Please using Thread::SetSelfPriority instead
-    // u_result setPriority( priority_val_t p);
+	u_result setPriority( priority_val_t p);
 	priority_val_t getPriority();
-
-    static u_result SetSelfPriority(priority_val_t p);
-
 
     bool operator== ( const Thread & right) { return this->_handle == right._handle; }
 protected:

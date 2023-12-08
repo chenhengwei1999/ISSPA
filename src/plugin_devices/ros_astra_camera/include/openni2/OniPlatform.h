@@ -21,7 +21,6 @@
 #ifndef ONIPLATFORM_H
 #define ONIPLATFORM_H
 
-
 // Supported platforms
 #define ONI_PLATFORM_WIN32 1
 #define ONI_PLATFORM_LINUX_X86 2

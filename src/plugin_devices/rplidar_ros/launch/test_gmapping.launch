@@ -1,0 +1,20 @@
+
+<launch>
+    <arg name="lidar_type" value="$(env RPLIDAR_TYPE)" doc="lidar_type type [a1,a2,a3,s1,s2]"/>
+    <group if="$(eval arg('lidar_type') == 's2')" >
+        <node name="scan_dilute" pkg="rplidar_ros" type="scan_dilute.py" output="screen" respawn="true"/>
+        <include file="$(find rplidar_ros)/launch/gmapping.launch">
+            <arg name="scan_topic" default="scan_dilute"/>
+        </include>
+    </group>
+    <group unless="$(eval arg('lidar_type') == 's2')" >
+        <include file="$(find rplidar_ros)/launch/gmapping.launch">
+            <arg name="scan_topic" default="scan"/>
+        </include>
+    </group>
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+    <!--    激光雷达的坐标系-->
+    <node pkg="tf" type="static_transform_publisher" name="odom_to_laser"
+          args="0 0 0.05 0 0 0  /odom /laser  30"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rplidar_ros)/rviz/test_map.rviz"/>
+</launch>

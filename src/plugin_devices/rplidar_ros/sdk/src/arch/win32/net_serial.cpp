@@ -70,19 +70,10 @@ bool raw_serial::bind(const char * portname, _u32 baudrate, _u32 flags)
 
 bool raw_serial::open(const char * portname, _u32 baudrate, _u32 flags)
 {
-#ifdef _UNICODE
-    wchar_t wportname[1024];
-    mbstowcs(wportname, portname, sizeof(wportname) / sizeof(wchar_t));
-#endif
-
     if (isOpened()) close();
     
     _serial_handle = CreateFile(
-#ifdef _UNICODE
-        wportname,
-#else
         portname,
-#endif
         GENERIC_READ | GENERIC_WRITE,
         0,
         NULL,
@@ -160,7 +151,7 @@ int raw_serial::senddata(const unsigned char * data, size_t size)
     if(ClearCommError(_serial_handle, &error, NULL) && error > 0)
         PurgeComm(_serial_handle, PURGE_TXABORT | PURGE_TXCLEAR);
 
-    if(!WriteFile(_serial_handle, data, (DWORD)size, &w_len, &_wo))
+    if(!WriteFile(_serial_handle, data, size, &w_len, &_wo))
         if(GetLastError() != ERROR_IO_PENDING)
             w_len = ANS_DEV_ERR;
 
@@ -173,7 +164,7 @@ int raw_serial::recvdata(unsigned char * data, size_t size)
     DWORD r_len = 0;
 
 
-    if(!ReadFile(_serial_handle, data, (DWORD)size, &r_len, &_ro))
+    if(!ReadFile(_serial_handle, data, size, &r_len, &_ro))
     {
         if(GetLastError() == ERROR_IO_PENDING) 
         {
@@ -212,7 +203,7 @@ int raw_serial::waitforsent(_u32 timeout, size_t * returned_size)
     }
 _final:
     if (returned_size) *returned_size = w_len;
-    return (int)ans;
+    return ans;
 }
 
 int raw_serial::waitforrecv(_u32 timeout, size_t * returned_size)
@@ -230,7 +221,7 @@ int raw_serial::waitforrecv(_u32 timeout, size_t * returned_size)
         ans = ANS_DEV_ERR;
     }
     if (returned_size) *returned_size = r_len;
-    return (int)ans;
+    return ans;
 }
 
 int raw_serial::waitfordata(size_t data_count, _u32 timeout, size_t * returned_size)

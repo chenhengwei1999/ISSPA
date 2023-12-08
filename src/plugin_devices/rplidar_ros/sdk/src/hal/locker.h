@@ -45,11 +45,11 @@ public:
         LOCK_FAILED = 0
     };
 
-    Locker(bool recusive = false){
+    Locker(){
 #ifdef _WIN32
         _lock = NULL;
 #endif
-        init(recusive);
+        init();
     }
 
     ~Locker()
@@ -117,11 +117,7 @@ public:
     void unlock()
     {
 #ifdef _WIN32
-        if (_recusive) {
-            ReleaseMutex(_lock);
-        } else {
-            ReleaseSemaphore(_lock, 1, NULL);
-        }
+        ReleaseMutex(_lock);
 #else
         pthread_mutex_unlock(&_lock);
 #endif
@@ -142,25 +138,12 @@ public:
 
 
 protected:
-    void    init(bool recusive)
+    void    init()
     {
-        
 #ifdef _WIN32
-        if (_recusive = recusive) {
-            _lock = CreateMutex(NULL, FALSE, NULL);
-        } else {
-            _lock = CreateSemaphore(NULL, 1, 1, NULL);
-        }
+        _lock = CreateMutex(NULL,FALSE,NULL);
 #else
-        
-        if (recusive) {
-            pthread_mutexattr_t attr;
-            pthread_mutexattr_init(&attr);
-            pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
-            pthread_mutex_init(&_lock, &attr);
-        } else {
-            pthread_mutex_init(&_lock, NULL);
-        }
+        pthread_mutex_init(&_lock, NULL);
 #endif
     }
 
@@ -178,11 +161,9 @@ protected:
 
 #ifdef _WIN32
     HANDLE  _lock;
-    bool _recusive;
 #else
     pthread_mutex_t _lock;
 #endif
-    
 };
 
 class AutoLocker

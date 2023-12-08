@@ -16,13 +16,6 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
-#include <net/if.h>
-#include <sys/ioctl.h>
-#include <linux/can.h>
-#include <linux/can/raw.h>
-
-
-
 namespace rp{ namespace net {
 
 
@@ -174,7 +167,7 @@ u_result SocketAddress::getAddressAsString(char * buffer, size_t buffersize) con
 
         break;
     }
-    return ans==NULL?RESULT_OPERATION_FAIL:RESULT_OK;
+    return ans<=0?RESULT_OPERATION_FAIL:RESULT_OK;
 }
 
 
@@ -442,7 +435,7 @@ public:
     virtual u_result send(const void * buffer, size_t len) 
     {
         size_t ans = ::send( _socket_fd, buffer, len, MSG_NOSIGNAL);
-        if (ans == len) {
+        if (ans == (int)len) {
             return RESULT_OK;
         } else {
             switch (errno) {
@@ -724,13 +717,13 @@ public:
         }
     }
 
-    virtual u_result sendTo(const SocketAddress * target, const void * buffer, size_t len)
+    virtual u_result sendTo(const SocketAddress & target, const void * buffer, size_t len)
     {
-        const struct sockaddr * addr = target ? reinterpret_cast<const struct sockaddr *>(target->getPlatformData()) : NULL;
-        int dest_addr_size = (target ? sizeof(sockaddr_storage) : 0);
-        int ans = ::sendto(_socket_fd, (const char *)buffer, (int)len, 0, addr, dest_addr_size);
-        if (ans != -1) {
-            assert(ans == len);
+        const struct sockaddr* addr = &target ? reinterpret_cast<const struct sockaddr*>(target.getPlatformData()) : NULL;
+        assert(addr);
+        size_t ans = ::sendto( _socket_fd, buffer, len, 0, addr, sizeof(sockaddr_storage));
+        if (ans != (size_t)-1) {
+            assert(ans == (int)len);
             return RESULT_OK;
         } else {
             switch (errno) {
@@ -759,26 +752,6 @@ public:
         int ans = ::connect(_socket_fd, addr, (int)sizeof(sockaddr_storage));
         return ans ? RESULT_OPERATION_FAIL : RESULT_OK;
 
-    }
-    
-    virtual u_result clearRxCache()
-    {
-        timeval tv;
-        tv.tv_sec = 0;
-        tv.tv_usec = 0;
-        fd_set rdset;
-        FD_ZERO(&rdset);
-        FD_SET(_socket_fd, &rdset);
-
-        int res = -1;
-        char recv_data[2];
-        memset(recv_data, 0, sizeof(recv_data));
-        while (true) {
-            res = select(FD_SETSIZE, &rdset, nullptr, nullptr, &tv);
-            if (res == 0) break;
-            recv(_socket_fd, recv_data, 1, 0);
-        }
-        return RESULT_OK;
     }
 
     virtual u_result recvFrom(void *buf, size_t len, size_t & recv_len, SocketAddress * sourceAddr)

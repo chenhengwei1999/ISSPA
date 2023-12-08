@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -g  -shared -Wl,-soname,libgtest.so -o libgtest.so CMakeFiles/gtest.dir/src/gtest-all.cc.o  -L/home/ty/Workspace/ROS/robot_camera/src/ros_astra_camera/cmake-build-debug/gtest/googlemock/gtest/src -Wl,-rpath,/home/ty/Workspace/ROS/robot_camera/src/ros_astra_camera/cmake-build-debug/gtest/googlemock/gtest/src -lpthread 
