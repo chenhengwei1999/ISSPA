@@ -1,4 +1,4 @@
 <launch>
     <node pkg="rviz" type="rviz" name="rviz" required="true"
-          args="-d $(find pavs_navigation)/rviz/navigate.rviz"/>
+          args="-d $(find vehicle_navigation)/rviz/navigate.rviz"/>
 </launch>

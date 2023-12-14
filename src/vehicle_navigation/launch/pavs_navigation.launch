@@ -10,17 +10,17 @@
     <node name='send_mark' pkg="pavs_navigation" type="send_mark.py"/>
 
     <!-- 加载地图 || Load map -->
-    <node name="map_server" pkg="map_server" type="map_server" args="$(find pavs_navigation)/maps/$(arg map).yaml"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find vehicle_mapping)/maps/$(arg map).yaml"/>
     
     <!-- AMCL自适应蒙特卡洛定位 -->
-    <include file="$(find pavs_navigation)/launch/library/amcl.launch"/>
+    <include file="$(find vehicle_navigation)/launch/library/amcl.launch"/>
 
     <!-- 导航核心组件move_base -->
-    <include file="$(find pavs_navigation)/launch/library/move_base.launch">
+    <include file="$(find vehicle_navigation)/launch/library/move_base.launch">
         <arg name="nav_use_rotvel" value="$(arg nav_use_rotvel)"/>
     </include>
     
     <!-- RVIZ -->
-    <include file="$(find pavs_navigation)/launch/view/view_navigate.launch" if="$(arg use_rviz)"/>
+    <include file="$(find vehicle_navigation)/launch/view/view_navigate.launch" if="$(arg use_rviz)"/>
 </launch>
 

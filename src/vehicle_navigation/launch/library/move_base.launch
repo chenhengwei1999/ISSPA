@@ -5,17 +5,17 @@
     <arg name="nav_use_rotvel" default="true"/>
     <!-- move_base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <rosparam file="$(find pavs_navigation)/param/common/global_costmap_params.yaml" command="load"/>
-        <rosparam file="$(find pavs_navigation)/param/common/local_costmap_params.yaml" command="load"/>
-        <rosparam file="$(find pavs_navigation)/param/common/move_base_params.yaml" command="load"/>
-        <rosparam file="$(find pavs_navigation)/param/common/costmap_common_params_$(arg robot_type).yaml" command="load"
+        <rosparam file="$(find vehicle_navigation)/param/common/global_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find vehicle_navigation)/param/common/local_costmap_params.yaml" command="load"/>
+        <rosparam file="$(find vehicle_navigation)/param/common/move_base_params.yaml" command="load"/>
+        <rosparam file="$(find vehicle_navigation)/param/common/costmap_common_params_$(arg robot_type).yaml" command="load"
             ns="global_costmap"/>
-        <rosparam file="$(find pavs_navigation)/param/common/costmap_common_params_$(arg robot_type).yaml" command="load"
+        <rosparam file="$(find vehicle_navigation)/param/common/costmap_common_params_$(arg robot_type).yaml" command="load"
             ns="local_costmap"/>
-        <!--rosparam file="$(find pavs_navigation)/param/common/dwa_local_planner_params_$(arg robot_type).yaml" command="load"/-->
+        <!--rosparam file="$(find vehicle_navigation)/param/common/dwa_local_planner_params_$(arg robot_type).yaml" command="load"/-->
         <!--param name="base_local_planner" type="string" value="dwa_local_planner/DWAPlannerROS" if="$(eval arg('robot_type') == 'R2')"/-->
-        <rosparam file="$(find pavs_navigation)/param/common/teb_local_planner_params_$(arg robot_type)_steer.yaml" command="load" if="$(arg nav_use_rotvel)"/>
-        <rosparam file="$(find pavs_navigation)/param/common/teb_local_planner_params_$(arg robot_type).yaml" command="load" unless="$(arg nav_use_rotvel)"/>
+        <rosparam file="$(find vehicle_navigation)/param/common/teb_local_planner_params_$(arg robot_type)_steer.yaml" command="load" if="$(arg nav_use_rotvel)"/>
+        <rosparam file="$(find vehicle_navigation)/param/common/teb_local_planner_params_$(arg robot_type).yaml" command="load" unless="$(arg nav_use_rotvel)"/>
         <param name="base_local_planner" type="string" value="teb_local_planner/TebLocalPlannerROS"/>
         <!--param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)"/-->
         <remap from="cmd_vel" to="cmd_vel"/>

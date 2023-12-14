@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# for ros
+src/CMakeLists.txt
+
 # C extensions
 *.so
 
