@@ -1,0 +1,4 @@
+<launch>
+    <arg name="map_name" default="yahboomcar"/>
+    <node pkg="map_server" type="map_saver" name="app_map_saver" args="-f $(find yahboomcar_nav)/maps/$(arg map_name)"/>
+</launch>

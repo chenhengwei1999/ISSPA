@@ -1,0 +1,11 @@
+<launch>
+    <!-- 启动APP相关接口服务 || Start APP related interface services -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
+    <node pkg="world_canvas_server" type="world_canvas_server" name="world_canvas_server">
+        <param name="start_map_manager" value="true"/>
+        <param name="auto_save_map" value="false"/>
+    </node>
+    <node pkg="world_canvas_server" type="map_manager.py" name="map_manager"/>
+    <node pkg="yahboomcar_nav" type="save" name="save_map"/>
+</launch>
+

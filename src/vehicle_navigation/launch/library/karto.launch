@@ -1,0 +1,103 @@
+<!--
+  notice : you should install karto-slam at first, command 'sudo apt-get install ros-melodic-open-karto'and 'sudo apt-get install ros-indigo-slam-karto'.
+           this launch just for test, you should improve the param for the best result.
+  you nedd change the frame of the "static_transform_publisher" when using the real robot platform.
+  it is better  subscribe the topic /odom with true to slam in gmapping
+E-mail: kint.zhao@slamtec.com
+ -->
+<launch>
+    <arg name="scan_topic" default="scan"/>
+    <arg name="base_frame" default="base_footprint"/>
+    <arg name="odom_frame" value="odom"/>
+    <arg name="map_frame" value="map"/>
+    <node pkg="slam_karto" type="slam_karto" name="slam_karto" output="screen">
+        <remap from="scan" to="$(arg scan_topic)"/>
+        <!-- 机器人基坐标系 || The frame attached to the mobile base. -->
+        <param name="base_frame" value="$(arg base_frame)"/>
+        <!-- 里程计坐标系 || The frame attached to the odometry system.-->
+        <param name="odom_frame" value="$(arg odom_frame)"/>
+        <!-- 地图坐标系 || The frame attached to the map.-->
+        <param name="map_frame" value="$(arg map_frame)"/>
+        <!-- 地图更新频率，该值越低，计算负载越大。
+        How long (in seconds) between updates to the map.
+        Lowering this number updates the occupancy grid more often,
+        at the expense of greater computational load.-->
+        <param name="map_update_interval" value="1.0"/>
+        <!-- 分辨率，网格单元的边缘长度 || Resolution of the map (in metres per occupancy grid block)-->
+        <param name="resolution" value="0.05"/>
+        <!-- General Parameters || 通用参数-->
+        <!-- 是否使用scan matching算法，在真实环境下设置为true，仿真环境加入噪声即可建议关闭。
+        When set to true, the mapper will use a scan matching algorithm.
+        In some simulator environments where the simulated scan and odometry data are very accurate,
+        the scan matching algorithm can produce worse results.
+        In those cases set this to false to improve results.-->
+        <param name="use_scan_matching" value="true"/>
+        <!-- 使用每个 scan 的质心来查看两个 scan 的距离。
+        Use the barycenter of scan endpoints to define distances between scans.-->
+        <param name="use_scan_barycenter" value="true"/>
+        <!-- 进行帧间匹配的最小运动距离 || Sets the minimum travel between scans.-->
+        <param name="minimum_travel_distance" value="0.3"/>
+        <!-- 进行帧间匹配的最小运动角度 || Sets the minimum heading change between scans. -->
+        <param name="minimum_travel_heading" value="0.4 "/>
+        <!-- 设置 ScanBuffer 的长度，约等于scan_buffer_maximum_scan_distance/minimum_travel_distance。
+        Sets the length of the scan chain stored for scan matching.
+        scan_buffer_size should be set to approximately scan_buffer_maximum_scan_distance / minimum_travel_distance. -->
+        <param name="scan_buffer_size" value="70 "/>
+        <!-- 设置 ScanBuffer 的最大长度和 Size作用类似。
+        Sets the maximum distance between the first and last scans in the scan chain stored for matching.-->
+        <param name="scan_buffer_maximum_scan_distance" value="20.0"/>
+        <!-- 设置最小scans连接的最小响应阈值。
+        Scans are linked only if the correlation response value is greater than this value.-->
+        <param name="link_match_minimum_response_fine" value="0.6"/>
+        <!-- 设置两个连接的 scans 最大距离， 大于此值则不考虑两者的响应阈值。
+            Sets the maximum distance between linked scans.
+            Scans that are farther apart will not be linked regardless of the correlation response value.-->
+        <param name="link_scan_maximum_distance" value="10.0"/>
+        <!-- 是否启用回环检测 || Enable/disable loop closure.-->
+        <param name="do_loop_closing" value="true"/>
+        <!-- 回环检测最下链条尺寸 || When the loop closure detection finds a candidate it must be part of a large set of linked scans. -->
+        <param name="loop_match_minimum_chain_size" value="10"/>
+        <!-- 回环匹配时粗匹配的最大协方差值， 小于此值才认为是一个可行解。
+        The co-variance values for a possible loop closure have to be less than this value to consider a viable solution. -->
+        <param name="loop_match_maximum_variance_coarse" value="0.4"/>
+        <!-- 回环匹配时粗匹配的最小响应， 响应值大于此值将会开始粗精度的回环优化。
+        If response is larger than this, then initiate loop closure search at the coarse resolution.-->
+        <param name="loop_match_minimum_response_coarse" value="0.8"/>
+        <!-- 回环匹配最小响应阈值，大于此值才开始进行高精度。
+        If response is larger than this, then initiate loop closure search at the fine resolution.-->
+        <param name="loop_match_minimum_response_fine" value="0.8"/>
+        <!-- Correlation Parameters || 矫正参数-->
+        <!-- Correlation Grid的搜索范围大小 || Sets the size of the search grid used by the matcher.-->
+        <param name="correlation_search_space_dimension" value="2"/>
+        <!-- Correlation Grid的分辨率 || Sets the resolution (size of a grid cell) of the correlation grid.-->
+        <param name="correlation_search_space_resolution" value="0.01"/>
+        <!-- Correlation Grid模糊程度 || The point readings are smeared by this value in X and Y to create a smoother response.-->
+        <param name="correlation_search_space_smear_deviation" value="0.03"/>
+        <!-- Loop Closure Parameters || 回环参数-->
+        <!-- 回环检测空间范围大小 || The size of the search grid used by the matcher.-->
+        <param name="loop_search_space_dimension" value="10"/>
+        <!-- 回环检测空间分辨率 || The resolution (size of a grid cell) of the correlation grid.-->
+        <param name="loop_search_space_resolution" value="0.1"/>
+        <!-- 回环检测模糊程度 || The point readings are smeared by this value in X and Y to create a smoother response. -->
+        <param name="loop_search_space_smear_deviation" value="0.05"/>
+        <!-- 回环检测最大距离 || Maximum distance of loop detection-->
+        <param name="loop_search_maximum_distance" value="4.0"/>
+        <!-- Scan Matcher Parameters-->
+        <!-- scan-matching时 对里程计的补偿系数 || Variance of penalty for deviating from odometry when scan-matching.-->
+        <param name="distance_variance_penalty" value="0.3"/>
+        <!-- 2scan-matching时 对角度的补偿系数 || See distance_variance_penalty.-->
+        <param name="angle_variance_penalty" value="0.35"/>
+        <!-- 精搜索角度范围 || The range of angles to search during a fine search.-->
+        <param name="fine_search_angle_offset" value="0.00349"/>
+        <!-- 粗搜索角度范围 || The range of angles to search during a coarse search.-->
+        <param name="coarse_search_angle_offset" value="0.349"/>
+        <!-- 精搜索角分辨率 || Resolution of angles to search during a coarse search.-->
+        <param name="coarse_angle_resolution" value="0.0349"/>
+        <!-- 最小角度惩罚 || Minimum value of the angle penalty multiplier so scores do not become too small.-->
+        <param name="minimum_angle_penalty" value="0.9"/>
+        <!-- 最下距离惩罚 || Minimum value of the distance penalty multiplier so scores do not become too small.-->
+        <param name="minimum_distance_penalty" value="0.5"/>
+        <!-- 在没有发现好的匹配的情况下，是否增加搜索范围 || Whether to increase the search space if no good matches are initially found-->
+        <param name="use_response_expansion" value="false"/>
+    </node>
+</launch>

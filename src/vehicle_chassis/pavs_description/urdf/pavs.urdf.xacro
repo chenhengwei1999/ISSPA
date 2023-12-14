@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="yahboomcar_R2" xmlns:xacro="http://ros.org/wiki/xacro">
+  <!--xacro:include filename="$(find yahboomcar_description)/urdf/yahboomcar_R2.gazebo.xacro"/-->
+  <link name="imu_link"/>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.014025 -0.00011707 0.082168"
+        rpy="0 0 0" />
+      <mass
+        value="0.52447" />
+      <inertia
+        ixx="0.00066245"
+        ixy="-3.1852E-08"
+        ixz="-4.6503E-05"
+        iyy="0.0012486"
+        iyz="-3.356E-08"
+        izz="0.0018052" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0 0.62745 0.23529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="back_right_link">
+    <inertial>
+      <origin
+        xyz="3.8959E-08 0.0015615 -6.3774E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.060236" />
+      <inertia
+        ixx="2.5326E-05"
+        ixy="-2.701E-10"
+        ixz="3.3546E-09"
+        iyy="4.4342E-05"
+        iyz="-2.9324E-10"
+        izz="2.531E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_right_joint"
+    type="continuous">
+    <origin
+      xyz="-0.11607 -0.08425 0.0125"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_right_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="back_left_link">
+    <inertial>
+      <origin
+        xyz="-6.87042718550135E-08 -0.00156153690070754 3.00324059371304E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.0602360431220635" />
+      <inertia
+        ixx="2.53100986719244E-05"
+        ixy="-3.65138701967536E-11"
+        ixz="1.15601374112124E-09"
+        iyy="4.43431918315874E-05"
+        iyz="-7.01985398840287E-11"
+        izz="2.53280330627738E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="back_left_joint"
+    type="continuous">
+    <origin
+      xyz="-0.11607 0.08425 0.0125"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="back_left_link" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="front_left_steer">
+    <inertial>
+      <origin
+        xyz="-0.0044676 0.0031203 -0.014101"
+        rpy="0 0 0" />
+      <mass
+        value="0.002176" />
+      <inertia
+        ixx="1.4001E-07"
+        ixy="-7.8357E-08"
+        ixz="1.1741E-12"
+        iyy="2.7801E-07"
+        iyz="7.8069E-12"
+        izz="2.909E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/front_left_steer.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.082353 0.56078 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/front_left_steer.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_left_steer_joint"
+    type="revolute">
+    <origin
+      xyz="0.11922 0.065 0.0262"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_left_steer" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="10"
+      velocity="1" />
+  </joint>
+  <link
+    name="front_left_wheel">
+    <inertial>
+      <origin
+        xyz="-6.1417E-08 -0.0048115 4.113E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.060236" />
+      <inertia
+        ixx="2.531E-05"
+        ixy="2.9987E-10"
+        ixz="3.7781E-09"
+        iyy="4.4342E-05"
+        iyz="2.6181E-10"
+        izz="2.5326E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_left_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="0.00022897 0.0228 -0.0141"
+      rpy="0 0 -0.010042" />
+    <parent
+      link="front_left_steer" />
+    <child
+      link="front_left_wheel" />
+    <axis
+      xyz="0 -1 0" />
+  </joint>
+  <link
+    name="front_right_steer">
+    <inertial>
+      <origin
+        xyz="-0.0045387 -0.0030159 -0.012099"
+        rpy="0 0 0" />
+      <mass
+        value="0.002176" />
+      <inertia
+        ixx="1.4372E-07"
+        ixy="8.1469E-08"
+        ixz="-1.0492E-12"
+        iyy="2.7431E-07"
+        iyz="7.8675E-12"
+        izz="2.909E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/front_left_steer.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.082353 0.56078 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/front_left_steer.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_right_steer_joint"
+    type="revolute">
+    <origin
+      xyz="0.11922 -0.065 0.0242"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="front_right_steer" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="10"
+      velocity="1" />
+  </joint>
+  <link
+    name="front_right_wheel">
+    <inertial>
+      <origin
+        xyz="5.5753E-08 0.0015615 -5.0453E-08"
+        rpy="0 0 0" />
+      <mass
+        value="0.060236" />
+      <inertia
+        ixx="2.5325E-05"
+        ixy="5.201E-11"
+        ixz="7.1484E-09"
+        iyy="4.4343E-05"
+        iyz="6.0924E-11"
+        izz="2.5314E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/back_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="front_right_wheel_joint"
+    type="continuous">
+    <origin
+      xyz="-0.00025662 -0.019549 -0.0121"
+      rpy="0 0 -0.013126" />
+    <parent
+      link="front_right_steer" />
+    <child
+      link="front_right_wheel" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="-0.0022507 -5.8908E-06 -0.021168"
+        rpy="0 0 0" />
+      <mass
+        value="0.22414" />
+      <inertia
+        ixx="0.00039172"
+        ixy="2.2482E-08"
+        ixz="4.3677E-08"
+        iyy="4.6625E-05"
+        iyz="1.3858E-10"
+        izz="0.0004106" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/camera_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.082353 0.082353 0.082353 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0.095117 0 0.09955"
+      rpy="0 0.0057171 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="laser_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/laser_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://yahboomcar_description/meshes/Ackermann/laser_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="laser_joint"
+    type="fixed">
+    <origin
+      xyz="0.012548 0 0.1311"
+      rpy="0 0 3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="laser_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+  <joint name="base_imu" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="-0.05 0.0 0.05" rpy="0 3.1415 1.5707"/>
+  </joint>
+
+  <link name="base_footprint"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.0215" rpy="0 0 0"/>
+  </joint>
+
+  <!--transmission name="front_right_steer_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_right_steer_joint" >
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_right_steer_joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>100</motorTorqueConstant>
+    </actuator>
+  </transmission>  
+  
+  <transmission name="front_left_steer_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="front_left_steer_joint" >
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="front_left_steer_joint_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+      <motorTorqueConstant>100</motorTorqueConstant>
+    </actuator>
+  </transmission>
+ <transmission name="back_right_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="back_right_joint" >
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="back_right_joint_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>      
+  
+  <transmission name="back_left_joint_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="back_left_joint" >
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="back_right_left_motor">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission-->
+</robot>

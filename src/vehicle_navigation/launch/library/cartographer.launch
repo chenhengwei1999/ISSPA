@@ -1,0 +1,4 @@
+<launch>
+    <!-- path：/opt/ros/melodic/share/cartographer_ros-->
+    <include file="$(find cartographer_ros)/launch/yahboomcar_cartographer.launch"/>
+</launch>

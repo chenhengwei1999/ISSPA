@@ -1,0 +1,15 @@
+<launch>
+    <arg name="ns" default="robot1"/>
+    <arg name="use_gui" default="true"/>
+    <arg name="robot_type" value="$(env ROBOT_TYPE)" doc="robot_type [X1,X3,X3plus,R2,X7]"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder
+        '$(find yahboomcar_description)/urdf/yahboomcar_X3.urdf' ns:=$(arg ns)"/>
+<!--    <param name="robot_description" command="$(find xacro)/xacro &#45;&#45;inorder-->
+<!--        '$(find yahboomcar_description)/urdf/yahboomcar_$(arg robot_type).urdf.xacro' ns:=$(arg ns)" />-->
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"
+          if="$(arg use_gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
+          unless="$(arg use_gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find yahboomcar_description)/rviz/yahboomcar.rviz"/>
+</launch>
