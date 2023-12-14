@@ -3,7 +3,7 @@
     <arg name="map_type" default="gmapping" doc="opt: gmapping,hector,karto,cartographer"/>
     <arg name="lidar_type" value="a1" doc="lidar_type [a1, velodyne, ls16]"/>
 
-    <group if="$(eval arg('lidar_type') == 'a1'" >
+    <group if="$(eval arg('lidar_type') == 'a1')" >
         <include file="$(find pavs_navigation)/launch/library/$(arg map_type).launch"/>
     </group>
 

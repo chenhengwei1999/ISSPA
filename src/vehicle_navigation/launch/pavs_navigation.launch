@@ -1,10 +1,10 @@
 <launch>
     <!-- 是否打开rviz || Whether to open rviz -->
-    <arg name="use_rviz" default="true"/>
+    <arg name="use_rviz" default="false"/>
     <arg name="nav_use_rotvel" default="true"/>
     
     <!-- 地图名 || Map name  my_map-->
-    <arg name="map" default="my_map"/>
+    <arg name="map" default="map"/>
 
     <!-- MarkerArray node> -->
     <node name='send_mark' pkg="pavs_navigation" type="send_mark.py"/>
