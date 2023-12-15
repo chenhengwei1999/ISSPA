@@ -10,7 +10,7 @@ from sensor_msgs.msg import LaserScan
 from math import radians, copysign, sqrt, pow
 from geometry_msgs.msg import Twist, Point, Quaternion
 from transform_utils import quat_to_angle, normalize_angle
-from pavs_bringup.cfg import PatrolParamConfig
+from vehicle_bringup.cfg import PatrolParamConfig
 from dynamic_reconfigure.server import Server
 import dynamic_reconfigure.client
 RAD2DEG = 180 / math.pi

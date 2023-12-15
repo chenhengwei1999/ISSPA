@@ -8,16 +8,42 @@ This repo is used to develop and store codes for physical agents.
 
 - ROS1 noetic
 
-## Package Setup
+## WorkSpace Setup
 
-*None.*
+Create a workspace for ROS:
+
+```bash
+mkdir ~/pa_ws/src -p
+```
+
+Clone the ISSPA codes:
+
+```bash
+cd ~/pavs/src
+git clone https://github.com/chenhengwei1999/ISSPA.git
+```
+
+Install dependent libraries:
+
+```bash
+cd ~/pavs
+rosdep install --from-paths src --ignore-src -r -y
+```
+
+Complie the whole projects using `catkin_make`:
+
+```bash
+catkin_make
+```
+
+Finally refresh the environment variables or store them in **.bashrc**.
+
+```bash
+source devel/setup.bash
+```
 
 ## Usage Guide
 
-### Quick Start
+### Quick Start of PVAS
 
-Firstly, launch the driver of chassis is needed.
-
-```bash
-roslaunch pavs_bringup pavs.launch
-```
+When the **WorkSpace Setup** is completed, you can try the following tasks, which contain **vehicle chassis** startup, **sensor** startup, **remote control**, **SLAM**, and **navigation**. Refer [here](./docs/quick_start.md) for documentation.

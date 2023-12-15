@@ -7,7 +7,7 @@
     <arg name="map" default="map"/>
 
     <!-- MarkerArray node> -->
-    <node name='send_mark' pkg="pavs_navigation" type="send_mark.py"/>
+    <node name='send_mark' pkg="vehicle_navigation" type="send_mark.py"/>
 
     <!-- 加载地图 || Load map -->
     <node name="map_server" pkg="map_server" type="map_server" args="$(find vehicle_mapping)/maps/$(arg map).yaml"/>

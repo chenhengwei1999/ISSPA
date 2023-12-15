@@ -12,7 +12,7 @@ from Rosmaster_Lib import Rosmaster
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Float32, Int32, Bool
 from dynamic_reconfigure.server import Server
-from pavs_bringup.cfg import PIDparamConfig
+from vehicle_bringup.cfg import PIDparamConfig
 
 car_type_dic={
     'R2':5,
