@@ -19,15 +19,8 @@ mkdir ~/pa_ws/src -p
 Clone the ISSPA codes:
 
 ```bash
-cd ~/pavs/src
+cd ~/pa_ws/src
 git clone https://github.com/chenhengwei1999/ISSPA.git
-```
-
-Install dependent libraries:
-
-```bash
-cd ~/pavs
-rosdep install --from-paths src --ignore-src -r -y
 ```
 
 Complie the whole projects using `catkin_make`:
@@ -40,6 +33,9 @@ Finally refresh the environment variables or store them in **.bashrc**.
 
 ```bash
 source devel/setup.bash
+
+# Or
+echo "source ~/pa_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
 ## Usage Guide
