@@ -5,7 +5,7 @@
 Firstly, launch chassis and sensors driver of the vehicle.
 
 ```bash
-roslaunch vehicle_bringup vehicle_chassis_and_sensors.launch
+roslaunch vehicle_bringup pavs_chassis_and_sensors.launch
 ```
 
 ## Start the SLAM Program
