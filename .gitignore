@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# for vscode
+.vscode
+
 # for ros
 src/CMakeLists.txt
 devel/
