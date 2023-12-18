@@ -11,7 +11,7 @@
           args="0.0435 5.258E-05 0.11 3.14 0 0  /base_link /laser 30" if="$(eval arg('lidar_type') == 'a1')"/>
 
     <!-- 启动相机 -->
-    <include file="$(find astra_camera)/launch/astraproplus.launch" if="$(eval arg('camera_type') == 'astraproplus')" />
+    <include file="$(find astra_camera)/launch/astra_pro_plus.launch" if="$(eval arg('camera_type') == 'astraproplus')" />
     
     <!-- Coordinate conversion for camera -->
     <node pkg="tf" type="static_transform_publisher" name="camera_link_to_laser"

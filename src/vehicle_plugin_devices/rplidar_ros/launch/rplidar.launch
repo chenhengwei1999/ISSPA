@@ -1,5 +1,5 @@
 <launch>
-    <arg name="lidar_type" value="$(env RPLIDAR_TYPE)" doc="lidar_type type [a1,a2,a3,s1,s2]"/>
+    <arg name="lidar_type" value="a1" doc="lidar_type type [a1,a2,a3,s1,s2]"/>
     <arg name="frame_id" default="laser"/>
     <arg name="shielding_angle" default="30"/>
     <!-- scan filtering node -->
