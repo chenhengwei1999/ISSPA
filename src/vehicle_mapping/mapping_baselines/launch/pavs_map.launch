@@ -1,0 +1,16 @@
+<launch>
+    <arg name="use_rviz" default="false"/>
+    <arg name="map_type" default="gmapping" doc="opt: gmapping,hector,karto,cartographer"/>
+    <arg name="lidar_type" value="a1" doc="lidar_type [a1, velodyne, ls16]"/>
+
+    <group if="$(eval arg('lidar_type') == 'a1')" >
+        <include file="$(find mapping_baselines)/launch/library/$(arg map_type).launch"/>
+    </group>
+
+    <group if="$(arg use_rviz)">
+        <include if="$(eval arg('map_type') != 'cartographer')"
+                 file="$(find mapping_baselines)/launch/view/view_map.launch"/>
+        <include if="$(eval arg('map_type') == 'cartographer')"
+                 file="$(find mapping_baselines)/launch/view/view_cartographer.launch"/>
+    </group>
+</launch>

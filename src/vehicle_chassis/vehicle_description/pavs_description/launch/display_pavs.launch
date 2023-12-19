@@ -1,0 +1,16 @@
+<launch>
+    <!--arg name="ns" default="robot1"/-->
+    <arg name="use_gui" default="true"/>
+
+    <arg name="robot_type" value="PAVS" doc="robot_type [PAVS]"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder
+        '$(find pavs_description)/urdf/pavs.urdf.xacro'" if="$(eval arg('robot_type') == 'PAVS')"/>
+
+    <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"
+          if="$(arg use_gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
+          unless="$(arg use_gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pavs_description)/rviz/pavs.rviz"/>
+</launch>

@@ -1,0 +1,26 @@
+<launch>
+    <!-- 是否打开rviz || Whether to open rviz -->
+    <arg name="use_rviz" default="false"/>
+    <arg name="nav_use_rotvel" default="true"/>
+    
+    <!-- 地图名 || Map name  my_map-->
+    <arg name="map" default="map"/>
+
+    <!-- MarkerArray node> -->
+    <node name='send_mark' pkg="navigation_stack" type="send_mark.py"/>
+
+    <!-- 加载地图 || Load map -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find mapping_baselines)/maps/$(arg map).yaml"/>
+    
+    <!-- AMCL自适应蒙特卡洛定位 -->
+    <include file="$(find navigation_stack)/launch/library/amcl.launch"/>
+
+    <!-- 导航核心组件move_base -->
+    <include file="$(find navigation_stack)/launch/library/move_base.launch">
+        <arg name="nav_use_rotvel" value="$(arg nav_use_rotvel)"/>
+    </include>
+    
+    <!-- RVIZ -->
+    <include file="$(find navigation_stack)/launch/view/view_navigate.launch" if="$(arg use_rviz)"/>
+</launch>
+

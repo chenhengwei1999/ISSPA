@@ -1,0 +1,4 @@
+<launch>
+    <node name="pointcloud_to_pcd" pkg="pcl_ros" type="pointcloud_to_pcd" args="input:=/laser_cloud_surround" output="screen">
+    </node>
+</launch>

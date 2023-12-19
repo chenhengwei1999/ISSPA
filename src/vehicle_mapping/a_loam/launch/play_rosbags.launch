@@ -1,0 +1,13 @@
+<launch>
+  <node pkg="rosbag" type="play" name="rosbag_player" output="screen" args="/home/chw/Downloads/rosbags/nsh_indoor_outdoor.bag">
+  <!-- <node pkg="rosbag" type="play" name="rosbag_player"  output="screen" args="/home/chw/Downloads/rosbags/2017-06-08-15-52-45_3.bag clock topic /velodyne_points /imu/data"> -->
+    <!-- <remap from="/carla/ego_vehicle/lidar" to="/velodyne_points" /> -->
+    <!-- <remap from="/carla/ego_vehicle/imu" to="/imu/data" /> -->
+
+    <!-- for VINS-Mono -->
+    <!-- <remap from="/carla/ego_vehicle/rgb_front/image" to="/cam0/image_raw" />
+     <remap from="/carla/ego_vehicle/imu" to="/imu0" /> -->
+
+  </node>
+  <!-- 路径必须为绝对路径-->
+</launch>
