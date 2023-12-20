@@ -55,6 +55,11 @@ from utils.torch_utils import select_device, smart_inference_mode
 
 import rospy
 from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D
+from geometry_msgs.msg import Pose2D
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
+
+
 
 @smart_inference_mode()
 def run(
@@ -71,7 +76,7 @@ def run(
         save_csv=False,  # save results in CSV format
         save_conf=False,  # save confidences in --save-txt labels
         save_crop=False,  # save cropped prediction boxes
-        nosave=False,  # do not save images/videos
+        nosave=True,  # do not save images/videos
         classes=None,  # filter by class: --class 0, or --class 0 2 3
         agnostic_nms=False,  # class-agnostic NMS
         augment=False,  # augmented inference
@@ -89,9 +94,12 @@ def run(
 ):
     
     rospy.init_node('yolov5', anonymous=False)
-    pub = rospy.Publisher('2d_detection', BoundingBox2D, queue_size=10)
+    pub = rospy.Publisher('detection_results', Image, queue_size=10)
     rate = rospy.Rate(10)
+    bridge = CvBridge()
 
+    # detection_msgs = BoundingBox2D()
+    # pose2d = Pose2D()
 
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
@@ -207,6 +215,10 @@ def run(
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
+                    ###
+
+                    ### 
+
             # Stream results
             im0 = annotator.result()
             if view_img:
@@ -216,6 +228,26 @@ def run(
                     cv2.resizeWindow(str(p), im0.shape[1], im0.shape[0])
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
+
+            ###
+            try:
+                scaling_factor = 0.5
+                scaled_im = cv2.resize(im0, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv2.INTER_AREA)
+                image_msg = bridge.cv2_to_imgmsg(scaled_im, encoding='bgr8')
+
+                # 设置 ROS Image 消息的 header（可以根据实际情况调整）
+                image_msg.header.stamp = rospy.Time.now()
+                image_msg.header.frame_id = "camera_frame"
+
+                # 发布到指定的 topic
+                pub.publish(image_msg)
+                rate.sleep()  # 控制发布频率
+            except Exception as e:
+                print("*"*20)
+                print(e)
+                print("*"*20)
+            ###
+
 
             # Save results (image with detections)
             if save_img:
@@ -248,6 +280,18 @@ def run(
     if update:
         strip_optimizer(weights[0])  # update model (to fix SourceChangeWarning)
 
+
+    # pose2d.x = 10
+    # pose2d.y = 10
+    # pose2d.theta = 0
+    # detection_msgs.center = pose2d
+    # detection_msgs.size_x = 10
+    # detection_msgs.size_y = 10
+
+    # while not rospy.is_shutdown():
+    #     # Publish the message
+    #     pub.publish(detection_msgs)
+    #     rate.sleep()
 
 def parse_opt():
     parser = argparse.ArgumentParser()
