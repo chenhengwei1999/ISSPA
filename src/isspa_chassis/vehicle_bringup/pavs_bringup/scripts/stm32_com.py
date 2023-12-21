@@ -7,20 +7,17 @@ import serial
 import threading
 
 
-# V1.7.3
+# V3.3.1
 class Rosmaster(object):
     __uart_state = 0
 
     def __init__(self, car_type=1, com="/dev/myserial", delay=.002, debug=False):
         # com = "COM30"
         # com="/dev/ttyTHS1"
-        com="/dev/ttyUSB0"
+        # com="/dev/ttyUSB0"
         # com="/dev/ttyAMA0"
 
-        # print("Entering Rosmaster Class")
         self.ser = serial.Serial(com, 115200)
-        # print("Serial Port has been initialized")
-        # assert self.ser.isOpen(), 'Serial is not open!'
 
         self.__delay_time = delay
         self.__debug = debug
@@ -39,9 +36,12 @@ class Rosmaster(object):
         self.FUNC_RGB_EFFECT = 0x06
 
         self.FUNC_REPORT_SPEED = 0x0A
-        self.FUNC_REPORT_IMU_RAW = 0x0B
+        self.FUNC_REPORT_MPU_RAW = 0x0B
         self.FUNC_REPORT_IMU_ATT = 0x0C
         self.FUNC_REPORT_ENCODER = 0x0D
+        self.FUNC_REPORT_ICM_RAW = 0x0E
+        
+        self.FUNC_RESET_STATE = 0x0F
 
         self.FUNC_MOTOR = 0x10
         self.FUNC_CAR_RUN = 0x11
@@ -117,6 +117,8 @@ class Rosmaster(object):
         self.__akm_readed_angle = False
         self.__AKM_SERVO_ID = 0x01
 
+        self.__read_car_type = 0
+
         if self.__debug:
             print("cmd_delay=" + str(self.__delay_time) + "s")
 
@@ -137,17 +139,15 @@ class Rosmaster(object):
     # According to the type of data frame to make the corresponding parsing
     def __parse_data(self, ext_type, ext_data):
         # print("parse_data:", ext_data, ext_type)
-        # 貌似是在stm32中定义好了，现在的重点是要找到stm32中的代码，看看是怎么定义的
-        # 还有个问题是，定义的代码是保存在stm32上，还是nvidia xaiver上？
         if ext_type == self.FUNC_REPORT_SPEED:
             # print(ext_data)
             self.__vx = int(struct.unpack('h', bytearray(ext_data[0:2]))[0]) / 1000.0
             self.__vy = int(struct.unpack('h', bytearray(ext_data[2:4]))[0]) / 1000.0
             self.__vz = int(struct.unpack('h', bytearray(ext_data[4:6]))[0]) / 1000.0
             self.__battery_voltage = struct.unpack('B', bytearray(ext_data[6:7]))[0]
-        # 解析原始陀螺仪、加速度计、磁力计数据
-        # the original gyroscope, accelerometer, magnetometer data
-        elif ext_type == self.FUNC_REPORT_IMU_RAW:
+        # 解析MPU9250原始陀螺仪、加速度计、磁力计数据
+        # (MPU9250)the original gyroscope, accelerometer, magnetometer data
+        elif ext_type == self.FUNC_REPORT_MPU_RAW:
             # 陀螺仪传感器:±500dps=±500°/s ±32768 (gyro/32768*500)*PI/180(rad/s)=gyro/3754.9(rad/s)
             gyro_ratio = 1 / 3754.9 # ±500dps
             self.__gx = struct.unpack('h', bytearray(ext_data[0:2]))[0]*gyro_ratio
@@ -160,6 +160,23 @@ class Rosmaster(object):
             self.__az = struct.unpack('h', bytearray(ext_data[10:12]))[0]*accel_ratio
             # 磁力计传感器
             mag_ratio = 1
+            self.__mx = struct.unpack('h', bytearray(ext_data[12:14]))[0]*mag_ratio
+            self.__my = struct.unpack('h', bytearray(ext_data[14:16]))[0]*mag_ratio
+            self.__mz = struct.unpack('h', bytearray(ext_data[16:18]))[0]*mag_ratio
+        # 解析ICM20948原始陀螺仪、加速度计、磁力计数据
+        # (ICM20948)the original gyroscope, accelerometer, magnetometer data
+        elif ext_type == self.FUNC_REPORT_ICM_RAW:
+            gyro_ratio = 1 / 1000.0
+            self.__gx = struct.unpack('h', bytearray(ext_data[0:2]))[0]*gyro_ratio
+            self.__gy = struct.unpack('h', bytearray(ext_data[2:4]))[0]*gyro_ratio
+            self.__gz = struct.unpack('h', bytearray(ext_data[4:6]))[0]*gyro_ratio
+
+            accel_ratio = 1 / 1000.0
+            self.__ax = struct.unpack('h', bytearray(ext_data[6:8]))[0]*accel_ratio
+            self.__ay = struct.unpack('h', bytearray(ext_data[8:10]))[0]*accel_ratio
+            self.__az = struct.unpack('h', bytearray(ext_data[10:12]))[0]*accel_ratio
+
+            mag_ratio = 1 / 1000.0
             self.__mx = struct.unpack('h', bytearray(ext_data[12:14]))[0]*mag_ratio
             self.__my = struct.unpack('h', bytearray(ext_data[14:16]))[0]*mag_ratio
             self.__mz = struct.unpack('h', bytearray(ext_data[16:18]))[0]*mag_ratio
@@ -229,11 +246,15 @@ class Rosmaster(object):
                 self.__akm_readed_angle = True
                 if self.__debug:
                     print("FUNC_AKM_DEF_ANGLE:", id, self.__akm_def_angle)
+            
+            elif ext_type == self.FUNC_SET_CAR_TYPE:
+                car_type = struct.unpack('B', bytearray(ext_data[0:1]))[0]
+                self.__read_car_type = car_type
+            
 
     # 接收数据 receive data
     def __receive_data(self):
         while True:
-            # 每次循环执行时，bytearray(self.ser.read())[0]得到的是什么呢？
             head1 = bytearray(self.ser.read())[0]
             if head1 == self.__HEAD:
                 head2 = bytearray(self.ser.read())[0]
@@ -321,7 +342,6 @@ class Rosmaster(object):
     # Start the thread that receives and processes data
     def create_receive_threading(self):
         try:
-            # self.__uart_state这个变量在类初始化的时候好像并没有赋值啊
             if self.__uart_state == 0:
                 name1 = "task_serial_receive"
                 task_receive = threading.Thread(target=self.__receive_data, name=name1)
@@ -504,13 +524,13 @@ class Rosmaster(object):
 
 
     # 控制小车向前、向后、向左、向右等运动。
-    # state=[0~6],=0停止,=1前进,=2后退,=3向左,=4向右,=5左旋,=6右旋
+    # state=[0, 7],=0停止,=1前进,=2后退,=3向左,=4向右,=5左旋,=6右旋,=7停车
     # speed=[-100, 100]，=0停止。
-    # adjust=True开启陀螺仪辅助运动方向。=False则不开启。
+    # adjust=True开启陀螺仪辅助运动方向。=False则不开启。(此功能未开通)
     # Control the car forward, backward, left, right and other movements.
     # State =[0~6],=0 stop,=1 forward,=2 backward,=3 left,=4 right,=5 spin left,=6 spin right
     # Speed =[-100, 100], =0 Stop.
-    # Adjust =True Activate the gyroscope auxiliary motion direction.  If =False, the function is disabled.  
+    # Adjust =True Activate the gyroscope auxiliary motion direction.  If =False, the function is disabled.(This function is not enabled)
     def set_car_run(self, state, speed, adjust=False):
         try:
             car_type = self.__CAR_TYPE
@@ -530,9 +550,15 @@ class Rosmaster(object):
             print('---set_car_run error!---')
             pass
 
-    # 小车运动控制,v_x=[-1.0, 1.0], v_y=[-1.0, 1.0], v_z=[-5, 5]
-    # Car movement control, v_x = [1.0, 1.0], v_y = [1.0, 1.0], v_z = [5, 5]  
+    # 小车运动控制, 
+    # Car movement control
     def set_car_motion(self, v_x, v_y, v_z):
+        '''
+        输入范围 input range: 
+        X3: v_x=[-1.0, 1.0], v_y=[-1.0, 1.0], v_z=[-5, 5]
+        X3PLUS: v_x=[-0.7, 0.7], v_y=[-0.7, 0.7], v_z=[-3.2, 3.2]
+        R2/R2L: v_x=[-1.8, 1.8], v_y=[-0.045, 0.045], v_z=[-3, 3]
+        '''
         try:
             vx_parms = bytearray(struct.pack('h', int(v_x*1000)))
             vy_parms = bytearray(struct.pack('h', int(v_y*1000)))
@@ -594,47 +620,44 @@ class Rosmaster(object):
     
     # 设置偏航角调节的PID
     # Set the PID for yaw Angle adjustment
-    def set_yaw_pid_param(self, kp, ki, kd, forever=False):
-        try:
-            state = 0
-            if forever:
-                state = 0x5F
-            cmd = [self.__HEAD, self.__DEVICE_ID, 0x0A, self.FUNC_SET_YAW_PID]
-            if kp > 10 or ki > 10 or kd > 10 or kp < 0 or ki < 0 or kd < 0:
-                print("YAW PID value must be:[0, 10.00]")
-                return
-            kp_params = bytearray(struct.pack('h', int(kp * 1000)))
-            ki_params = bytearray(struct.pack('h', int(ki * 1000)))
-            kd_params = bytearray(struct.pack('h', int(kd * 1000)))
-            cmd.append(kp_params[0])  # low
-            cmd.append(kp_params[1])  # high
-            cmd.append(ki_params[0])  # low
-            cmd.append(ki_params[1])  # high
-            cmd.append(kd_params[0])  # low
-            cmd.append(kd_params[1])  # high
-            cmd.append(state)
-            checksum = sum(cmd, self.__COMPLEMENT) & 0xff
-            cmd.append(checksum)
-            self.ser.write(cmd)
-            if self.__debug:
-                print("pid:", cmd)
-            time.sleep(self.__delay_time)
-            if forever:
-                time.sleep(.1)
-        except:
-            print('---set_pid_param error!---')
-            pass
+    # def set_yaw_pid_param(self, kp, ki, kd, forever=False):
+    #     try:
+    #         state = 0
+    #         if forever:
+    #             state = 0x5F
+    #         cmd = [self.__HEAD, self.__DEVICE_ID, 0x0A, self.FUNC_SET_YAW_PID]
+    #         if kp > 10 or ki > 10 or kd > 10 or kp < 0 or ki < 0 or kd < 0:
+    #             print("YAW PID value must be:[0, 10.00]")
+    #             return
+    #         kp_params = bytearray(struct.pack('h', int(kp * 1000)))
+    #         ki_params = bytearray(struct.pack('h', int(ki * 1000)))
+    #         kd_params = bytearray(struct.pack('h', int(kd * 1000)))
+    #         cmd.append(kp_params[0])  # low
+    #         cmd.append(kp_params[1])  # high
+    #         cmd.append(ki_params[0])  # low
+    #         cmd.append(ki_params[1])  # high
+    #         cmd.append(kd_params[0])  # low
+    #         cmd.append(kd_params[1])  # high
+    #         cmd.append(state)
+    #         checksum = sum(cmd, self.__COMPLEMENT) & 0xff
+    #         cmd.append(checksum)
+    #         self.ser.write(cmd)
+    #         if self.__debug:
+    #             print("pid:", cmd)
+    #         time.sleep(self.__delay_time)
+    #         if forever:
+    #             time.sleep(.1)
+    #     except:
+    #         print('---set_pid_param error!---')
+    #         pass
 
     # 设置小车类型
     # Set car Type
     def set_car_type(self, car_type):
         if str(car_type).isdigit():
-            # & 代表位运算，__CAR_TYPE结果为 int 5
             self.__CAR_TYPE = int(car_type) & 0xff
-            # self.__HEAD = 0xFF, self.__DEVICE_ID = 0xFC, self.FUNC_SET_CAR_TYPE = 0x15, self.__CAR_TYPE = int(5)
             cmd = [self.__HEAD, self.__DEVICE_ID, 0x00, self.FUNC_SET_CAR_TYPE, self.__CAR_TYPE, 0x5F]
             cmd[2] = len(cmd) - 1
-            # self.__COMPLEMENT = 257 - self.__DEVICE_ID
             checksum = sum(cmd, self.__COMPLEMENT) & 0xff
             cmd.append(checksum)
             self.ser.write(cmd)
@@ -678,11 +701,9 @@ class Rosmaster(object):
             print('---set_uart_servo error!---')
             pass
 
-    # 设置总线舵机角度接口：id:7-9, angle: 7:[0, 225], 8:[30, 270], 9:[30, 180], 设置舵机要运动到的角度。
-    # 设直立向上夹紧状态，三个舵机都为180度，7/8号顺时针（向下）转为减，逆时针（向上）转为增，夹子松开为减，夹紧为增。
+    # 设置总线舵机角度接口：s_id:[1,6], s_angle: 1-4:[0, 180], 5:[0, 270], 6:[0, 180], 设置舵机要运动到的角度。
     # run_time表示运行的时间(ms),时间越短,舵机转动越快。最小为0，最大为2000
-    # Set bus steering gear Angle interface: ID :7-9, Angle :7 :[0, 225], 8:[30, 270], 9:[30, 180], set steering gear to move to the Angle.  
-    # Set up the vertical clamping state, the three steering gear are 180 degrees, 7/8 clockwise (down) to decrease, counterclockwise (up) to increase, clip release to decrease, clamping to increase.  
+    # Set bus steering gear Angle interface: s_id:[1,6], s_angle: 1-4:[0, 180], 5:[0, 270], 6:[0, 180], set steering gear to move to the Angle.  
     # run_time indicates the running time (ms). The shorter the time, the faster the steering gear rotates.  The minimum value is 0 and the maximum value is 2000
     def set_uart_servo_angle(self, s_id, s_angle, run_time=500):
         try:
@@ -726,9 +747,9 @@ class Rosmaster(object):
             print('---set_uart_servo_angle error! ID=%d---' % s_id)
             pass
 
-    # 设置总线舵机的ID号，servo_id=[1-250]。
+    # 设置总线舵机的ID号(谨慎使用)，servo_id=[1-250]。
     # 运行此函数前请确认只连接一个总线舵机，否则会把所有已连接的总线舵机都设置成同一个ID，造成控制混乱。
-    # Set the bus servo ID, servo_id=[1-250].  
+    # Set the bus servo ID(Use with caution), servo_id=[1-250].  
     # Before running this function, please confirm that only one bus actuator is connected. Otherwise, all connected bus actuators will be set to the same ID, resulting in confusion of control
     def set_uart_servo_id(self, servo_id):
         try:
@@ -883,12 +904,16 @@ class Rosmaster(object):
             pass
 
     # 控制阿克曼类型(R2)小车相对于默认角度的转向角，向左为负数，向右为正数，angle=[-45, 45]
+    # ctrl_car=False，只控制舵机角度，=True，控制舵机角度同时修改左右电机的速度。
     # Control the steering Angle of ackman type (R2) car relative to the default Angle, negative for left and positive for right, Angle =[-45, 45]
-    def set_akm_steering_angle(self, angle):
+    # ctrl_car=False, only control the steering gear Angle, =True, control the steering gear Angle and modify the speed of the left and right motors.
+    def set_akm_steering_angle(self, angle, ctrl_car=False):
         try:
             if int(angle) > 45 or int(angle) < -45:
                 return
             id = self.__AKM_SERVO_ID
+            if ctrl_car:
+                id = self.__AKM_SERVO_ID + 0x80
             cmd = [self.__HEAD, self.__DEVICE_ID, 0x00, self.FUNC_AKM_STEER_ANGLE, id, int(angle)&0xFF]
             cmd[2] = len(cmd) - 1
             checksum = sum(cmd, self.__COMPLEMENT) & 0xff
@@ -916,6 +941,21 @@ class Rosmaster(object):
             time.sleep(.1)
         except:
             print('---reset_flash_value error!---')
+            pass
+    
+    # 重置小车状态，包括停车，关灯，关蜂鸣器
+    # Reset car status, including parking, lights off, buzzer off
+    def reset_car_state(self):
+        try:
+            cmd = [self.__HEAD, self.__DEVICE_ID, 0x04, self.FUNC_RESET_STATE, 0x5F]
+            checksum = sum(cmd, self.__COMPLEMENT) & 0xff
+            cmd.append(checksum)
+            self.ser.write(cmd)
+            if self.__debug:
+                print("reset_car_state:", cmd)
+            time.sleep(self.__delay_time)
+        except:
+            print('---reset_car_state error!---')
             pass
 
     # 清除单片机自动发送过来的缓存数据
@@ -1127,22 +1167,34 @@ class Rosmaster(object):
 
     # 获取小车偏航角PID参数
     # PID parameters of trolley yaw Angle were obtained
-    def get_yaw_pid(self):
-        self.__kp1 = 0
-        self.__ki1 = 0
-        self.__kd1 = 0
-        self.__pid_index = 0
-        self.__request_data(self.FUNC_SET_YAW_PID, int(5))
-        for i in range(20):
-            if self.__pid_index > 0:
-                kp = float(self.__kp1 / 1000.0)
-                ki = float(self.__ki1 / 1000.0)
-                kd = float(self.__kd1 / 1000.0)
-                if self.__debug:
-                    print("get_yaw_pid: {0}, {1}, {2}".format(self.__pid_index, [kp, ki, kd], i))
-                return [kp, ki, kd]
+    # def get_yaw_pid(self):
+    #     self.__kp1 = 0
+    #     self.__ki1 = 0
+    #     self.__kd1 = 0
+    #     self.__pid_index = 0
+    #     self.__request_data(self.FUNC_SET_YAW_PID, int(5))
+    #     for i in range(20):
+    #         if self.__pid_index > 0:
+    #             kp = float(self.__kp1 / 1000.0)
+    #             ki = float(self.__ki1 / 1000.0)
+    #             kd = float(self.__kd1 / 1000.0)
+    #             if self.__debug:
+    #                 print("get_yaw_pid: {0}, {1}, {2}".format(self.__pid_index, [kp, ki, kd], i))
+    #             return [kp, ki, kd]
+    #         time.sleep(.001)
+    #     return [-1, -1, -1]
+
+    # 获取当前底层小车类型。
+    # Gets the current car type from machine
+    def get_car_type_from_machine(self):
+        self.__request_data(self.FUNC_SET_CAR_TYPE)
+        for i in range(0, 20):
+            if self.__read_car_type != 0:
+                car_type = self.__read_car_type
+                self.__read_car_type = 0
+                return car_type
             time.sleep(.001)
-        return [-1, -1, -1]
+        return -1
 
 
     # 获取底层单片机版本号，如1.1
@@ -1165,22 +1217,22 @@ class Rosmaster(object):
 
 if __name__ == '__main__':
     # 小车底层处理库
-    #com_index = 1
-    #while True:
-    #    com_index = com_index + 1
-    #    try:
-    #        print("try COM%d" % com_index)
-    #        com = 'COM%d' % com_index
-    #        bot = Rosmaster(1, com, debug=True)
-    #        break
-    #    except:
-    #        if com_index > 256:
-    #            print("-----------------------No COM Open--------------------------")
-    #            exit(0)
-    #        continue
-    #print("--------------------Open %s---------------------" % com)
+    com_index = 1
+    while True:
+        com_index = com_index + 1
+        try:
+            print("try COM%d" % com_index)
+            com = 'COM%d' % com_index
+            bot = Rosmaster(1, com, debug=True)
+            break
+        except:
+            if com_index > 256:
+                print("-----------------------No COM Open--------------------------")
+                exit(0)
+            continue
+    print("--------------------Open %s---------------------" % com)
 
-    bot = Rosmaster(com="/dev/ttyUSB0", debug=True)
+    # bot = Rosmaster(com="/dev/ttyUSB0", debug=True)
     bot.create_receive_threading()
     time.sleep(.1)
     bot.set_beep(50)
@@ -1189,11 +1241,15 @@ if __name__ == '__main__':
     version = bot.get_version()
     print("version=", version)
 
+    # bot.set_car_type(4)
+    # time.sleep(.1)
+    # car_type = bot.get_car_type_from_machine()
+    # print("car_type:", car_type)
     # bot.set_uart_servo_angle(1, 100)
 
     # s_id, value = bot.get_uart_servo_value(1)
     # print("value:", s_id, value)
-    time.sleep(.1)
+    
     # bot.set_uart_servo_torque(1)
     # time.sleep(.1)
     # state = bot.set_uart_servo_offset(6)
@@ -1213,7 +1269,7 @@ if __name__ == '__main__':
     # angle_array = bot.get_uart_servo_angle_array()
     # print("angle_array:", angle_array)
 
-    # bot.set_car_motion(0, 0, -2)
+    # bot.set_car_motion(0.5, 0, 0)
 
     # bot.send_ip_addr("192.168.1.2")
 
@@ -1222,21 +1278,25 @@ if __name__ == '__main__':
     # bot.set_auto_report_state(0, False)
 
     # bot.set_pwm_servo_all(50, 50, 50, 50)
-
+    # time.sleep(1)
+    # bot.set_car_motion(0, 0, -3.5)
+    # bot.set_car_run(6, 50)
     try:
         while True:
-            #ax, ay, az = bot.get_accelerometer_data()
-            #gx, gy, gz = bot.get_gyroscope_data()
-            #mx, my, mz = bot.get_magnetometer_data()
+            ax, ay, az = bot.get_accelerometer_data()
+            gx, gy, gz = bot.get_gyroscope_data()
+            mx, my, mz = bot.get_magnetometer_data()
             # print(ax, ay, az)
             # print(ax, ay, az, gx, gy, gz, mx, my, mz)
-            #print("%3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f" % 
-            #(ax, ay, az, gx, gy, gz, mx, my, mz))
-            m1, m2, m3, m4 = bot.get_motor_encoder()
-            print("encoder:", m1, m2, m3, m4)
+            # print("%3.3f, %3.3f, %3.3f,      %3.3f, %3.3f, %3.3f" % 
+            # (ax, ay, az, gx, gy, gz))
+            print("%3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f, %3.3f" % 
+            (ax, ay, az, gx, gy, gz, mx, my, mz))
+            # roll, pitch, yaw = bot.get_imu_attitude_data()
+            # print("roll:%f, pitch:%f, yaw:%f" % (roll, pitch, yaw))
+            # m1, m2, m3, m4 = bot.get_motor_encoder()
+            # print("encoder:", m1, m2, m3, m4)
 
-            # yaw, roll, pitch = bot.get_imu_attitude_data()
-            # print("attitude:%3.3f, %3.3f, %3.3f" % (yaw, roll, pitch))
             # v = bot.get_motion_data()
             # print("v:", v)
 
@@ -1244,8 +1304,6 @@ if __name__ == '__main__':
             # print(pid)
             # version = bot.get_version()
             # print("version=", version)
-            # bot.set_pwm_servo(4, angle1)
-            # angle1 = (10 + angle1) % 180
             # vx, vy, vz = bot.get_motion_data()
             # print("V:", vx, vy, vz)
             time.sleep(.1)

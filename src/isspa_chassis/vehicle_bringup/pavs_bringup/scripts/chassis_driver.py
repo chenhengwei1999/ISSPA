@@ -166,6 +166,10 @@ class pavs_driver:
         #vy = msg.linear.y/1000.0*180.0/3.1416    #Radian system
         vy = msg.linear.y
         angular = msg.angular.z     # wait for change
+
+        if vx < 0:
+            angular = -angular
+
         # 小车运动控制,vel: ±1, angular: ±5
         # Trolley motion control,vel=[-1, 1], angular=[-5, 5]
         # rospy.loginfo("cmd_velx: {}, cmd_vely: {}, cmd_ang: {}".format(vx, vy, angular))

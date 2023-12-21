@@ -1,24 +1,21 @@
 Welcome to ISSPA's documentation!
 ===================================
 
-**ISSPA** is an experimental platform for self-driving physical agents, which was originally designed to facilitate researchers by creating a benchmark library that is easy to use, algorithmically verifiable, and modularly extensible. Its full name is **Intelligent Self-driving System empowering Physical Agent**, and it was built under the leadership of the [TIS](https://tis.ios.ac.cn/) lab, of which the team members are listed in :doc:`Team`.
+**ISSPA (Intelligent Self-driving System empowering Physical Agent)** is an experimental platform for 
+self-driving physical agents, which was originally designed to facilitate researchers by creating a 
+baseline library that is easy to use, algorithmically verifiable, and modularly extensible. And it was 
+built under the leadership of the `TIS Lab <https://tis.ios.ac.cn/>`_, of which the team members 
+are listed in :doc:`team`.
 
-It has the following main features:
-1. Some benchmark frameworks for autonomous driving, with algorithms that are easy to validate (with convenient interfaces).
-2, A supporting cloud platform that allows remote connection and use of physical carts.
+It has the following features:
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+- Some open source baseline frameworks for autonomous driving.
 
-.. note::
-
-   This project is under active development.
+- A cloud platform that supports the remote use of physical vehicles.
 
 Contents
 --------
 
 .. toctree::
 
-   usage
-   api
    team

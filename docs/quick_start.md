@@ -5,21 +5,21 @@
 Firstly, launch chassis and sensors driver of the vehicle.
 
 ```bash
-roslaunch vehicle_bringup pavs_chassis_and_sensors.launch
+roslaunch pavs_bringup pavs_chassis_and_sensors.launch
 ```
 
 ## Start the SLAM Program
 
 ```bash
-roslaunch vehicle_mapping pavs_map.launch
+roslaunch mapping_baselines pavs_map.launch
 ```
 
-When the map is created, you can execute `map.sh` under the `~/chw_space/pavs_ws/src/ISSPA/src/vehicle_mapping/scripts` directory to save your map.
+When the map is created, you can execute `map.sh` under the `~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/scripts` directory to save your map.
 
 ## Start the Navigation Program
 
 ```bash
-roslaunch vehicle_navigation pavs_navigation.launch
+roslaunch navigation_stack pavs_navigation.launch
 ```
 
 

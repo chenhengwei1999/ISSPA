@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-map_dir="${HOME}/pa_ws/src/ISSPA/src/vehicle_mapping/mapping_baselines/maps"
+map_dir="~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/maps/map"
 map_name="cartographer_map"
 
 # Check if the folder exists, create the folder if it does not exist

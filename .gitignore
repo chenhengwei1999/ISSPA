@@ -6,6 +6,15 @@ __pycache__/
 # for vscode
 .vscode
 
+### for project
+src/isspa_object_detection/camera_based_detection/yolov5_ros/scripts/runs/*
+# Ignore Python cache files
+__pycache__/
+
+# Ignore all subfolders' __pycache__ folders
+**/__pycache__/
+
+
 # for ros
 src/CMakeLists.txt
 devel
