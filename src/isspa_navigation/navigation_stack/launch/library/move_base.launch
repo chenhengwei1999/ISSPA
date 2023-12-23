@@ -1,5 +1,5 @@
 <launch>
-    <arg name="robot_type" value="PAVS" doc="robot_type [PAVS PAVL]"/>
+    <arg name="robot_type" value="R2" doc="robot_type [PAVS PAVL]"/>
     <!-- Arguments -->
     <arg name="move_forward_only" default="false"/>
     <arg name="nav_use_rotvel" default="true"/>
