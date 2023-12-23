@@ -8,11 +8,13 @@ import threading
 from math import pi
 from time import sleep
 from sensor_msgs.msg import Imu, MagneticField, JointState
-from stm32_com import Rosmaster
+from stm32_com import PAVS
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String, Float32, Int32, Bool
 from dynamic_reconfigure.server import Server
 from pavs_bringup.cfg import PIDparamConfig
+
+from logging_output import logger
 
 car_type_dic={
     'R2':5,
@@ -28,11 +30,9 @@ class pavs_driver:
         # 弧度转角度
         # Radians turn angle
         self.RA2DE = 180 / pi
-        self.car = Rosmaster()
+        self.car = PAVS()
         self.car_type = rospy.get_param("~car_type","R2")#default R2
-        #print(self.car_type)
-        #print(car_type_dic[self.car_type])
-        #self.car.set_car_type(car_type_dic[self.car_type])#1
+        
         self.car.set_car_type(5)
         self.imu_link = rospy.get_param("~imu_link", "imu_link")
         self.Prefix = rospy.get_param("~prefix", "")
@@ -196,6 +196,8 @@ class pavs_driver:
 if __name__ == '__main__':
     rospy.init_node("driver_node", anonymous=False)
     try:
+        logger.info("Welcome to the PAVS experimental platform!")
+        logger.info("PAVS's Chassis is Opening...")
         driver = pavs_driver()
         driver.pub_data()
         rospy.spin()

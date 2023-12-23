@@ -6,16 +6,13 @@ import time
 import serial
 import threading
 
+from logging_output import logger
 
 # V3.3.1
-class Rosmaster(object):
+class PAVS(object):
     __uart_state = 0
 
     def __init__(self, car_type=1, com="/dev/myserial", delay=.002, debug=False):
-        # com = "COM30"
-        # com="/dev/ttyTHS1"
-        # com="/dev/ttyUSB0"
-        # com="/dev/ttyAMA0"
 
         self.ser = serial.Serial(com, 115200)
 
@@ -123,7 +120,7 @@ class Rosmaster(object):
             print("cmd_delay=" + str(self.__delay_time) + "s")
 
         if self.ser.isOpen():
-            print("Rosmaster Serial Opened! Baudrate=115200")
+            logger.info("PAVS Serial Opened! Baudrate=115200")
         else:
             print("Serial Open Failed!")
         # 打开机械臂的扭矩力，避免6号舵机首次插上去读不到角度。
@@ -347,10 +344,10 @@ class Rosmaster(object):
                 task_receive = threading.Thread(target=self.__receive_data, name=name1)
                 task_receive.setDaemon(True)
                 task_receive.start()
-                print("----------------create receive threading--------------")
+                logger.info("{0}create receive threading{1}".format("=" * 10, "=" * 10,))
                 self.__uart_state = 1
         except:
-            print('---create_receive_threading error!---')
+            logger.info('Create receive threading error! Please check your stable first!')
             pass
     
     # 单片机自动返回数据状态位，默认为开启，如果设置关闭会影响部分读取数据功能。
@@ -1223,7 +1220,7 @@ if __name__ == '__main__':
         try:
             print("try COM%d" % com_index)
             com = 'COM%d' % com_index
-            bot = Rosmaster(1, com, debug=True)
+            bot = PAVS(1, com, debug=True)
             break
         except:
             if com_index > 256:
@@ -1232,7 +1229,7 @@ if __name__ == '__main__':
             continue
     print("--------------------Open %s---------------------" % com)
 
-    # bot = Rosmaster(com="/dev/ttyUSB0", debug=True)
+    # bot = PAVS(com="/dev/ttyUSB0", debug=True)
     bot.create_receive_threading()
     time.sleep(.1)
     bot.set_beep(50)
