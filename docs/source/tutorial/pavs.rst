@@ -119,6 +119,6 @@ possible to realize the task of fixed-point navigation!
 
     roslaunch navigation_stack pavs_navigation.launch
 
-By now, you will be able to test the effectiveness of the navigation algorithms on **RVIZ** by selecting points on the 
+By now, you will be able to test the effectiveness of the navigation algorithms on ``RVIZ`` by selecting points on the 
 map that are free of obstacles.
 
