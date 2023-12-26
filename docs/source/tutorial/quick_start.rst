@@ -28,29 +28,29 @@ WorkSpace Setup
 ISSPA as our main repository, it is recommended that you first understand its directory structure, 
 which is necessary for later use and development.
 
-- First, create a workspace in the `/home/$USER/` directory:
+- First, create a workspace in the ``/home/$USER/`` directory:
   
-.. code-block:: bash
-
+  .. code-block:: bash
+    
     mkdir ~/pa_ws/src -p
 
-- Next, put the source program inside `src`:
+- Next, put the source program inside ``src``:
 
-.. code-block:: bash
+  .. code-block:: bash
 
     cd ~/pa_ws/src
     git clone https://github.com/chenhengwei1999/ISSPA.git
 
-- Finally, use `catkin_make` to compile the workspace.
+- Finally, use ``catkin_make`` to compile the workspace.
   
-.. code-block:: bash
+  .. code-block:: bash
     
     catkin_make
   
 .. note::
 
    **Warm reminder:** Before using the program, remember to refresh the environment variables.
-   Or, storing them in `.bashrc` is okay.
+   Or, storing them in ``.bashrc`` is okay.
 
    .. code-block:: bash
 

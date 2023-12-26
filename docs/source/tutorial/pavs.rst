@@ -36,7 +36,7 @@ visual interface for familiarizing yourself with the internal operating system.
     Reserve at least one USB port for the keyboard and mouse kit, which can help you with wireless 
     network configuration and so on.
 
-Once you have configured your network, you can view your IPv4 address via the `ifconfig` command. 
+Once you have configured your network, you can view your IPv4 address via the ``ifconfig`` command. 
 After that, you can connect via VNC viewer or SSH (we will use SSH as an example below).
 
 The command line usage of SSH is as follows:
@@ -64,7 +64,7 @@ Firstly, launch chassis and sensors driver of the vehicle.
     roslaunch pavs_bringup pavs_chassis_and_sensors.launch
 
 With the chassis booted, you can view the current list of messages 
-via the **rostopic list**, e.g. **/cmd_vel** is the topic for which the chassis expects twist subscribers.
+via the ``rostopic list``, e.g. ``/cmd_vel`` is the topic for which the chassis expects twist subscribers.
 
 At this point, launch another terminal, again using SSH to connect to the vehicle, and enter the following 
 commands to test that the motors and servos are working properly.
@@ -92,7 +92,7 @@ After that, you can test if the SLAM program works properly.
 
     roslaunch mapping_baselines pavs_map.launch
 
-When the program is started, you can check for message output by typing **rostopic echo /map** in the vehicle's 
+When the program is started, you can check for message output by typing ``rostopic echo /map`` in the vehicle's 
 terminal, which normally outputs a number of matrices containing values from 0 to 1, which represent the probability 
 of an obstacle being present in the grid.
 
@@ -102,10 +102,10 @@ Further, you need to control the vehicle movement via a remote controller or a k
     Warm reminder: Try not to let the vehicle hit the obstacles during mapping.
 
 
-When the map is created, you can execute map.sh under the `~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/scripts directory` 
+When the map is created, you can execute map.sh under the ``~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/scripts directory`` 
 to save your map.
 
-Eventually, the maps will be saved to the `~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/maps/` folder 
+Eventually, the maps will be saved to the ``~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/maps/`` folder 
 with the name `map`.
 
 
