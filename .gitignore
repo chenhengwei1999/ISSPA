@@ -8,6 +8,9 @@ __pycache__/
 
 ### for project
 src/isspa_object_detection/camera_based_detection/yolov5_ros/scripts/runs/*
+.catkin_workspace
+
+
 # Ignore Python cache files
 __pycache__/
 
