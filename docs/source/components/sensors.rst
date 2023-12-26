@@ -19,32 +19,34 @@ mm-wave radar, GPS, IMU, each with distinct data formats.
 **ISSPA's configuration**
 -------------------------
 
-ISSPA's vehicles can be equipped with single/multi-line LiDAR, mono/stereo cameras, IMU, 
+ISSPA's vehicles can be equipped with single/multi-line LiDAR, mono/depth cameras, IMU, 
 providing researchers with a diverse range of options to meet their specific needs. 
 Brief introductions to different sensors are as follows: 
 
 - LiDAR: LiDAR utilizes laser beams to measure precise distances by measuring the reflection time. 
   Widely used in autonomous driving, LiDAR contributes to real-time mapping, obstacle detection, 
-  and distance measurement.
+  and distance measurement. Below is a sample point cloud from the ISCAS campus using velodyne's 
+  16-line LiDAR.
 
   .. figure:: ../imgs/lidar.png
     :alt: LiDAR example
     :align: center
     :scale: 50%
 
-    `LiDAR example <https://velodynelidar.com/blog/guide-to-lidar-wavelengths/>`_
+    **Sample LiDAR point cloud data collected at ISCAS campus**
 
-- Industrial Camera: Industrial cameras, known for high resolution and fast capture rates, 
-  are employed for capturing image information. In autonomous driving, 
-  industrial cameras are utilized for visual perception, lane detection, 
-  traffic sign recognition, and other tasks.
+- Depth Camera: Depth cameras based on Time-of-Flight (ToF) technology use the principle of measuring the flight 
+  time of light pulses to determine the distance between objects and the camera. By measuring the 
+  time it takes for light beams to be emitted and returned, it generates high-resolution depth images. 
+  ToF depth cameras offer advantages of speed, accuracy, and adaptability to various lighting conditions. 
+  They find widespread applications in computer vision, 3D scanning, virtual reality, and augmented reality.
 
-  .. figure:: ../imgs/d435_camera_modules.jpg
+  .. figure:: ../imgs/astro_pro_plus.jpeg
     :alt: Camera example
     :align: center
     :scale: 50%
 
-    `Camera example <https://www.intelrealsense.com/depth-camera-d435/>`_
+    **Data visualization of different modalities of depth cameras in the ISCAS laboratory**
   
 
 - IMU (Inertial Measurement Unit): IMU provides information about a vehicle's attitude and motion 
