@@ -1,6 +1,6 @@
 ISSPA Documentation
 ===================================
-Welcome to ISSPA documentation!
+Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 
 .. toctree::
    :maxdepth: 1
@@ -98,7 +98,8 @@ Introduction to the core elements of ISSPA.
 
 CONTRIBUTIND TO ISSPA
 ------------------------
-Guide you on how to add plugins to ISSPA, if you have a better solution, please let us know, thank you very much:
+Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
+please do not hesitate to Pull&Request on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
 
 - :doc:`/contributing_to_isspa/mapping_plugin` - Extended guidance on SLAM algorithms is available here.
   
