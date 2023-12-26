@@ -53,3 +53,11 @@ Within the control module, we seamlessly integrate the Proportional-Integral-Der
 The PID algorithm, renowned for its classical simplicity and ease of implementation, takes center stage in governing the control dynamics 
 of the system. This classical control approach within the MCU ensures stability and precision in steering the system's behavior, establishing 
 a robust and accessible control architecture.
+
+
+**Input & Output**
+------------------
+
+
+**Reference**
+--------------
