@@ -27,7 +27,7 @@ Brief introductions to different sensors are as follows:
   Widely used in autonomous driving, LiDAR contributes to real-time mapping, obstacle detection, 
   and distance measurement.
 
-  .. figure:: ../imgs/lidar.jpg
+  .. figure:: ../imgs/lidar.png
     :alt: LiDAR example
     :align: center
     :scale: 50%
