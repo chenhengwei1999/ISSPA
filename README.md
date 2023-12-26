@@ -1,45 +1,14 @@
-# ISSPA (Intelligent Self-driving System Physical Agent)
+# ISSPA (Intelligent Self-driving System empowering Physical Agents)
 
-This repo is used to develop and store codes for physical agents.
+**ISSPA** is an experimental platform for self-driving physical agents, which was originally designed to 
+facilitate researchers by creatingbaseline solutions that are easy to use, algorithmically verifiable, and 
+modularly extensible. And it was built under the leadership of the [TIS Lab](https://tis.ios.ac.cn/), of which 
+the team members are listed in [Team](https://isspa.readthedocs.io/en/latest/about_us/team.html).
 
-## Developing Environment
+ISSPA has the following features:
 
-- Ubuntu 20.04
+- Some baseline solutions for autonomous driving.
 
-- ROS1 noetic
+- Cloud platform that supports the remote use of physical vehicles.
 
-## WorkSpace Setup
-
-Create a workspace for ROS:
-
-```bash
-mkdir ~/pa_ws/src -p
-```
-
-Clone the ISSPA codes:
-
-```bash
-cd ~/pa_ws/src
-git clone https://github.com/chenhengwei1999/ISSPA.git
-```
-
-Complie the whole projects using `catkin_make`:
-
-```bash
-catkin_make
-```
-
-Finally refresh the environment variables or store them in **.bashrc**.
-
-```bash
-source devel/setup.bash
-
-# Or
-echo "source ~/pa_ws/devel/setup.bash" >> ~/.bashrc
-```
-
-## Usage Guide
-
-### Quick Start of PVAS
-
-When the **WorkSpace Setup** is completed, you can try the following tasks, which contain **vehicle chassis** startup, **sensor** startup, **remote control**, **SLAM**, and **navigation**. Refer [here](./docs/quick_start.md) for documentation.
+![ISSPA Overview](./docs/source/imgs/isspa_overview.jpg)

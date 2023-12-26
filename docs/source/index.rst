@@ -1,5 +1,6 @@
 ISSPA Documentation
 ===================================
+
 Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 
 .. toctree::
@@ -58,7 +59,7 @@ are listed in :doc:`about_us/team`.
 
 
 .. note::
-   The ISSPA project is a branch of the `ISS <https://tis.ios.ac.cn/iss/>`_ subject.
+   The ISSPA project is a branch of the `ISS <https://tis.ios.ac.cn/iss/>`_ project.
 
 ISSPA has the following features:
 
