@@ -28,7 +28,10 @@ WorkSpace Setup
 ISSPA as our main repository, it is recommended that you first understand its directory structure, 
 which is necessary for later use and development.
 
-- First, create a workspace in the `/home/$USER/` directory: ::
+- First, create a workspace in the `/home/$USER/` directory:
+  
+.. code-block:: bash
+
     mkdir ~/pa_ws/src -p
 
 - Next, put the source program inside `src`:
