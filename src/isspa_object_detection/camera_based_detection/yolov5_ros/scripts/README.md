@@ -1,19 +1,23 @@
-# Traffic lights detect -- demo
+# Usage Guide
 
-## Install (recommend install in ubuntu)
+## Install
 
-```cmd
-git clone https://github.com/ultralytics/yolov5  # clone
+```bash
+git clone https://github.com/ultralytics/yolov5
 cd yolov5
-pip install -r requirements.txt  # install
+pip install -r requirements.txt 
 ```
 
 ## Training
 
-- Use ./data/VOC.yaml to save as ./data/data.yaml for modification
+Use `./data/VOC.yaml` to save as ./data/data.yaml for modification.
 
 ```python
-# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+# Train/val/test sets as 
+# 1) dir: path/to/imgs, 
+# 2) file: path/to/imgs.txt, or 
+# 3) list: [path/to/imgs1, path/to/imgs2, ..]
+
 path: ./cinTA_v2-1   ## your dataset path
 train: # train images 
   - train/images
@@ -30,7 +34,7 @@ names: ['green', 'red', 'yellow']  # class names
 
 
 
-- Use ./model/yolov5s.yaml to save as ./model/yolov5s_traffic_lights.yaml for modification
+Use `./model/yolov5s.yaml` to save as `./model/yolov5s_traffic_lights.yaml` for modification
 
 ```python
 # YOLOv5 🚀 by Ultralytics, GPL-3.0 license
@@ -40,7 +44,7 @@ names: ['green', 'red', 'yellow']  # class names
 nc: 3  # number of classes
 ```
 
-- dataset link:
+Dataset link:
 
 ```python
 # paste its in jupyter notebook and run
@@ -52,23 +56,23 @@ dataset = project.version(1).download("yolov5")
 
 
 
-## weights
+## Weights
 
-You can find our trained weights [here](https://drive.google.com/drive/folders/1h8PMiA1As6Gy__V9bRYqrgFeHsgx3Uh2?usp=drive_link)
+You can find our trained weights [here](https://drive.google.com/drive/folders/1h8PMiA1As6Gy__V9bRYqrgFeHsgx3Uh2?usp=drive_link).
 
 
 
-## detect result
+## Detect Result
 
-- use ```python train.py --ephos 100 --data ./data/data.yaml --model yolov5l_traffic_lights.yaml``` to train
+Use ```python train.py --ephos 100 --data ./data/data.yaml --model yolov5l_traffic_lights.yaml``` to train:
 
-  ![red](https://github.com/memory009/ISSPA/tree/master/src/isspa_object_detection/camera_based_detection/yolov5_ros/scripts/demo/traffic_lights_results/red.png)
+![red](/docs/source/imgs/yolov5_traffic_light_red.jpg)
 
-  ![yellow](https://github.com/memory009/ISSPA/tree/master/src/isspa_object_detection/camera_based_detection/yolov5_ros/scripts/demo/traffic_lights_results/yellow.png)
+![yellow](/docs/source/imgs/yolov5_traffic_light_yellow.jpg)
 
-  ![green](https://github.com/memory009/ISSPA/tree/master/src/isspa_object_detection/camera_based_detection/yolov5_ros/scripts/demo/traffic_lights_results/green.png)
+![green](/docs/source/imgs/yolov5_traffic_light_green.jpg)
 
-### issues&solution
+## Issues & Solution
 
 Q1：
 
