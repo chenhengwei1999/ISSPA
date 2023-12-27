@@ -4,7 +4,8 @@
 
     <node name="yolov5_2d_detection" pkg="yolov5_ros" type="detect_ros.py" output="screen">
         <param name="image_topic" type="sensor_msgs::msgs::Image" value="$(arg image_topic)" />
-        <param ?
+        <param name="model_path" type="str" value="$(find yolov5_ros)/scripts/yolov5s.pt" />
+        <param name="output_topic_2d" type="str" value="/yolov5_ros/2d_detection" />
     </node>
 
 </launch>
