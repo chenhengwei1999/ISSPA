@@ -98,6 +98,8 @@ def run(
     rate = rospy.Rate(10)
     bridge = CvBridge()
 
+    ### add notes heres
+
     # detection_msgs = BoundingBox2D()
     # pose2d = Pose2D()
 

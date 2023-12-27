@@ -1,0 +1,10 @@
+<launch>
+
+    <arg name="image_topic" default="/camera/color/image_raw"/>
+
+    <node name="yolov5_2d_detection" pkg="yolov5_ros" type="detect_ros.py" output="screen">
+        <param name="image_topic" type="sensor_msgs::msgs::Image" value="$(arg image_topic)" />
+        <param ?
+    </node>
+
+</launch>
