@@ -9,7 +9,7 @@
     <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 **Preface**
----------
+-----------
 
 The navigation module is a key part of self-driving vehicles, guiding the vehicle from one point to another. It has 
 important tasks like figuring out the best overall route (global path planning), planning short-term moves (local path planning), 
@@ -21,13 +21,40 @@ control module, which makes the vehicle move accordingly.
 
 In practical terms, the planning part of the navigation module has two jobs. First, the global path planning decides the 
 best way to go from where the vehicle is to where it needs to be. Second, the local planning comes up with short-term plans 
-for the vehicle to follow in real-time, especially when there are unexpected things in the way.
+for the vehicle to follow in real-time, especially when there are unexpected things in the way. 
+
+Within the field of control systems, mature algorithms such as PID (Proportional-Integral-Derivative) and LQR (Linear Quadratic Regulator) 
+have reached an advanced stage of development. In PAVs, the implementation of PID control has been integrated and embedded into an STM32 
+control board to ensure responsiveness and meet real-time operational requirements.
+
+
+**List of Navigation  Algorithms**
+-----------------------------------
+
+ISSPA has deployed one or several benchmark algorithms for both planning and control tasks within the Navigation module. 
+For planning, it predominantly relies on the technology path provided by the ROS Navigation stack, 
+while the control aspect incorporates the classic PID control algorithm flashed onto the development board.
+
+Here is the algorithmic breakdown for each task implementation:
++----------------------+----------------------+----------------+
+|      Planning (ROS Navigation Stack)        |     Control    |
++----------------------+----------------------+----------------+
+|     Global Planner   |     Local Planner    |       PID      |
++======================+======================+================+
+|          A*          |         TEB          |       ...      |
++----------------------+----------------------+----------------+
+|          D*          |         DWA          |       ...      |
++----------------------+----------------------+----------------+
+|          PSO         |         ...          |       ...      |
++----------------------+----------------------+----------------+
+
+In the followint parts, we will discuss more details of this tasks.
 
 
 **ROS Navigation Stack**
 ------------------------
 
-The ROS Navigation Stack is a comprehensive framework in robotic research, serving as a sophisticated navigation solution. 
+The ROS Navigation Stack is a comprehensive planning framework in robotic research, serving as a sophisticated navigation solution. 
 Comprising an array of algorithms and modules, it empowers robots to autonomously traverse their environment while avoiding obstacles. 
 This stack incorporates fundamental components such as localization, mapping, and path planning, providing a holistic solution for 
 robotic navigation challenges. In essence, it serves as a cornerstone in the realm of robotic systems, facilitating intelligent 
