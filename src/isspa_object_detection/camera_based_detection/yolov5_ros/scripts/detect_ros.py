@@ -54,7 +54,7 @@ from utils.general import (LOGGER, Profile, check_file, check_img_size, check_im
 from utils.torch_utils import select_device, smart_inference_mode
 
 import rospy
-from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D
+# from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D
 from geometry_msgs.msg import Pose2D
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
@@ -93,13 +93,15 @@ def run(
         vid_stride=1,  # video frame-rate stride
 ):
     
+    # 一个 python 文件中只能初始化一个节点
     rospy.init_node('yolov5', anonymous=False)
-    pub = rospy.Publisher('detection_results', Image, queue_size=10)
+    image_pub = rospy.Publisher('detection_results', Image, queue_size=10)
+    bbox_pub = rospy.Publisher('bounding_box', Pose2D, queue_size=10)  # 创建ROS发布者
     rate = rospy.Rate(10)
     bridge = CvBridge()
 
     # detection_msgs = BoundingBox2D()
-    # pose2d = Pose2D()
+
 
     source = str(source)
     save_img = not nosave and not source.endswith('.txt')  # save inference images
@@ -195,6 +197,9 @@ def run(
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
                     c = int(cls)  # integer class
+                    center_x = (xyxy[0] + xyxy[2]) / 2  # 边界框的中心点x坐标
+                    center_y = (xyxy[1] + xyxy[3]) / 2  # 边界框的中心点y坐标
+                    rotation_angle = 0
                     label = names[c] if hide_conf else f'{names[c]}'
                     confidence = float(conf)
                     confidence_str = f'{confidence:.2f}'
@@ -231,12 +236,20 @@ def run(
                 scaled_im = cv2.resize(im0, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv2.INTER_AREA)
                 image_msg = bridge.cv2_to_imgmsg(scaled_im, encoding='bgr8')
 
+
                 # 设置 ROS Image 消息的 header（可以根据实际情况调整）
                 image_msg.header.stamp = rospy.Time.now()
                 image_msg.header.frame_id = "camera_frame"
 
+                # 设置 ROS Pose2D信息的 header
+                pose = Pose2D()
+                pose.x = center_x
+                pose.y = center_y
+                pose.theta = rotation_angle
+
                 # 发布到指定的 topic
-                pub.publish(image_msg)
+                image_pub.publish(image_msg)
+                bbox_pub.publish(pose)
                 rate.sleep()  # 控制发布频率
             except Exception as e:
                 print("*"*20)
