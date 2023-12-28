@@ -36,9 +36,11 @@ For planning, it predominantly relies on the technology path provided by the ROS
 while the control aspect incorporates the classic PID control algorithm flashed onto the development board.
 
 Here is the algorithmic breakdown for each task implementation:
+
+
 +----------------------+----------------------+----------------+
 |      Planning (ROS Navigation Stack)        |     Control    |
-+----------------------+----------------------+----------------+
++======================+======================+================+
 |     Global Planner   |     Local Planner    |       PID      |
 +======================+======================+================+
 |          A*          |         TEB          |       ...      |
