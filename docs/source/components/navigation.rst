@@ -125,60 +125,45 @@ This endeavor is intended to offer you a comprehensive reference and insight int
 In ROS Navigation Stack, D* (D-star) and A* (A-star) algorithms are primarily used for global path planning. 
 
 Their inputs generally involve:
-   - **Start and Goal Positions**  
-     Which describe the robot's initial position (coordinates) and the target destination it intends to reach. 
+   - **Start and Goal Positions** -- Which describe the robot's initial position (coordinates) and the target destination it intends to reach. 
    
-   - **Map information**  
-     Typically represented as a grid map or similar format indicating traversable areas, obstacles, and other terrain information in the robot's environment.  
+   - **Map information** -- Typically represented as a grid map or similar format indicating traversable areas, obstacles, 
+   and other terrain information in the robot's environment.  
 
 Their outputs generally involve:
-   - **Planned global path(route)**  
-     The primary output involves a computed path from the starting point to the goal location, 
+   - **Planned global path(route)** -- The primary output involves a computed path from the starting point to the goal location, 
      accounting for the map information and obstacle avoidance strategies implemented by these algorithms.
 
 
 **Local Planner**
 ##################
 In ROS Navigation Stack, TEB and DWA algorithms are primarily used for local trajectory planning. 
+
 Their inputs generally involve:
-
-   - **Planned global path**   
-
-     Path or trajectory obtained from the global planner.
-
-   - **Local Map Information**  
-
-     Typically represented as a local grid map.
-
-   - **Robot's Kinematic and Dynamic Constraints**  
-
-     Information about the vehicle's physical limits, such as maximum speed, acceleration, and other kinematic constraints.  
+   - **Planned global path** -- Path or trajectory obtained from the global planner.
+   - **Local Map Information** -- Typically represented as a local grid map.
+   - **Robot's Kinematic and Dynamic Constraints** -- Information about the vehicle's physical limits, such as maximum speed, acceleration, 
+   and other kinematic constraints.  
 
 Their outputs generally involve:
-   - **Planned local trajectory**  
-
-     Trajectory that considering the dynamic constraints and local map information, ensuring collision avoidance and kinematic feasibility.
-   
-   - **Vehicle linear and angular velocity**
-   
-     Velocity commands that sent to control task to control the vehicle.
+   - **Planned local trajectory** -- Trajectory that considering the dynamic constraints and local map information, 
+   ensuring collision avoidance and kinematic feasibility.
+   - **Vehicle linear and angular velocity** -- Velocity commands that sent to control task to control the vehicle.
 
 
 **Controller**
 ###############
 In control tasks, PID is a classical method.
-Its inputs are:
-   - **Expected vehicle linear and angular velocity**
-     vehicle linear and angular velocity that provided by :guilabel:`Local planner`.
 
-   - **Current Vehicle linear and angular velocity**
+Its inputs are:
+   - **Expected vehicle linear and angular velocity** -- Vehicle linear and angular velocity that provided by :guilabel:`Local planner`.
+
+   - **Current Vehicle linear and angular velocity** 
      
 Its outputs are:
-   - **Motor speed control**  
-     PWM value.
+   - **Motor speed control** -- PWM value.
 
-   - **Yaw control**  
-     Angular velocity. 
+   - **Yaw control** -- Angular velocity. 
 
 
 
