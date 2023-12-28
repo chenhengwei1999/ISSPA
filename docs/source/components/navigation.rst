@@ -141,31 +141,37 @@ Their outputs generally involve:
 ##################
 In ROS Navigation Stack, TEB and DWA algorithms are primarily used for local trajectory planning. 
 Their inputs generally involve:
+
    - **Planned global path**   
+
      Path or trajectory obtained from the global planner.
 
    - **Local Map Information**  
+
      Typically represented as a local grid map.
 
    - **Robot's Kinematic and Dynamic Constraints**  
+
      Information about the vehicle's physical limits, such as maximum speed, acceleration, and other kinematic constraints.  
 
 Their outputs generally involve:
    - **Planned local trajectory**  
+
      Trajectory that considering the dynamic constraints and local map information, ensuring collision avoidance and kinematic feasibility.
    
    - **Vehicle linear and angular velocity**
+   
      Velocity commands that sent to control task to control the vehicle.
 
 
 **Controller**
 ###############
-In control tasks, PID is a classical method.  <br>
+In control tasks, PID is a classical method.
 Its inputs are:
-   - **Expected vehicle linear and angular velocity** <br>  
+   - **Expected vehicle linear and angular velocity**
      vehicle linear and angular velocity that provided by :guilabel:`Local planner`.
 
-   - **Current Vehicle linear and angular velocity**<br>
+   - **Current Vehicle linear and angular velocity**
      
 Its outputs are:
    - **Motor speed control**  
