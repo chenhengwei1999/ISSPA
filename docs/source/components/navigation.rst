@@ -160,14 +160,13 @@ Their outputs generally involve:
 
 **Controller**
 ###############
-In control tasks, PID is a classical method. 
+In control tasks, PID is a classical method.  <br>
 Its inputs are:
-   - **Expected vehicle linear and angular velocity**  
+   - **Expected vehicle linear and angular velocity** <br>  
      vehicle linear and angular velocity that provided by :guilabel:`Local planner`.
 
-   - **Current Vehicle linear and angular velocity**  
+   - **Current Vehicle linear and angular velocity**<br>
      
-
 Its outputs are:
    - **Motor speed control**  
      PWM value.
