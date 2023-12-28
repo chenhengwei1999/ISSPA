@@ -120,7 +120,7 @@ This endeavor is intended to offer you a comprehensive reference and insight int
 |                      |                      |     c. Robot's Dynamics and Constraints     |                                              |
 +----------------------+----------------------+---------------------------------------------+----------------------------------------------+
 |          PID         |     Controller       |     a. Expected linear and angular velocity |      a. Motor speed control: PWM value       |
-|                      |                      |     b. Vehicle linear and angular velocity  |      b. Yaw control: Angular velocity        |
+|                      |                      |     b. Current linear and angular velocity  |      b. Yaw control: Angular velocity        |
 +----------------------+----------------------+---------------------------------------------+----------------------------------------------+
 
 
