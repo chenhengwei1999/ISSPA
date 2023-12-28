@@ -93,7 +93,7 @@ a robust and accessible control architecture.
 .. figure:: ../imgs/PID_wiki.png
    :alt: PID block diagram 
    :align: center
-   :scale: 40%
+   :scale: 30%
 
    `PID block diagram <https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller>`_
 
@@ -109,13 +109,17 @@ Within this section, we aim to present the inputs and outputs of different plann
 This endeavor is intended to offer you a comprehensive reference and insight into these algorithms.
 
 
-.. tabularcolumns:: |p{1cm}|p{7cm}|
-
-.. csv-table:: Inputs & Outputs
-   :file: /files/table_inputs_outputs.csv
-   :header-rows: 1
-   :class: longtable
-   :widths: 1 1
+| **Algo ** | **Type**        | **Inputs**                                                | **Outputs** |
+|:---------:|:---------------:|:---------------------------------------------------------:|:-----------:|
+| A* / D*   | Global Planner  | a. Start and Goal Positions:  <br> b. Map Representation: | global path |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
+|           |                 |                                                           |             |
 
 
 
