@@ -42,7 +42,7 @@ Here is the algorithmic breakdown for each task implementation:
 |      Planning (ROS Navigation Stack)        |     Control    |
 +======================+======================+================+
 |     Global Planner   |     Local Planner    |       PID      |
-+======================+======================+================+
++----------------------+----------------------+----------------+
 |          A*          |         TEB          |       ...      |
 +----------------------+----------------------+----------------+
 |          D*          |         DWA          |       ...      |
@@ -50,7 +50,7 @@ Here is the algorithmic breakdown for each task implementation:
 |          PSO         |         ...          |       ...      |
 +----------------------+----------------------+----------------+
 
-In the followint parts, we will discuss more details of this tasks.
+In the followint parts, we will discuss more details of these tasks.
 
 
 **ROS Navigation Stack**
