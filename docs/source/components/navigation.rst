@@ -113,11 +113,11 @@ This endeavor is intended to offer you a comprehensive reference and insight int
 |         Algo         |         Type         |              Inputs                         |                  Outputs                     |
 +======================+======================+============================================================================================+
 |     A* / D* / PSO    |     Global Planner   |        a. Start and Goal Positions          |          Planned global path(route)          |
-|                      |                      |        b.Map information                    |                                              |
+|                      |                      |        b. Map information                   |                                              |
 +----------------------+----------------------+---------------------------------------------+----------------------------------------------+
 |      DWA / TEB       |     Local Planner    |     a. Global path                          |    a. Planned local trajectory               |
-|                      |                      |     b.Map information                       |    b. Linear velocity and angular velocity   |
-|                      |                      |     c.Robot's Dynamics and Constraints      |                                              |
+|                      |                      |     b. Map information                      |    b. Linear velocity and angular velocity   |
+|                      |                      |     c. Robot's Dynamics and Constraints     |                                              |
 +----------------------+----------------------+---------------------------------------------+----------------------------------------------+
 |          PID         |     Controller       |     a. Expected linear and angular velocity |      a. Motor speed control: PWM value       |
 |                      |                      |     b. Vehicle linear and angular velocity  |      b. Yaw control: Angular velocity        |
