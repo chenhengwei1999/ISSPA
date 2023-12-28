@@ -142,7 +142,7 @@ In ROS Navigation Stack, TEB and DWA algorithms are primarily used for local tra
 Their inputs generally involve:
    - **Planned global path** -- Path or trajectory obtained from the global planner.
    - **Local Map Information** -- Typically represented as a local grid map.
-   - **Robot's Kinematic and Dynamic Constraints** -- Information about the vehicle's physical limits, such as maximum speed, acceleration,and other kinematic constraints.  
+   - **Robot's Kinematic and Dynamic Constraints** -- Information about the vehicle's physical limits, e.g., maximum speed, acceleration, and other kinematic constraints.
  
 Their outputs generally involve:
    - **Planned local trajectory** -- Trajectory that considering the dynamic constraints and local map information, ensuring collision avoidance and kinematic feasibility.
