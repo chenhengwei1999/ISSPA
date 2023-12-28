@@ -109,20 +109,86 @@ Within this section, we aim to present the inputs and outputs of different plann
 This endeavor is intended to offer you a comprehensive reference and insight into these algorithms.
 
 
-| **Algo ** | **Type**        | **Inputs**                                                | **Outputs** |
-|:---------:|:---------------:|:---------------------------------------------------------:|:-----------:|
-| A* / D*   | Global Planner  | a. Start and Goal Positions:  <br> b. Map Representation: | global path |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
-|           |                 |                                                           |             |
++----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
+|         Algo         |         Type         |                                      Inputs                                            |                                   Outputs                                  |
++======================+======================+========================================================================================+============================================================================+
+|     A* / D* / PSO    |     Global Planner   |                 a. Start and Goal Positions <br> b.Map information                     |                       Planned global path(route)                           |
++----------------------+----------------------+--------------------------------------------------------------------------------- ------+----------------------------------------------------------------------------+
+|      DWA / TEB       |     Local Planner    |     a. Global path <br> b.Map information <br> c.Robot's Dynamics and Constraints      |  a. Planned local trajectory <br> b. Linear velocity and angular velocity  |
++----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
+|          PID         |     Controller       |  a. Expected linear and angular velocity  <br> b. Vehicle linear and angular velocity  |  a. Motor speed control: PWM value <br> b. Yaw control: Angular velocity.  |
++----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
 
+
+**Global Planner**
+###################
+In ROS Navigation Stack, D* (D-star) and A* (A-star) algorithms are primarily used for global path planning. 
+Their inputs generally involve:
+   - **Start and Goal Positions**
+     Which describe the robot's initial position (coordinates) and the target destination it intends to reach. 
+   
+   - **Map information**
+     Typically represented as a grid map or similar format indicating traversable areas, obstacles, and other terrain information in the robot's environment.
+
+Their outputs generally involve:
+   - **Planned global path(route)**
+     The primary output involves a computed path from the starting point to the goal location, 
+     accounting for the map information and obstacle avoidance strategies implemented by these algorithms.
+
+
+**Local Planner**
+##################
+In ROS Navigation Stack, TEB and DWA algorithms are primarily used for local trajectory planning. 
+Their inputs generally involve:
+   - **Planned global path**
+     Path or trajectory obtained from the global planner.
+
+   - **Local Map Information**
+     Typically represented as a local grid map.
+
+   - **Robot's Kinematic and Dynamic Constraints**
+     Information about the vehicle's physical limits, such as maximum speed, acceleration, and other kinematic constraints.
+
+Their outputs generally involve:
+   - **Planned local trajectory**
+     Trajectory that considering the dynamic constraints and local map information, ensuring collision avoidance and kinematic feasibility.
+   
+   - **Vehicle linear and angular velocity**
+     Velocity commands that sent to control task to control the vehicle.
+
+
+**Controller**
+###############
+In control tasks, PID is a classical method. 
+Its inputs are:
+   - **Expected vehicle linear and angular velocity**
+     vehicle linear and angular velocity that provided by :guilabel:`Local planner`.
+
+   - **Current Vehicle linear and angular velocity**
+     
+
+Its outputs are:
+   - **Motor speed control**
+     PWM value.
+
+   - **Yaw control**
+     Angular velocity. 
 
 
 
 **Reference**
 --------------
+
+- `ros navigation stack ROS wiki <https://wiki.ros.org/navigation>`_.
+
+- `move_base ROS wiki <https://wiki.ros.org/move_base>`_.
+
+- `global_planner ROS wiki <https://wiki.ros.org/global_planner>`_.
+
+- `PSO_global_planner <https://github.com/JZX-MY/pso_global_planner>`_.
+
+- `dwa_local_planner ROS wiki <https://wiki.ros.org/dwa_local_planner>`_.
+
+- `teb_local_planner ROS wiki <https://wiki.ros.org/teb_local_planner>`_.
+
+- `PID wiki <https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller>`_.
