@@ -127,8 +127,7 @@ In ROS Navigation Stack, D* (D-star) and A* (A-star) algorithms are primarily us
 Their inputs generally involve:
    - **Start and Goal Positions** -- Which describe the robot's initial position (coordinates) and the target destination it intends to reach. 
    
-   - **Map information** -- Typically represented as a grid map or similar format indicating traversable areas, obstacles, 
-   and other terrain information in the robot's environment.  
+   - **Map information** -- Typically represented as a grid map or similar format indicating traversable areas, obstacles, and other terrain information in the robot's environment.  
 
 Their outputs generally involve:
    - **Planned global path(route)** -- The primary output involves a computed path from the starting point to the goal location, 
