@@ -98,9 +98,9 @@ a robust and accessible control architecture.
    `PID block diagram <https://en.wikipedia.org/wiki/Proportional%E2%80%93integral%E2%80%93derivative_controller>`_
 
 The figure shows the the block diagram of a PID controller in a feedback loop, 
-where $r(t)$ is the desired process variable (PV) or setpoint (SP), and $y(t)$ is the measured PV.
+where :math:`r(t)` is the desired process variable (PV) or setpoint (SP), and :math:`y(t)` is the measured PV.
 
-In ISSPA, the PID control variable can encompass angular velocity, linear velocity, and other parameters.
+In ISSPA, the PID control variable can encompass :guilabel:`angular velocity`, :guilabel:`linear velocity`, etc.
 
 
 **Inputs & Outputs**
