@@ -109,15 +109,19 @@ Within this section, we aim to present the inputs and outputs of different plann
 This endeavor is intended to offer you a comprehensive reference and insight into these algorithms.
 
 
-+----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
-|         Algo         |         Type         |                                      Inputs                                            |                                   Outputs                                  |
-+======================+======================+========================================================================================+============================================================================+
-|     A* / D* / PSO    |     Global Planner   |                 a. Start and Goal Positions <br> b.Map information                     |                       Planned global path(route)                           |
-+----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
-|      DWA / TEB       |     Local Planner    |     a. Global path <br> b.Map information <br> c.Robot's Dynamics and Constraints      |  a. Planned local trajectory <br> b. Linear velocity and angular velocity  |
-+----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
-|          PID         |     Controller       |  a. Expected linear and angular velocity  <br> b. Vehicle linear and angular velocity  |  a. Motor speed control: PWM value <br> b. Yaw control: Angular velocity.  |
-+----------------------+----------------------+----------------------------------------------------------------------------------------+----------------------------------------------------------------------------+
++----------------------+----------------------+---------------------------------------------+----------------------------------------------+
+|         Algo         |         Type         |              Inputs                         |                  Outputs                     |
++======================+======================+============================================================================================+
+|     A* / D* / PSO    |     Global Planner   |        a. Start and Goal Positions          |          Planned global path(route)          |
+|                      |                      |        b.Map information                    |                                              |
++----------------------+----------------------+---------------------------------------------+----------------------------------------------+
+|      DWA / TEB       |     Local Planner    |     a. Global path                          |    a. Planned local trajectory               |
+|                      |                      |     b.Map information                       |    b. Linear velocity and angular velocity   |
+|                      |                      |     c.Robot's Dynamics and Constraints      |                                              |
++----------------------+----------------------+---------------------------------------------+----------------------------------------------+
+|          PID         |     Controller       |     a. Expected linear and angular velocity |      a. Motor speed control: PWM value       |
+|                      |                      |     b. Vehicle linear and angular velocity  |      b. Yaw control: Angular velocity        |
++----------------------+----------------------+---------------------------------------------+----------------------------------------------+
 
 
 **Global Planner**
