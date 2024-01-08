@@ -1,0 +1,10 @@
+<launch>
+    <!-- 启动yolov5_ros节点 -->
+    <node name="yolov5" pkg="yolov5_ros" type="detect_ros.py" output="screen">
+        <param name="weights" value="$(find yolov5_ros)/scripts/yolov5s_traffic_lights.pt"/>
+        <param name="source" value="0"/>
+    </node>
+
+    <!-- 启动rviz -->
+    <node name="rviz" pkg="rviz" type="rviz" />
+</launch>
