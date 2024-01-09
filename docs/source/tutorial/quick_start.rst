@@ -47,7 +47,7 @@ which is necessary for later use and development.
     
     catkin_make
 
-When executing catkin_make, you may encounter the following environment adaptation problems. 
+When executing ``catkin_make``, you may encounter the following environment adaptation problems. 
 The detailed solutions you can see :doc:`issue of catkin_make </tutorial/problems_catkin_make>`.
 
 .. note::
