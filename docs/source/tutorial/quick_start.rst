@@ -46,7 +46,9 @@ which is necessary for later use and development.
   .. code-block:: bash
     
     catkin_make
-  
+
+When executing catkin_make, you may encounter the following environment adaptation problems. The detailed solution is `here</tutorial/Problems encountered by catkin_make>`
+
 .. note::
 
    **Warm reminder:** Before using the program, remember to refresh the environment variables.
