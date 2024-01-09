@@ -7,7 +7,7 @@ Problems and Solutions Encountered During Catkin Make Process
 Issue 1: Python environment conflicts
 --------------------------------------
 
-When running `catkin_make`, the host default environment conflicts with the virtual environment.
+When running ``catkin_make``, the host default environment conflicts with the virtual environment.
 
 **Error Message:**
 
@@ -36,14 +36,14 @@ When running `catkin_make`, the host default environment conflicts with the virt
 
 **Solution:(1 or 2)**
 
-1. In bashrc or zshrc, comment out the `anaconda` part, and then reactivate the conda environment when using conda in the future.
+1. In bashrc or zshrc, comment out the ``anaconda`` part, and then reactivate the conda environment when using conda in the future.
 
-2. When `catkin_make`, specify to use python in /usr/bin/, for example `catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3`
+2. When ``catkin_make``, specify to use python in /usr/bin/, for example ``catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3``
 
 Issue 2: libuvc is not found
 ---------------------------
 
-When running `catkin_make`, none of the required 'libuvc' found.
+When running ``catkin_make``, none of the required 'libuvc' found.
 
 **Error Message:**
 
@@ -76,7 +76,7 @@ Problems and Solutions Encountered During Catkin Make Process
 Issue 1: Python environment conflicts
 ---------------------------------------
 
-When running `catkin_make`, the host default environment conflicts with the virtual environment
+When running ``catkin_make``, the host default environment conflicts with the virtual environment
 
 **Error Message:**
 
@@ -101,20 +101,20 @@ When running `catkin_make`, the host default environment conflicts with the virt
 
 **Reason:**
 
->  Since there is a Python environment in the locally installed anaconda, `catkin_make` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
+>  Since there is a Python environment in the locally installed anaconda, ``catkin_make`` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
 
 **Solution:(1 or 2)**
 
-1. In bashrc or zshrc, comment out the `anaconda` part, and then reactivate the conda environment when using conda in the future.
+1. In bashrc or zshrc, comment out the ``anaconda`` part, and then reactivate the conda environment when using conda in the future.
 
-2. When `catkin_make`, specify to use python in /usr/bin/, for example `catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3`
+2. When ``catkin_make``, specify to use python in /usr/bin/, for example ``catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3``
 
 
 
 Issue 2: libuvc is not found
 ------------------------------
 
-When running `catkin_make`, None of the required 'libuvc' found
+When running ``catkin_make``, None of the required '`libuvc'`` found
 
 **Error Message:**
 
