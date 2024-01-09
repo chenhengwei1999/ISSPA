@@ -1,77 +1,227 @@
-**Quick Start**
-======================
+.. _catkin_make_problems_and_solutions:
 
-In this tutorial, you will learn how to use the `ISSPA source code <https://github.com/chenhengwei1999/ISSPA>`_
-and how PA (Pyhsical Agent) is launched! Specifically, the following sections are included:
+==============================================
+Problems and Solutions Encountered During Catkin Make Process
+==============================================
 
-- Developing Environment
+Issue 1: Python environment conflicts
+--------------------------------------
 
-- WorkSpace Setup
+When running `catkin_make`, the host default environment conflicts with the virtual environment.
 
-- Usage Guide
+**Error Message:**
+
+.. code-block:: bash
+
+    -- This workspace overlays: /opt/ros/noetic
+    -- Found PythonInterp: /yourhost/anaconda3/bin/python3 (found suitable version "3.11.5", minimum required is "3") 
+    -- Using PYTHON_EXECUTABLE: /yourhost/anaconda3/bin/python3
+    -- Using Debian Python package layout
+    -- Could NOT find PY_em (missing: PY_EM) 
+    CMake Error at /opt/ros/noetic/share/catkin/cmake/empy.cmake:30 (message):
+      Unable to find either executable 'empy' or Python module 'em'...  try
+      installing the package 'python3-empy'
+    Call Stack (most recent call first):
+      /opt/ros/noetic/share/catkin/cmake/all.cmake:164 (include)
+      /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+      CMakeLists.txt:58 (find_package)
+
+    -- Configuring incomplete, errors occurred!
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
+    Invoking "cmake" failed
+
+**Reason:**
+
+> Since there is a Python environment in the locally installed anaconda, `catkin_make` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
+
+**Solution:(1 or 2)**
+
+1. In bashrc or zshrc, comment out the `anaconda` part, and then reactivate the conda environment when using conda in the future.
+
+2. When `catkin_make`, specify to use python in /usr/bin/, for example `catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3`
+
+Issue 2: libuvc is not found
+---------------------------
+
+When running `catkin_make`, none of the required 'libuvc' found.
+
+**Error Message:**
+
+.. code-block:: bash
+
+    CMake Error at /usr/share/cmake-3.16/Modules/FindPkgConfig.cmake:707 (message):
+      None of the required 'libuvc' found
+    Call Stack (most recent call first):
+      isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:35 (pkg_search_module)
 
 
-Developing Environment
-----------------------
-
-We recommend using **Ubuntu** as your development system, ROS1 noetic is the main version we use at the moment, 
-and we will upgrade to ROS2 later in our work.
-
-- Ubuntu 20.04
-
-- ROS1 noetic
+    CMake Error at isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:37 (message):
+      libuvc is not found
 
 
-WorkSpace Setup
-----------------
+    -- Configuring incomplete, errors occurred!
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeError.log".
+    Invoking "cmake" failed
 
-ISSPA as our main repository, it is recommended that you first understand its directory structure, 
-which is necessary for later use and development.
+**Solution:**
 
-- First, create a workspace in the ``/home/$USER/`` directory:
-  
-  .. code-block:: bash
-    
-    mkdir ~/pa_ws/src -p
+```bash
+sudo apt-get install libuvc-dev
 
-- Next, put the source program inside ``src``:
+==============================
+Problems and Solutions Encountered During Catkin Make Process
+==============================
 
-  .. code-block:: bash
+Issue 1: Python environment conflicts
+---------------------------------------
 
-    cd ~/pa_ws/src
-    git clone https://github.com/chenhengwei1999/ISSPA.git
+When running `catkin_make`, the host default environment conflicts with the virtual environment
 
-- Finally, use ``catkin_make`` to compile the workspace.
-  
-  .. code-block:: bash
-    
-    catkin_make
-  
-.. note::
+**Error Message:**
 
-   **Warm reminder:** Before using the program, remember to refresh the environment variables.
-   Or, storing them in ``.bashrc`` is okay.
+.. code-block:: bash
 
-   .. code-block:: bash
+    -- This workspace overlays: /opt/ros/noetic
+    -- Found PythonInterp: /yourhost/anaconda3/bin/python3 (found suitable version "3.11.5", minimum required is "3") 
+    -- Using PYTHON_EXECUTABLE: /yourhost/anaconda3/bin/python3
+    -- Using Debian Python package layout
+    -- Could NOT find PY_em (missing: PY_EM) 
+    CMake Error at /opt/ros/noetic/share/catkin/cmake/empy.cmake:30 (message):
+      Unable to find either executable 'empy' or Python module 'em'...  try
+      installing the package 'python3-empy'
+    Call Stack (most recent call first):
+      /opt/ros/noetic/share/catkin/cmake/all.cmake:164 (include)
+      /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+      CMakeLists.txt:58 (find_package)
 
-      source devel/setup.bash
+    -- Configuring incomplete, errors occurred!
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
+    Invoking "cmake" failed
 
-      # echo "source ~/pa_ws/devel/setup.bash" >> ~/.bashrc
-    
+**Reason:**
 
-Usage Guide for PA
+>  Since there is a Python environment in the locally installed anaconda, `catkin_make` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
+
+**Solution:(1 or 2)**
+
+1. In bashrc or zshrc, comment out the `anaconda` part, and then reactivate the conda environment when using conda in the future.
+
+2. When `catkin_make`, specify to use python in /usr/bin/, for example `catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3`
+
+
+
+Issue 2: libuvc is not found
+------------------------------
+
+When running `catkin_make`, None of the required 'libuvc' found
+
+**Error Message:**
+
+.. code-block:: bash
+
+    CMake Error at /usr/share/cmake-3.16/Modules/FindPkgConfig.cmake:707 (message):
+      None of the required 'libuvc' found
+    Call Stack (most recent call first):
+      isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:35 (pkg_search_module)
+
+
+    CMake Error at isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:37 (message):
+      libuvc is not found
+
+    -- Configuring incomplete, errors occurred!
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeError.log".
+    Invoking "cmake" failed
+
+**Solution:**
+
+.. code-block:: bash
+
+    sudo apt-get install libuvc-dev
+
+
+
+Issue 3: None of the required 'libglog' found
+----------------------------------------------
+
+**Error Message:**
+
+.. code-block:: bash
+
+    -- ==> add_subdirectory(isspa_plugin_devices/ros_astra_camera)
+    -- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+    -- Checking for one of the modules 'libuvc'
+    -- Checking for one of the modules 'libglog'
+    CMake Error at /usr/share/cmake-3.16/Modules/FindPkgConfig.cmake:707 (message):
+      None of the required 'libglog' found
+    Call Stack (most recent call first):
+      isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:39 (pkg_search_module)
+
+
+    CMake Error at isspa_plugin_devices/ros_astra_camera/CMakeLists.txt:42 (message):
+      glog is not found
+
+
+    -- Configuring incomplete, errors occurred!
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
+    See also "/yourhost/ISSPA/build/CMakeFiles/CMakeError.log".
+    Invoking "cmake" failed
+
+**Solution:**
+
+.. code-block:: bash
+
+    sudo apt-get install libgoogle-glog-dev
+
+
+
+Issue 4: Missing package "costmap_2d" 
+--------------------------------------
+
+**Error Message:**
+
+.. code-block:: bash
+
+    CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package):
+    Could not find a package configuration file provided by "costmap_2d" with
+    any of the following names:
+
+    costmap_2dConfig.cmake
+    costmap_2d-config.cmake
+
+**Solution:**
+
+.. code-block:: bash
+
+    sudo apt-get install ros-noetic-costmap-2d
+
+
+
+Issue 5: Missing package "nav-core" 
 ------------------------------------
 
-Once the workspace setup is complete, you can attempt to perform the following tasks, 
-including vehicle chassis start, sensor start, remote control, SLAM, and navigation. 
+**Error Message:**
 
-When the WorkSpace Setup is completed, you can try the following tasks, 
-which contain vehicle chassis startup, sensor startup, remote control, SLAM, 
-and navigation.
+.. code-block:: bash
 
-The following experimental vehicles are currently supported:
+    -- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+    -- Could NOT find nav_core (missing: nav_core_DIR)
+    -- Could not find the required component 'nav_core'. The following CMake error indicates that you either need to install the package with the same name or change your environment so that it can be found.
+    CMake Error at /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:83 (find_package):
+      Could not find a package configuration file provided by "nav_core" with any
+      of the following names:
 
-PAVS
-~~~~
+        nav_coreConfig.cmake
+        nav_core-config.cmake
 
-Refer :doc:`/tutorial/pavs` for documentation.
+**Solution:**
+
+.. code-block:: bash
+
+    sudo apt-get install ros-noetic-nav-core
+
+
+
+
+
