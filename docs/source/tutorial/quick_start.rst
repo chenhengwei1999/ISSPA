@@ -36,22 +36,22 @@ which is necessary for later use and development.
 
 - First, create a workspace in the ``/home/$USER/`` directory:
   
-  .. code-block:: bash
-    
-    mkdir ~/pa_ws/src -p
+.. code-block:: bash
+  
+  mkdir ~/pa_ws/src -p
 
 - Next, put the source program inside ``src``:
 
-  .. code-block:: bash
+.. code-block:: bash
 
-    cd ~/pa_ws/src
-    git clone https://github.com/chenhengwei1999/ISSPA.git
+  cd ~/pa_ws/src
+  git clone https://github.com/chenhengwei1999/ISSPA.git
 
 - Finally, use ``catkin_make`` to compile the workspace.
   
-  .. code-block:: bash
-    
-    catkin_make
+.. code-block:: bash
+  
+  catkin_make
 
 When executing ``catkin_make``, you may encounter the following environment adaptation problems. 
 The detailed solutions you can see :doc:`issue of catkin_make </tutorial/problems_catkin_make>`.
