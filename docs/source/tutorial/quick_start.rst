@@ -24,11 +24,11 @@ and we will upgrade to ROS2 later in our work.
 On Ubuntu Focal with ROS Noetic use these commands to install the above Library:
 
 .. code-block:: bash
-  
-  sudo apt-get install libuvc-dev
-  sudo apt-get install libgoogle-glog-dev
-  sudo apt-get install ros-noetic-costmap-2d
-  sudo apt-get install ros-noetic-nav-core
+
+  ：sudo apt-get install libuvc-dev
+  ：sudo apt-get install libgoogle-glog-dev
+  ：sudo apt-get install ros-noetic-costmap-2d
+  ：sudo apt-get install ros-noetic-nav-core
 
 WorkSpace Setup
 ----------------
