@@ -27,6 +27,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    /components/mapping
    /components/navigation
    /components/detection
+   /components/segmentation
 
 .. toctree::
    :maxdepth: 2
@@ -97,6 +98,8 @@ Introduction to the core elements of ISSPA.
 - :doc:`/components/navigation` - Navigation frameworks and classical planning algorithms are presented.
   
 - :doc:`/components/detection` - Introduction to target detection tasks, and common baseline algorithms such as yolov5.
+
+- :doc:`/components/segmentation` - Introduction to target segmentation tasks, and common baseline algorithms such as LSS.
 
 
 CONTRIBUTIND TO ISSPA
