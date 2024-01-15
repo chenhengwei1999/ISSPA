@@ -1,6 +1,3 @@
-.. _problems-catkin-make:
-
-==============================
 Problems and Solutions Encountered During Catkin Make Process
 ==============================
 

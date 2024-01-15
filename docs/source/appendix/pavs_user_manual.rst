@@ -1,7 +1,5 @@
-:caption:
-
-**PAVS**
-=====================================================
+**PAVS User Manual**
+====================
 
 The full name of PAVS is Physical Agents Vehicle Small, which is a small 
 vehicle for indoor environments, and its basic use will be described in the 

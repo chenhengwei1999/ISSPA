@@ -5,6 +5,12 @@ ISSPA Documentation
 Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 -------------------------------------------------------------------------------
 
+.. figure:: imgs/isspa_logo.jpg
+   :alt: ISSPA Overview
+   :align: center
+
+   **ISSPA Logo**
+
 .. toctree::
    :maxdepth: 1
    :caption: HOME 
@@ -28,6 +34,15 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    /components/navigation
    /components/detection
    /components/segmentation
+
+.. toctree::
+   :maxdepth: 3
+   :caption: ISSPA APPENDIX
+   :hidden:
+
+   /appendix/pavs_user_manual
+   /appendix/compilation_tools
+   /appendix/issue_and_troubleshooting
 
 .. toctree::
    :maxdepth: 2
@@ -80,13 +95,15 @@ ISSPA has the following features:
 
 TUTORIALS
 ---------
+
 Here are some guidelines for you to get started:
 
 - :doc:`/tutorial/quick_start` - Understand the operating environment and how programs are launched.
 
 
 ISSPA COMPONENTS
-----------------
+------------------------
+
 Introduction to the core elements of ISSPA.
 
 - :doc:`/components/chassis` - Descibes what ISSPA's vehicle chassis is, and how to get vehicle's state.
@@ -102,8 +119,21 @@ Introduction to the core elements of ISSPA.
 - :doc:`/components/segmentation` - Introduction to target segmentation tasks, and common baseline algorithms such as LSS.
 
 
+ISSPA APPENDIX
+--------------
+
+Documents such as user manuals (e.g. PAVS) are categorized.
+
+- :doc:`/appendix/pavs_user_manual` - User manual for PAVS.
+
+- :doc:`/appendix/compilation_tools` - Introduction to the compilation tools used in ROS.
+
+- :doc:`/appendix/issue_and_troubleshooting` - Common issues and solutions.
+
+
 CONTRIBUTIND TO ISSPA
 ------------------------
+
 Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
 please do not hesitate to Pull&Request on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
 

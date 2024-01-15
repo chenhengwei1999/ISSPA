@@ -2,7 +2,7 @@
 ======================
 
 In this tutorial, you will learn how to use the `ISSPA source code <https://github.com/chenhengwei1999/ISSPA>`_
-and how PA (Pyhsical Agent) is launched! Specifically, the following sections are included:
+and how PA (Pyhsical Agents) are launched! Specifically, the following sections are included:
 
 - Developing Environment
 
@@ -14,51 +14,50 @@ and how PA (Pyhsical Agent) is launched! Specifically, the following sections ar
 Developing Environment
 ----------------------
 
-We recommend using **Ubuntu** as your development system, ROS1 noetic is the main version we use at the moment, 
+We recommend using **Ubuntu 20.04** as your development system, ROS1 noetic is the version we use at the moment, 
 and we will upgrade to ROS2 later in our work.
 
 - Ubuntu 20.04
 
 - ROS1 noetic
 
-On Ubuntu Focal with ROS Noetic use these commands to install the above Library:
+The following are some of the dependent libraries that need to be installed before the program can be compiled and run:
 
 .. code-block:: bash
 
-    sudo apt-get update
-    sudo apt-get install libuvc-dev libgoogle-glog-dev ros-noetic-costmap-2d ros-noetic-nav-core
+    sudo apt update
+    sudo apt install libuvc-dev libgoogle-glog-dev ros-noetic-costmap-2d ros-noetic-nav-core libceres-dev
 
 WorkSpace Setup
 ----------------
 
-ISSPA as our main repository, it is recommended that you first understand its directory structure, 
+`ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ as our main repository, it is recommended that you first understand its directory structure, 
 which is necessary for later use and development.
 
-- First, create a workspace in the ``/home/$USER/`` directory:
-  
-.. code-block:: bash
-  
-  mkdir ~/pa_ws/src -p
-
-- Next, put the source program inside ``src``:
+First, clone the source code to the ``/home/$USER/`` directory:
 
 .. code-block:: bash
 
-  cd ~/pa_ws/src
+  cd /home/$USER
   git clone https://github.com/chenhengwei1999/ISSPA.git
 
-- Finally, use ``catkin_make`` to compile the workspace.
-  
+Next, use ``catkin_make`` to compile the workspace.
+
 .. code-block:: bash
   
+  cd /home/$USER/ISSPA
   catkin_make
-
-When executing ``catkin_make``, you may encounter the following environment adaptation problems. 
-The detailed solutions you can see :doc:`issue of catkin_make </tutorial/problems_catkin_make>`.
 
 .. note::
 
-   **Warm reminder:** Before using the program, remember to refresh the environment variables.
+    **Hints:** You can also select ``catkin_make_isolated`` for compilation. ROS provides a number of compilation tools, the differences and advantages 
+    of which are described :doc: `here </appendix/compilation_tools>`.
+
+When executing ``catkin_make``, you may encounter the following problems. Related **Issues & Troubleshooting** can be found :doc:`here </appendix/issue_and_troubleshooting>`.
+
+.. note::
+
+   Warm reminder: Before using the program, remember to refresh the environment variables.
    Or, storing them in ``.bashrc`` is okay.
 
    .. code-block:: bash
@@ -80,8 +79,16 @@ and navigation.
 
 The following experimental vehicles are currently supported:
 
-PAVS
-~~~~
+PAVS User Manual
+~~~~~~~~~~~~~~~~
 
-Refer :doc:`/tutorial/pavs` for documentation.
+Refer :doc:`/appendix/pavs_user_manual` for documentation.
+
+Issue & Troubleshooting
+-----------------------
+
+In the process of compiling the program and using the hardware there may be many problems, some common problems can be referred to this document 
+to try to solve, if you do not find a solution at :doc:`here </appendix/issue_and_troubleshooting>`, you can leave a issue in the ISSPA repository.
+
+
 
