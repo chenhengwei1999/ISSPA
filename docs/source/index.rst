@@ -9,7 +9,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    :alt: ISSPA Overview
    :align: center
 
-   **ISSPA Logo**
+   **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
 
 .. toctree::
    :maxdepth: 1
@@ -21,10 +21,10 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    :hidden:
 
    /tutorial/quick_start
-   /tutorial/pavs_quick_start
+   /tutorial/user_manual
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: ISSPA COMPONENTS
    :hidden:
 
@@ -36,7 +36,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    /components/segmentation
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: ISSPA APPENDIX
    :hidden:
 
@@ -77,9 +77,10 @@ are listed in :doc:`about_us/team`.
 
 
 .. note::
+
    The ISSPA project is a branch of the `ISS <https://tis.ios.ac.cn/iss/>`_ project.
 
-ISSPA has the following features:
+**ISSPA has the following features:**
 
 - Some baseline solutions for autonomous driving.
 
@@ -98,7 +99,7 @@ TUTORIALS
 
 Here are some guidelines for you to get started:
 
-- :doc:`/tutorial/quick_start` - Understand the operating environment and how programs are launched.
+- :doc:`/tutorial/quick_start` - Understand the developing environment and how programs are launched.
 
 
 ISSPA COMPONENTS
@@ -108,15 +109,15 @@ Introduction to the core elements of ISSPA.
 
 - :doc:`/components/chassis` - Descibes what ISSPA's vehicle chassis is, and how to get vehicle's state.
   
-- :doc:`/components/sensors` - Describe the sensors used by ISSPA, e.g., camera, lidar.
+- :doc:`/components/sensors` - Describe the sensors used by ISSPA, e.g., camera, lidar, imu.
   
 - :doc:`/components/mapping` - The dominant algorithm for mapping, the baseline algorithm, is introduced.
   
 - :doc:`/components/navigation` - Navigation frameworks and classical planning algorithms are presented.
   
-- :doc:`/components/detection` - Introduction to target detection tasks, and common baseline algorithms such as yolov5.
+- :doc:`/components/detection` - Introduction to object detection tasks, and common baseline algorithms such as yolov5.
 
-- :doc:`/components/segmentation` - Introduction to target segmentation tasks, and common baseline algorithms such as LSS.
+- :doc:`/components/segmentation` - Introduction to instance segmentation tasks, and common baseline algorithms such as LSS.
 
 
 ISSPA APPENDIX
@@ -124,7 +125,7 @@ ISSPA APPENDIX
 
 Documents such as user manuals (e.g. PAVS) are categorized.
 
-- :doc:`/appendix/pavs_user_manual` - User manual for PAVS.
+- :doc:`/appendix/pavs_user_manual` - User manual for PAVS (Physical Agent Vehicle Small).
 
 - :doc:`/appendix/compilation_tools` - Introduction to the compilation tools used in ROS.
 
@@ -135,7 +136,12 @@ CONTRIBUTIND TO ISSPA
 ------------------------
 
 Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
-please do not hesitate to Pull&Request on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
+please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
+
+.. image:: ./imgs/github_mark.svg
+   :target: https://github.com/chenhengwei1999/ISSPA/
+   :alt: GitHub Repository
+   :align: center
 
 - :doc:`/contributing_to_isspa/mapping_plugin` - Extended guidance on SLAM algorithms is available here.
   
@@ -147,4 +153,4 @@ please do not hesitate to Pull&Request on `Github: ISSPA <https://github.com/che
 ABOUT US
 --------
 
-- :doc:`/about_us/team` - Introduce our team.
+- :doc:`/about_us/team` - Presentation of our team and corresponding achievements, e.g. paper publications.

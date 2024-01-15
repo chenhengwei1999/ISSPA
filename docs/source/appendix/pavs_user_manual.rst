@@ -1,7 +1,7 @@
 **PAVS User Manual**
 ====================
 
-The full name of PAVS is Physical Agents Vehicle Small, which is a small 
+The full name of PAVS is **Physical Agents Vehicle Small**, which is a small 
 vehicle for indoor environments, and its basic use will be described in the 
 following document.
 
@@ -20,8 +20,8 @@ First, the model diagram of the vehicle is shown below:
 
    **Model Diagram of PAVS**
 
-Connection method
------------------
+Connection Methods
+------------------
 
 There are many ways to connect to a vehicle's internal port, such as through `VNC viewer`, 
 `SSH`, `Jupyter Notebook`, etc., or connecting a monitor plugged into the vehicle will work.

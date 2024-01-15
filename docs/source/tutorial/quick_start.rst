@@ -8,8 +8,6 @@ and how PA (Pyhsical Agents) are launched! Specifically, the following sections 
 
 - WorkSpace Setup
 
-- Usage Guide
-
 
 Developing Environment
 ----------------------
@@ -50,15 +48,15 @@ Next, use ``catkin_make`` to compile the workspace.
 
 .. note::
 
-    **Hints:** You can also select ``catkin_make_isolated`` for compilation. ROS provides a number of compilation tools, the differences and advantages 
-    of which are described :doc:`here </appendix/compilation_tools>`.
+    **Hints:** You can also use ``catkin_make_isolated`` or ``catkin`` for compilation. ROS provides a number of compilation tools, the differences and advantages 
+    of which are described at :doc:`here </appendix/compilation_tools>`.
 
-When executing ``catkin_make``, you may encounter the following problems. Related **Issues & Troubleshooting** can be found :doc:`here </appendix/issue_and_troubleshooting>`.
+When executing ``catkin_make``, you may encounter some problems. Common **Issues & Troubleshooting** can be found :doc:`here </appendix/issue_and_troubleshooting>`.
 
 .. note::
 
-   Warm reminder: Before using the program, remember to refresh the environment variables.
-   Or, storing them in ``.bashrc`` is okay.
+   **Warm reminder:** Please remember to refresh the environment variables before using the program.
+   Alternatively, storing them in ```~/.bashrc`` is fine.
 
    .. code-block:: bash
 
@@ -67,29 +65,3 @@ When executing ``catkin_make``, you may encounter the following problems. Relate
 
       # echo "source ~/ISSPA/devel/setup.bash" >> ~/.bashrc
     
-
-Usage Guide for PA
-------------------------------------
-
-Once the workspace setup is complete, you can attempt to perform the following tasks, 
-including vehicle chassis start, sensor start, remote control, SLAM, and navigation. 
-
-When the WorkSpace Setup is completed, you can try the following tasks, 
-which contain vehicle chassis startup, sensor startup, remote control, SLAM, 
-and navigation.
-
-The following experimental vehicles are currently supported:
-
-PAVS User Manual
-~~~~~~~~~~~~~~~~
-
-Refer :doc:`/appendix/pavs_user_manual` for documentation.
-
-Issue & Troubleshooting
------------------------
-
-In the process of compiling the program and using the hardware there may be many problems, some common problems can be referred to this document 
-to try to solve, if you do not find a solution at :doc:`here </appendix/issue_and_troubleshooting>`, you can leave a issue in the ISSPA repository.
-
-
-

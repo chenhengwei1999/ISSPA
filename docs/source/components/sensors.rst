@@ -23,30 +23,28 @@ ISSPA's vehicles can be equipped with single/multi-line LiDAR, mono/depth camera
 providing researchers with a diverse range of options to meet their specific needs. 
 Brief introductions to different sensors are as follows: 
 
-- LiDAR: LiDAR utilizes laser beams to measure precise distances by measuring the reflection time. 
-  Widely used in autonomous driving, LiDAR contributes to real-time mapping, obstacle detection, 
-  and distance measurement. Below is a sample point cloud from the ISCAS campus using velodyne's 
-  16-line LiDAR.
+- LiDAR: LiDAR utilizes laser beams to get distances by measuring the reflection time. 
+  Widely used in autonomous driving, LiDAR contributes to real-time mapping, object detection. 
+  Below is a frame of point cloud from one campus using velodyne's 16-line LiDAR.
 
   .. figure:: ../imgs/lidar.png
     :alt: LiDAR example
     :align: center
     :scale: 50%
 
-    **Sample LiDAR point cloud data collected at ISCAS campus**
+    **Sample LiDAR point cloud data collected at one campus**
 
 - Depth Camera: Depth cameras based on Time-of-Flight (ToF) technology use the principle of measuring the flight 
-  time of light pulses to determine the distance between objects and the camera. By measuring the 
-  time it takes for light beams to be emitted and returned, it generates high-resolution depth images. 
-  ToF depth cameras offer advantages of speed, accuracy, and adaptability to various lighting conditions. 
-  They find widespread applications in computer vision, 3D scanning, virtual reality, and augmented reality.
+  time of light pulses to determine the distance between objects and the camera. ToF depth cameras offer advantages 
+  of speed, accuracy, and adaptability to various lighting conditions. They find widespread applications in computer 
+  vision, 3D scanning, virtual reality, and augmented reality.
 
   .. figure:: ../imgs/astro_pro_plus.jpeg
     :alt: Camera example
     :align: center
     :scale: 50%
 
-    **Data visualization of different modalities of depth cameras in the ISCAS laboratory**
+    **Data visualization of different modalities of depth cameras in one laboratory**
   
 
 - IMU (Inertial Measurement Unit): IMU provides information about a vehicle's attitude and motion 
