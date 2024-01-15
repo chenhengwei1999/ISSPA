@@ -8,7 +8,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 .. figure:: imgs/isspa_logo.jpg
    :alt: ISSPA Overview
    :align: center
-   :width: 30%
+   :width: 70%
 
    **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
 
