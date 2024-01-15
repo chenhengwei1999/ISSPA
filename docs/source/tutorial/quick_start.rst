@@ -36,7 +36,7 @@ which is necessary for later use and development.
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
-   :width: 15%
+   :width: 5%
 
 First, clone the source code to the ``/home/$USER/`` directory:
 
