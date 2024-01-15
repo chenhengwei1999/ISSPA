@@ -5,7 +5,7 @@ ISSPA Documentation
 Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 -------------------------------------------------------------------------------
 
-.. figure:: imgs/isspa_logo.jpg
+.. figure:: imgs/isspa_logo.png
    :alt: ISSPA Overview
    :align: center
 
@@ -142,6 +142,7 @@ please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.c
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
+   :width: 30%
 
 - :doc:`/contributing_to_isspa/mapping_plugin` - Extended guidance on SLAM algorithms is available here.
   

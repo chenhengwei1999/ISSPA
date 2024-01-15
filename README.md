@@ -1,6 +1,6 @@
 # ISSPA (Intelligent Self-driving System empowering Physical Agents)
 
-![ISSPA Logo](./docs/source/imgs/isspa_logo.jpg)
+![ISSPA Logo](./docs/source/imgs/isspa_logo.png)
 
 ## Introduction
 
