@@ -1,8 +1,12 @@
-Problems and Solutions Encountered During Catkin Make Process
-==============================
+Issue_and Troubleshooting
+=========================
+
+
+During Compilation Process
+------------------------------------------------------------
 
 Issue 1: Could NOT find PY_em (missing: PY_EM) 
----------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When running ``catkin_make``, the host default environment conflicts with the virtual environment
 
@@ -40,7 +44,7 @@ When running ``catkin_make``, the host default environment conflicts with the vi
 
 
 Issue 2: libuvc is not found
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When running ``catkin_make``, None of the required '`libuvc'`` found
 
@@ -70,7 +74,7 @@ When running ``catkin_make``, None of the required '`libuvc'`` found
 
 
 Issue 3: None of the required 'libglog' found
-----------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Error Message:**
 
@@ -104,7 +108,7 @@ Issue 3: None of the required 'libglog' found
 
 
 Issue 4: Missing package "costmap_2d" 
---------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Error Message:**
 
@@ -126,7 +130,7 @@ Issue 4: Missing package "costmap_2d"
 
 
 Issue 5: Missing package "nav-core" 
-------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Error Message:**
 

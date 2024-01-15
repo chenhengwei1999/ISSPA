@@ -51,7 +51,7 @@ Next, use ``catkin_make`` to compile the workspace.
 .. note::
 
     **Hints:** You can also select ``catkin_make_isolated`` for compilation. ROS provides a number of compilation tools, the differences and advantages 
-    of which are described :doc: `here </appendix/compilation_tools>`.
+    of which are described :doc:`here </appendix/compilation_tools>`.
 
 When executing ``catkin_make``, you may encounter the following problems. Related **Issues & Troubleshooting** can be found :doc:`here </appendix/issue_and_troubleshooting>`.
 
@@ -62,9 +62,10 @@ When executing ``catkin_make``, you may encounter the following problems. Relate
 
    .. code-block:: bash
 
+      cd /home/$USER/ISSPA
       source devel/setup.bash
 
-      # echo "source ~/pa_ws/devel/setup.bash" >> ~/.bashrc
+      # echo "source ~/ISSPA/devel/setup.bash" >> ~/.bashrc
     
 
 Usage Guide for PA
