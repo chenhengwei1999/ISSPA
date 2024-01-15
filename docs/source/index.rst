@@ -142,7 +142,6 @@ please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.c
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
-   :width: 5%
 
 - :doc:`/contributing_to_isspa/mapping_plugin` - Extended guidance on SLAM algorithms is available here.
   
