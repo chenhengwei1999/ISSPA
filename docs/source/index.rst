@@ -8,6 +8,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 .. figure:: imgs/isspa_logo.jpg
    :alt: ISSPA Overview
    :align: center
+   :width: 30%
 
    **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
 
@@ -123,9 +124,9 @@ Introduction to the core elements of ISSPA.
 ISSPA APPENDIX
 --------------
 
-Documents such as user manuals (e.g. PAVS) are categorized.
+Documents such as user manuals (e.g. PAV-S) are categorized.
 
-- :doc:`/appendix/pavs_user_manual` - User manual for PAVS (Physical Agent Vehicle Small).
+- :doc:`/appendix/pavs_user_manual` - User manual for PAV-S (Physical Agent Vehicle Small).
 
 - :doc:`/appendix/compilation_tools` - Introduction to the compilation tools used in ROS.
 
@@ -138,7 +139,7 @@ CONTRIBUTIND TO ISSPA
 Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
 please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
 
-.. image:: ./imgs/github_mark.svg
+.. image:: ./imgs/github_mark.png
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
