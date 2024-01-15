@@ -30,7 +30,7 @@ When running ``catkin_make``, the local environment conflicts with the conda vir
     See also "/yourhost/ISSPA/build/CMakeFiles/CMakeOutput.log".
     Invoking "cmake" failed
 
-**Reason:**
+**Cause Analysis:**
 
 Since there is a Python environment in the locally installed anaconda, ``catkin_make`` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
 

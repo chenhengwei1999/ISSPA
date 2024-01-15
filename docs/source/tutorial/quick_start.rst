@@ -32,6 +32,12 @@ WorkSpace Setup
 `ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ as our main repository, it is recommended that you first understand its directory structure, 
 which is necessary for later use and development.
 
+.. image:: ./imgs/github_mark.svg
+   :target: https://github.com/chenhengwei1999/ISSPA/
+   :alt: GitHub Repository
+   :align: center
+   :width: 50%
+
 First, clone the source code to the ``/home/$USER/`` directory:
 
 .. code-block:: bash
