@@ -1,6 +1,5 @@
-Issue_and Troubleshooting
+Issue and Troubleshooting
 =========================
-
 
 During Compilation Process
 ------------------------------------------------------------

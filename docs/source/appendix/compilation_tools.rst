@@ -51,3 +51,9 @@ Conclusion
 -----------
 
 ROS build systems have undergone continuous evolution, from the traditional `rosbuild` to the current state-of-the-art `colcon`, enhancing efficiency and flexibility in software development for robotics.
+
+
+References
+----------
+
+- `ROS Build Systems <https://www.ros.org/reps/rep-0128.html>`_
