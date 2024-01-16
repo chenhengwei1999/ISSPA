@@ -23,7 +23,7 @@ class ColoredFormatter(logging.Formatter):
 LOG_FORMAT = "[%(asctime)s] - [%(levelname)s] - '%(message)s'"
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S %p"
 
-logger = logging.getLogger()
+logger = logging.getLogger("pavs_logger")
 logger.setLevel(logging.DEBUG)
 
 console_handler = logging.StreamHandler()

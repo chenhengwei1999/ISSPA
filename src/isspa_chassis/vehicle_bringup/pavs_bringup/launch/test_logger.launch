@@ -1,0 +1,6 @@
+<launch>
+    
+    <node pkg="pavs_bringup" type="test_logger.py" name="test_logger" required="true" output="screen">
+    </node>
+
+</launch>
