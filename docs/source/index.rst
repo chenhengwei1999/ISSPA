@@ -30,7 +30,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 
    /components/chassis
    /components/sensors
-   /components/SLAM
+   /components/mapping
    /components/navigation
    /components/detection
    /components/segmentation
@@ -113,7 +113,7 @@ Introduction to the core elements of ISSPA.
   
 - :doc:`/components/sensors` - Describe the sensors used by ISSPA, e.g., camera, lidar, imu.
   
-- :doc:`/components/SLAM` - The dominant algorithm for SLAM, the baseline algorithm, is introduced.
+- :doc:`/components/mapping` - The dominant algorithm for SLAM, the baseline algorithm, is introduced.
   
 - :doc:`/components/navigation` - Navigation frameworks and classical planning algorithms are presented.
   
@@ -147,7 +147,7 @@ please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.c
    :align: center
    :width: 20%
 
-- :doc:`/contributing_to_isspa/SLAM_plugin` - Extended guidance on SLAM algorithms is available here.
+- :doc:`/contributing_to_isspa/mapping_plugin` - Extended guidance on SLAM algorithms is available here.
   
 - :doc:`/contributing_to_isspa/navigation_plugin` - Extended guidance on navigation algorithms is available here.
   

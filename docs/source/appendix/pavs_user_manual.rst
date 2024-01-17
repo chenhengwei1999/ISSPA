@@ -17,7 +17,7 @@ First, the model diagram of the vehicle is shown below:
 
    :alt: PAVS Structure
    :align: center
-   :scale: 20%
+   :width: 20%
 
    **Model Diagram of PAVS**
 
