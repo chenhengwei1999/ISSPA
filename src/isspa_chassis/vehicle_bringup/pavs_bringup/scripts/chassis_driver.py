@@ -168,7 +168,10 @@ class pavs_driver:
         angular = msg.angular.z     # wait for change
 
         if vx < 0:
+            logger.debug("vx is negative")
+            logger.debug("vx: {}, vy: {}, angular: {}".format(vx, vy, angular))
             angular = -angular
+            logger.debug("angular has been changed to: {}".format(angular))
 
         # 小车运动控制,vel: ±1, angular: ±5
         # Trolley motion control,vel=[-1, 1], angular=[-5, 5]

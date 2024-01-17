@@ -1,7 +1,7 @@
 <launch>
     <param name="use_sim_time" value="false"/>
     <node name="joy_node" pkg="joy" type="joy_node" output="screen" respawn="false"/>
-    <node name="turtlebot_joy" pkg="pavs_ctrl" type="turtlebot_joy.py" output="screen">
+    <node name="turtlebot_joy" pkg="remote_ctrl" type="turtlebot_joy.py" output="screen">
         <param name="linear_speed_limit" type="double" value="2.0"/>
         <param name="angular_speed_limit" type="double" value="2.0"/>
     </node>

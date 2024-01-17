@@ -1,5 +1,5 @@
 <launch>
-    <node name="pavs_keyboard" pkg="pavs_ctrl" type="pavs_keyboard.py" output="screen">
+    <node name="pavs_keyboard" pkg="remote_ctrl" type="pavs_keyboard.py" output="screen">
         <param name="linear_speed_limit" type="double" value="1.0"/>
         <param name="angular_speed_limit" type="double" value="5.0"/>
     </node>

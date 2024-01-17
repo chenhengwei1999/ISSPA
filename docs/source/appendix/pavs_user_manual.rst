@@ -14,6 +14,7 @@ following document.
 First, the model diagram of the vehicle is shown below:
 
 .. figure:: ../imgs/pavs_structure.jpg
+
    :alt: PAVS Structure
    :align: center
    :scale: 20%
@@ -41,7 +42,7 @@ The command line usage of SSH is as follows:
 
 .. code-block:: bash
 
-    ssh <username>@<ipv4_address>
+    ssh jetson@192.168.xx.xx
 
 .. note::
     The default username is **jetson**, and the default password is **iscas**.
@@ -76,9 +77,15 @@ commands to test that the motors and servos are working properly.
     angular:
       x: 0.0
       y: 0.0
-      z: 0.0" -r 10
+      z: 0.5" -r 10
 
-If the chassis was successfully activated, the vehicle should have moved forward by now.
+If the chassis was successfully activated, the vehicle should have moved forward and turn left by now.
+
+
+.. note:: 
+
+    The cordinate which ROS uses is right-handed, and the direction of the z-axis is upward. 
+    And, counterclockwise is the positive direction.
 
 
 Start the SLAM Program
@@ -94,17 +101,55 @@ When the program is started, you can check for message output by typing ``rostop
 terminal, which normally outputs a number of matrices containing values from 0 to 1, which represent the probability 
 of an obstacle being present in the grid.
 
+The default SLAM algorithm is ``gmapping``, you can conveniently switch between algorithms by passing arguments on the 
+command line, for example if you want to use ``cartographer``, you can use the following command:
+
+.. code-block:: bash
+
+    roslaunch mapping_baselines pavs_map.launch map_type:=cartographer
+
+
 Further, you need to control the vehicle movement via a remote controller or a keyboard control node.
 
 .. note::
+    
     Warm reminder: Try not to let the vehicle hit the obstacles during mapping.
 
 
-When the map is created, you can execute map.sh under the ``~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/scripts directory`` 
+When the map is created, you can execute ``map.sh`` under the ``~/ISSPA/src/isspa_mapping/mapping_baselines/scripts`` folder
 to save your map.
 
-Eventually, the maps will be saved to the ``~/pa_ws/src/ISSPA/src/isspa_mapping/mapping_baselines/maps/`` folder 
+A quick way to search for this script is ``roscd``, used as follows:
+
+
+.. code-block:: bash
+
+    roscd mapping_baselines/scripts
+
+Then execute the following command:
+
+.. code-block:: bash
+
+    ./map.sh
+
+    # If you are using ``cartographer``, use ``cartographer_map.sh``
+    ./cartographer_map.sh
+
+Eventually, the maps will be saved to the ``~/ISSPA/src/isspa_mapping/mapping_baselines/maps/`` folder 
 with the name `map`.
+
+At this point, you will find the following two files:
+
+.. code-block:: bash
+
+    ISCAS@ISCAS:~/ISSPA/src/isspa_mapping/mapping_baselines/maps$ ll
+    total 640
+    drwxrwxr-x 2 chw chw   4096 1月  16 20:46 ./
+    drwxrwxr-x 6 chw chw   4096 12月 19 16:37 ../
+    -rw-rw-r-- 1 chw chw 640052 1月  16 20:46 map.pgm
+    -rw-rw-r-- 1 chw chw    191 1月  16 20:46 map.yaml
+
+Where ``map.pgm`` is the grip map and ``map.yaml`` is the configuration file for the map.
 
 
 Start the Navigation Program

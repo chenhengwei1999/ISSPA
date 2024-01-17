@@ -14,6 +14,7 @@
     <include file="$(find astra_camera)/launch/astra_pro_plus.launch" if="$(eval arg('camera_type') == 'astraproplus')" />
     
     <!-- Coordinate conversion for camera -->
-    <node pkg="tf" type="static_transform_publisher" name="camera_link_to_laser"
-          args="0 0 0 0 0 0  /camera_link /laser 30" if="$(eval arg('camera_type') == 'astraproplus')"/>
+    <!-- /camera_link to /base_link has been writen in urdf -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="camera_link_to_laser"
+          args="0 0 0 0 0 0  /camera_link /laser 30" if="$(eval arg('camera_type') == 'astraproplus')"/> -->
 </launch>

@@ -33,10 +33,11 @@ WorkSpace Setup
 which is necessary for later use and development.
 
 .. image:: ../imgs/github_mark.png
+  
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
-   :width: 30%
+   :width: 20%
 
 First, clone the source code to the ``/home/$USER/`` directory:
 
