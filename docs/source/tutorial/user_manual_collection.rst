@@ -1,4 +1,4 @@
-**User Manual**
+**User Manual Collection**
 ===================================
 
 Once the workspace setup is complete, you can attempt to perform the following tasks, 

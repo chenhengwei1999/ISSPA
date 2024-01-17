@@ -16,9 +16,9 @@ First, the model diagram of the vehicle is shown below:
 .. figure:: ../imgs/pavs_structure.jpg
    :alt: PAVS Structure
    :align: center
-   :scale: 50%
+   :scale: 20%
 
-   **Model Diagram of PAVS**
+   **Model Diagram of PAV-S**
 
 Connection Methods
 ------------------
