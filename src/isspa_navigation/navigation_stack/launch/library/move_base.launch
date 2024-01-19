@@ -12,6 +12,12 @@
             ns="global_costmap"/>
         <rosparam file="$(find navigation_stack)/param/common/costmap_common_params_$(arg robot_type).yaml" command="load"
             ns="local_costmap"/>
+
+        <rosparam file="$(find navigation_stack)/common/param/global_planner_params.yaml" command="load" />
+
+        <!-- <rosparam file="$(find pso_global_planner)/params/pso_planner.yaml" command="load" />
+        <param name="base_global_planner" value="pso_planner/globalMotionPlannerROS" /> -->
+
         <!--rosparam file="$(find navigation_stack)/param/common/dwa_local_planner_params_$(arg robot_type).yaml" command="load"/-->
         <!--param name="base_local_planner" type="string" value="dwa_local_planner/DWAPlannerROS" if="$(eval arg('robot_type') == 'R2')"/-->
         <rosparam file="$(find navigation_stack)/param/common/teb_local_planner_params_$(arg robot_type)_steer.yaml" command="load" if="$(arg nav_use_rotvel)"/>

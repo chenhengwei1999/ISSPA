@@ -2,7 +2,7 @@ GlobalPlanner:
   #  是否选择探索未知区域。
   allow_unknown:  true        # Allow planner to plan through unknown space, default true
   #  靠近目标点的周围多少数值就算到了目标点
-  default_tolerance: 0.0      # If goal in obstacle, plan to the closest point in radius default_tolerance, default 0.0
+  default_tolerance: 0.05      # If goal in obstacle, plan to the closest point in radius default_tolerance, default 0.0
   #  可能区域是否可视化
   visualize_potential: false
   #  如果设置为false就用A*
