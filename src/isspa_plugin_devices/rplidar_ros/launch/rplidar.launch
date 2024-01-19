@@ -1,7 +1,7 @@
 <launch>
     <arg name="lidar_type" value="a1" doc="lidar_type type [a1,a2,a3,s1,s2]"/>
-    <arg name="frame_id" default="laser"/>
-    <arg name="shielding_angle" default="30"/>
+    <arg name="frame_id" default="laser_link"/>
+    <arg name="shielding_angle" default="0"/>
     <!-- scan filtering node -->
     <node name="scan_filter" pkg="rplidar_ros" type="scan_filter.py" output="screen" respawn="true">
         <param name="shielding_angle" type="double" value="$(arg shielding_angle)"/>
