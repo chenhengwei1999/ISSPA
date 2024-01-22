@@ -40,5 +40,5 @@
         <!--<param name="plan_service" value="/move_base/NavfnROS/make_plan"/> -->
         <param name="plan_service" value="/move_base/make_plan"/>
     </node>
-    <node pkg="yahboomcar_nav" type="rrt_save_map" name="rrt_save_map" output="screen"/>
+    <node pkg="navigation_stack" type="rrt_save_map" name="rrt_save_map" output="screen"/>
 </launch>

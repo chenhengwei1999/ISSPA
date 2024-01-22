@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  isspa
 )
 
 ## System dependencies are found with CMake's conventions
@@ -118,6 +119,7 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
+  # ${CMAKE_CURRENT_SOURCE_DIR}/../../isspa/include
 )
 
 ## Declare a C++ library
@@ -135,6 +137,13 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/pavl_bringup_node.cpp)
 
+# add_executable(test_cpp_package src/test_cpp_package.cpp)
+
+# target_include_directories(test_cpp_package PRIVATE
+#   ${catkin_INCLUDE_DIRS}
+# )
+
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -148,6 +157,11 @@ include_directories(
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
+# )
+
+# target_link_libraries(test_cpp_package
+#   ${catkin_LIBRARIES}
+#   isspa_util
 # )
 
 #############

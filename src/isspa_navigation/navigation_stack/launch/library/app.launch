@@ -6,6 +6,6 @@
         <param name="auto_save_map" value="false"/>
     </node>
     <node pkg="world_canvas_server" type="map_manager.py" name="map_manager"/>
-    <node pkg="yahboomcar_nav" type="save" name="save_map"/>
+    <node pkg="navigation_stack" type="save" name="save_map"/>
 </launch>
 

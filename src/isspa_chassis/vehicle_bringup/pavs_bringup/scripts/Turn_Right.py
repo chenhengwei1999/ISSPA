@@ -45,7 +45,7 @@ class PAVS_CarPatrol():
         #self.sub_scan = rospy.Subscriber('/scan', LaserScan, self.registerScan, queue_size=1)
         #self.sub_Joy = rospy.Subscriber('/JoyState', Bool, self.JoyStateCallback)
         self.tf_listener.waitForTransform(self.odom_frame, self.base_frame, rospy.Time(), rospy.Duration(60.0))
-        #self.dyn_client = dynamic_reconfigure.client.Client("YahboomCarPatrol", timeout=60)
+        #self.dyn_client = dynamic_reconfigure.client.Client("PAVS_CarPatrol", timeout=60)
         #rospy.loginfo("Bring up rqt_reconfigure to control the Robot.")
         print(1111)
         

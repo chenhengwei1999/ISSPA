@@ -9,6 +9,6 @@ setup(
     install_requires=[
         # 依赖项列表
     ],
-    scripts=glob('src/isspa/*.py'),
+    scripts=glob('scripts/isspa/*.py'),
     package_dir={'': 'src'},
 )

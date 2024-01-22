@@ -104,7 +104,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES yahboomcar_ctrl
+#  LIBRARIES remote_ctrl
 #  CATKIN_DEPENDS roscpp rosmsg rospy
 #  DEPENDS system_lib
 )
@@ -122,7 +122,7 @@ include_directories(
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/yahboomcar_ctrl.cpp
+#   src/${PROJECT_NAME}/remote_ctrl.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -133,7 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/yahboomcar_ctrl_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/remote_ctrl.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -197,7 +197,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_yahboomcar_ctrl.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_remote_ctrl.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

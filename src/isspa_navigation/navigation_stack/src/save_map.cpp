@@ -1,6 +1,4 @@
-//
-// Created by yahboom on 2021/6/24.
-//
+
 #include <ros/ros.h>
 #include <string.h>
 #include <iostream>
@@ -9,7 +7,7 @@
 using namespace std;
 
 bool save_map_callback(world_canvas_msgs::SaveMap::Request &req, world_canvas_msgs::SaveMap::Response &res) {
-    const char *string1 = "dbus-launch gnome-terminal -- roslaunch yahboomcar_nav map_saver.launch map_name:=";
+    const char *string1 = "dbus-launch gnome-terminal -- roslaunch navigation_stack map_saver.launch map_name:=";
     const char *string2 = req.map_name.data();
     char command[100];
     strcpy(command, string1);

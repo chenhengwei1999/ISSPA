@@ -82,7 +82,7 @@
 
     <!-- 过滤和融合imu数据 -->
     <!-- Filter and fuse imu data -->
-    <!-- refer to https://github.com/CCNYRoboticsLab/imu_tools/tree/melodic-->
+    <!-- refer to https://github.com/CCNYRoboticsLab/imu_tools-->
     <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick" output="screen" if="$(arg use_ekf)">
         <param name="fixed_frame" value="base_link"/>
         <param name="use_mag" value="false"/>
@@ -94,11 +94,16 @@
         <!-- <remap from="/sub_imu" to="/imu/imu_raw"/>
         <remap from="/sub_mag" to="/mag/mag_raw"/> -->
 
+        <!-- https://github.com/CCNYRoboticsLab/imu_tools/blob/noetic/imu_filter_madgwick/src/imu_filter_ros.cpp, line 134-158 -->
         <remap from="/imu/data_raw" to="/imu/imu_raw"/>
         <remap from="/imu/mag" to="/mag/mag_raw"/>
 
-        <remap from="/pub_imu" to="/imu/imu_data"/>
+        <!-- https://github.com/CCNYRoboticsLab/imu_tools/blob/noetic/imu_filter_madgwick/src/imu_filter_ros.cpp, line 116-132 -->
+        <!-- <remap from="/pub_imu" to="/imu/imu_data"/> -->
+        <remap from="/imu/data" to="/imu/imu_data"/>
         <remap from="/pub_mag" to="/mag/mag_field"/>
+        
+
     </node>
 
     <!-- 扩展卡尔曼数据融合 -->
@@ -106,6 +111,7 @@
     <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization" output="screen" if="$(arg use_ekf)">
         <remap from="odometry/filtered" to="odom"/>
         <remap from="/imu0" to="/imu/imu_data"/>
+        <!-- <remap from="/imu0" to="/imu/imu_raw"/> -->
         <remap from="/odom0" to="odom_raw"/>
         <param name="odom_frame" value="/odom"/>
         <param name="world_frame" value="/odom"/>

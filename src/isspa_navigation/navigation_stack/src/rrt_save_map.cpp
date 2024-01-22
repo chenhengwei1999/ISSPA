@@ -44,7 +44,7 @@ public:
         ros::Rate loopRate(rate);
         while (ros::ok()) {
             if (count == waiting_time) {
-                const char *string1 = "dbus-launch gnome-terminal -- roslaunch yahboomcar_nav map_saver.launch map_name:=";
+                const char *string1 = "dbus-launch gnome-terminal -- roslaunch navigation_stack map_saver.launch map_name:=";
                 const char *string2 = rrt_map_name.c_str();
                 char command[100];
                 strcpy(command, string1);
