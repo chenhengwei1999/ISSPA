@@ -4,17 +4,17 @@
 During ISSPA'S Compilation
 --------------------------
 
-Issue A: Could NOT find PY_em (missing: PY_EM)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Issue A
+~~~~~~~~
 
-When running ``catkin_make``, the local environment conflicts with the conda virtual environment
+When running ``catkin_make``, the local environment conflicts with the conda virtual environment.
 
 **Error Message:**
 
 .. code-block:: bash
 
     -- This workspace overlays: /opt/ros/noetic
-    -- Found PythonInterp: /home/user/anaconda3/bin/python3 (found suitable version "3.11.5", minimum required is "3") 
+    -- Found PythonInterp: /home/iscas/anaconda3/bin/python3 (found suitable version "3.11.5", minimum required is "3") 
     -- Using PYTHON_EXECUTABLE: /yourhost/anaconda3/bin/python3
     -- Using Debian Python package layout
     -- Could NOT find PY_em (missing: PY_EM) 
@@ -34,8 +34,8 @@ When running ``catkin_make``, the local environment conflicts with the conda vir
 
 Since there is a Python environment in the locally installed anaconda, ``catkin_make`` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
 
-Solution A:
-~~~~~~~~~~
+Solution A
+~~~~~~~~~~~
 
 There are two ways to solve the above problem:
 

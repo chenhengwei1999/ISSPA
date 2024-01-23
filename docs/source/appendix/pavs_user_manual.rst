@@ -53,9 +53,9 @@ to run the vehicle.
 
 
 Start the Vehicle Chassis and Sensors
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------
 
-Firstly, launch chassis and sensors driver of the vehicle. 
+Firstly, launch chassis and sensors driver and sensors of the vehicle. 
 
 .. code-block:: bash
 
@@ -88,7 +88,7 @@ If the chassis was successfully activated, the vehicle should have moved forward
 
 
 Start the SLAM Program
-~~~~~~~~~~~~~~~~~~~~~~
+----------------------
 
 After that, you can test if the SLAM program works properly.
 
@@ -152,7 +152,7 @@ Where ``map.pgm`` is the grip map and ``map.yaml`` is the configuration file for
 
 
 Start the Navigation Program
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 Once you have activated the vehicle's chassis and sensors, and you have been given a grid map, it is then 
 possible to realize the task of fixed-point navigation!

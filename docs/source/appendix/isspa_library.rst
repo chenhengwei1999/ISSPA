@@ -29,8 +29,8 @@ Second, you will be introduced to the basic usage of Python Package with code sa
 Creation Method
 ~~~~~~~~~~~~~~~
 
-Here's an example of creating a python package named `isspa`, which also has the package name `isspa`.
-Create a `setup.py` file in the root directory of the ROS package, i.e., the directory on a level with `CMakeLists.txt`:
+Here's an example of creating a python package named ``isspa``, which also has the package name ``isspa``.
+Create a ``setup.py`` file in the root directory of the ROS package, i.e., the directory on a level with ``CMakeLists.txt``:
 
 .. code-block:: bash
 
@@ -40,7 +40,7 @@ Create a `setup.py` file in the root directory of the ROS package, i.e., the dir
     cd isspa
     touch setup.py
 
-The contents of the `setup.py` file are as follows:
+The contents of the ``setup.py`` file are as follows:
 
 .. code-block:: python
 
@@ -61,12 +61,12 @@ The contents of the `setup.py` file are as follows:
 
 .. note::
 
-    The version should be consistent with the version of the package in the `package.xml` file.
+    The version should be consistent with the version of the package in the ``package.xml`` file.
 
 
-After that, you also need to change the contents of `CMakeLists.txt`:
+After that, you also need to change the contents of ``CMakeLists.txt``:
 
-..code-block:: cmake
+.. code-block:: cmake
 
     cmake_minimum_required(VERSION 3.0.2)
     project(isspa)
@@ -109,7 +109,7 @@ If all goes well, you can try running the program in another package. A simple t
     chomd +x test_import_python_package.py
 
 
-Below we add a simple `test_import_python_package.py` script under `~/ISSPA/src/test_import_python_package/scripts` as an example.
+Below we add a simple ``test_import_python_package.py`` script under ``~/ISSPA/src/test_import_python_package/scripts`` as an example.
 
 .. code-block:: python
     
@@ -148,7 +148,7 @@ The ROS library configuration for C++ is more complex than for python, so let's 
 Creataion Method
 ~~~~~~~~~~~~~~~~
 
-Here's an example of creating a C++ library named `isspa`, which also has the head file named `util.h`.
+Here's an example of creating a C++ library named ``isspa``, which also has the head file named ``util.h``.
 
 .. code-block:: bash
 
@@ -159,7 +159,7 @@ Here's an example of creating a C++ library named `isspa`, which also has the he
     mkdir include
     touch include/isspa/util.h
 
-The contents of the `util.h` file are as follows:
+The contents of the ``util.h`` file are as follows:
 
 .. code-block:: cpp
 
@@ -181,9 +181,9 @@ The contents of the `util.h` file are as follows:
 
 .. note::
 
-    Don't misspell `#ifndef` as `#ifdef`. , otherwise the contents of the header file will not be found during compilation.
+    Don't misspell ``#ifndef`` as ``#ifdef``. , otherwise the contents of the header file will not be found during compilation.
 
-Then create `util.cpp` in the `~/ISSPA/src/isspa/src` folder with the following contents:
+Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` folder with the following contents:
 
 .. code-block:: cpp
 
@@ -207,9 +207,9 @@ Then create `util.cpp` in the `~/ISSPA/src/isspa/src` folder with the following 
         ROS_INFO("Hello from util.cpp");
     }
 
-After that, you also need to change the contents of `CMakeLists.txt` within `isspa` package:
+After that, you also need to change the contents of ``CMakeLists.txt`` within ``isspa`` package:
 
-..code-block:: cmake
+.. code-block:: cmake
 
     cmake_minimum_required(VERSION 3.0.2)
     project(isspa)
@@ -249,10 +249,10 @@ After that, you also need to change the contents of `CMakeLists.txt` within `iss
     DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
     )
 
-At this point, the other package requires changes to `CMakeLists.txt` and `package.xml`, 
-assuming the name of the other ROS package is `test_import_roscpp_library`:
+At this point, the other package requires changes to ``CMakeLists.txt`` and ``package.xml``, 
+assuming the name of the other ROS package is ``test_import_roscpp_library``:
 
-We need to create a `main.cpp` file first.
+We need to create a ``main.cpp`` file first.
 
 .. code-block:: bash
 
@@ -280,9 +280,9 @@ A simple example is as follows:
         return 0;
     }
 
-After that, you also need to change the contents of `CMakeLists.txt` within `test_import_roscpp_library` package:
+After that, you also need to change the contents of ``CMakeLists.txt`` within ``test_import_roscpp_library`` package:
 
-..code-block:: cmake
+.. code-block:: cmake
 
     ...
 
@@ -300,7 +300,7 @@ After that, you also need to change the contents of `CMakeLists.txt` within `tes
 
     ...
 
-And add a `<depend>isspa</depend>` tag inside the `package.xml`.
+And add a ``<depend>isspa</depend>`` tag inside the ``package.xml``.
 
 Finally, you need to build the package:
 
