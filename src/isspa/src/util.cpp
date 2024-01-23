@@ -1,5 +1,3 @@
-// util.cpp
-
 #include "isspa/util.h"
 #include <iostream>
 
@@ -14,3 +12,8 @@ namespace isspa
         }
     }
 } // namespace isspa
+
+void sayHello()
+{
+    ROS_INFO("Hello from util.cpp");
+}

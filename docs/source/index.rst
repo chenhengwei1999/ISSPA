@@ -41,6 +41,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
    :hidden:
 
    /appendix/pavs_user_manual
+   /appendix/isspa_library
    /appendix/compilation_tools
    /appendix/issue_and_troubleshooting
 
@@ -128,6 +129,8 @@ ISSPA APPENDIX
 Documents such as user manuals (e.g. PAV-S) are categorized.
 
 - :doc:`/appendix/pavs_user_manual` - User manual for PAV-S (Physical Agent Vehicle Small).
+
+- :doc:`/appendix/isspa_library` - ISSPA's ROS library for Python and C++.
 
 - :doc:`/appendix/compilation_tools` - Introduction to the compilation tools used in ROS.
 

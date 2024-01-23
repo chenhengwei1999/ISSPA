@@ -1,5 +1,7 @@
-#ifdef ISSPA_UTIL_H
-#define ISSPA_UTIL_H
+#ifndef UTIL_H
+#define UTIL_H
+
+#include "ros/ros.h"
 
 namespace isspa
 {
@@ -8,6 +10,6 @@ namespace isspa
     }
 } // namespace isspa
 
+void sayHello();
 
-
-#endif // ISSPA_UTIL_H
+#endif // UTIL_H

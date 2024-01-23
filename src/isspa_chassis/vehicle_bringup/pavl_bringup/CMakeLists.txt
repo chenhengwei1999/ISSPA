@@ -137,11 +137,16 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/pavl_bringup_node.cpp)
 
-# add_executable(test_cpp_package src/test_cpp_package.cpp)
+add_executable(test_cpp_package src/test_cpp_package.cpp)
+
+target_link_libraries(test_cpp_package
+  ${catkin_LIBRARIES}
+)
 
 # target_include_directories(test_cpp_package PRIVATE
 #   ${catkin_INCLUDE_DIRS}
 # )
+
 
 
 ## Rename C++ executable without prefix

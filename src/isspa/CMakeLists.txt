@@ -102,12 +102,20 @@ catkin_python_setup()
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
+# catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES isspa
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
+# )
+
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES isspa
+  CATKIN_DEPENDS roscpp rospy std_msgs
+#  DEPENDS system_lib
 )
+
 
 ###########
 ## Build ##
@@ -125,14 +133,12 @@ include_directories(
 #   src/${PROJECT_NAME}/isspa.cpp
 # )
 
-add_library(isspa_util
+add_library(${PROJECT_NAME}
   src/util.cpp
 )
 
-target_include_directories(isspa_util
-  PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
+target_link_libraries(${PROJECT_NAME}
+  ${catkin_LIBRARIES}
 )
 
 ## Add cmake target dependencies of the library
@@ -144,6 +150,13 @@ target_include_directories(isspa_util
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/isspa_node.cpp)
+
+add_executable(test_roscpp_library src/test_roscpp_library.cpp)
+
+target_link_libraries(test_roscpp_library
+  ${catkin_LIBRARIES}
+  ${PROJECT_NAME}
+)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -195,7 +208,7 @@ catkin_install_python(PROGRAMS
 #   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
 # )
 
-install(TARGETS isspa_util
+install(TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION}
@@ -210,8 +223,8 @@ install(TARGETS isspa_util
 
 install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.h"
-  PATTERN ".svn" EXCLUDE
+  # FILES_MATCHING PATTERN "*.h"
+  # PATTERN ".svn" EXCLUDE
 )
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
