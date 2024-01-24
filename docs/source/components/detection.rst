@@ -63,3 +63,8 @@ operation of autonomous vehicles.
 .. note::
 
     The PointPillars algorithm has been tested in ISSPA and will be synchronized to the code repository as soon as possible.
+
+**Reference**
+-------------
+
+- `[yolov5] <https://github.com/ultralytics/yolov5>`_

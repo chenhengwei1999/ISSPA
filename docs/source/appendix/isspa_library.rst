@@ -3,7 +3,8 @@
 
 Some common tools will be integrated into ISSPA in the form of **Python Packages** or **CPP Libraries**, 
 the purpose of which is to interconnect ROS packages and give you a clearer insight into how ISSPA works. 
-In the meantime, you will also understand ISSPA's program logic and how it relates to each other.
+In the meantime, you will also understand ISSPA's program logic and how it relates to each other. Let's start 
+following along with the tutorial.
 
 The tutorial includes the following:
 
@@ -39,50 +40,61 @@ Create a ``setup.py`` file in the root directory of the ROS package, i.e., the d
     catkin_create_pkg isspa rospy roscpp std_msgs
     cd isspa
     touch setup.py
+    touch scripts/isspa/__init__.py
+    touch scripts/isspa/logging_output.py
+    chomd +x scripts/isspa/logging_output.py
 
 The contents of the ``setup.py`` file are as follows:
 
 .. code-block:: python
 
-    from setuptools import setup
-    from glob import glob
+    from distutils.core import setup
+    from catkin_pkg.python_setup import generate_distutils_setup
 
 
-    setup(
-        name='isspa',
-        version='0.1.0',
+    d = generate_distutils_setup(
         packages=['isspa'],
-        install_requires=[
-            # List of dependencies
-        ],
-        scripts=glob('scripts/isspa/*.py'),
-        package_dir={'': 'src'},
+        package_dir={'': 'scripts'},
+        version='0.1.0'
     )
+
+    setup(**d)
+
+Only two sentences are important here, the rest are the same every time:
+
+.. code-block:: python
+
+    packages=['isspa'],
+    package_dir={'': 'scripts'},
+
+The first sentence indicates the name of the package, and the second sentence indicates the directory where the package is located.
 
 .. note::
 
     The version should be consistent with the version of the package in the ``package.xml`` file.
+
+The contents of the ``logging_output.py`` file are as follows:
+
+.. code-block:: python
+
+    #!/usr/bin/env python
+    import rospy
+
+    def logger(msg):
+        rospy.loginfo("Welcome to ISSPA. " + msg)
 
 
 After that, you also need to change the contents of ``CMakeLists.txt``:
 
 .. code-block:: cmake
 
-    cmake_minimum_required(VERSION 3.0.2)
-    project(isspa)
-
-    find_package(catkin REQUIRED COMPONENTS
-    roscpp
-    rospy
-    std_msgs
-    )
+    ...
 
     catkin_python_setup()
 
-    catkin_install_python(PROGRAMS
-        scripts/isspa/logging_output.py
-        DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-        )
+    catkin_package()
+
+    ...
 
 Finally, you need to build the package:
 
@@ -91,7 +103,6 @@ Finally, you need to build the package:
     cd ~/ISSPA
     catkin_make
     source devel/setup.bash
-
 
 
 If all goes well, you can try running the program in another package. A simple test is as follows:
@@ -116,9 +127,15 @@ Below we add a simple ``test_import_python_package.py`` script under ``~/ISSPA/s
 
     #!/usr/bin/env python
     import rospy
+    from isspa import logging_output
 
     def test_log():
-        rospy.loginfo("Welcome to ISSPA!")
+        logging_output.logger("This is a test message.")
+        rospy.loginfo("Welcome to ISSPA! This is a message from test_import_python_package.py")
+
+    if __name__ == '__main__':
+        rospy.init_node('test_import_python_package')
+        test_log()
 
 And, run the following command to make the script executable:
 
@@ -131,7 +148,8 @@ The following results will be output:
 
 .. code-block:: bash
 
-    [INFO] [1632938655.757961]: Welcome to ISSPA!
+    [INFO] [1632938655.753961]: Welcome to ISSPA. This is a test message.
+    [INFO] [1632938655.758263]: Welcome to ISSPA! This is a message from test_import_python_package.py
 
 
 Usage Examples

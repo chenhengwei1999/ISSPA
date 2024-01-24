@@ -1,14 +1,11 @@
-from setuptools import setup
-from glob import glob
+from distutils.core import setup
+from catkin_pkg.python_setup import generate_distutils_setup
 
 
-setup(
-    name='isspa',
-    version='0.1.0',
+d = generate_distutils_setup(
     packages=['isspa'],
-    install_requires=[
-        # 依赖项列表
-    ],
-    scripts=glob('scripts/isspa/*.py'),
-    package_dir={'': 'src'},
+    package_dir={'': 'scripts'},
+    version='0.1.0'
 )
+
+setup(**d)

@@ -188,11 +188,11 @@ target_link_libraries(test_roscpp_library
 # )
 
 
-catkin_install_python(PROGRAMS
-  scripts/isspa/logging_output.py
-  # scripts/isspa/pavs_stm32_com.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+# catkin_install_python(PROGRAMS
+#   scripts/isspa/logging_output.py
+#   scripts/isspa/pavs_stm32_com.py
+#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+# )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
