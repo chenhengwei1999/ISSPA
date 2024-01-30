@@ -1,4 +1,4 @@
 <launch>
     <node pkg="rviz" type="rviz" name="rviz" required="true"
-          args="-d $(find vehicle_mapping)/rviz/grid_map.rviz"/>
+          args="-d $(find mapping_baselines)/rviz/grid_map.rviz"/>
 </launch>

@@ -3,8 +3,10 @@
     <arg name="use_rviz" default="false"/>
     <arg name="use_ekf" default="true"/>
     <arg name="nav_use_rotvel" default="false"/>
-    <arg name="robot_type" value="PAVS" doc="robot_type [PAVS]"/>
+    <arg name="robot_type" value="PAVS" doc="robot_type [PAVS, PAVS_YDLIDAR]"/>
     <arg name="use_remote_control" default="false"/>
+    <arg name="lidar_type" value="a1" doc="lidar_type [a1, ydlidar, velodyne, ls16]"/>
+    <arg name="camera_type" value="none" doc="camera_type [astras, astrapro, astraproplus]" />
 
     <!-- 启动遥控器 -->
     <!-- Start remote control -->
@@ -12,13 +14,18 @@
     
     <!-- 启动传感器 -->
     <!-- Start sensor -->
-    <include file="$(find pavs_bringup)/launch/sensor_bringup.launch" />
+    <include file="$(find pavs_bringup)/launch/sensor_bringup.launch">
+        <arg name="lidar_type" value="$(arg lidar_type)" doc="lidar_type [a1, ydlidar, velodyne, ls16]"/>
+        <arg name="camera_type" value="$(arg camera_type)" doc="camera_type [astras, astrapro, astraproplus]" />
+    </include>
 
     <!-- URDF模型 -->
     <!-- URDF model -->
     <group if="$(arg use_ekf)">
         <param name="robot_description" command="$(find xacro)/xacro --inorder
             '$(find pavs_description)/urdf/pavs.urdf.xacro'" if="$(eval arg('robot_type') == 'PAVS')"/>
+        <param name="robot_description" command="$(find xacro)/xacro --inorder
+            '$(find pavs_description)/urdf/pavs.urdf.xacro'" if="$(eval arg('robot_type') == 'PAVS_YDLIDAR')"/>
         <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"
             if="$(arg use_gui)"/>
         <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"
