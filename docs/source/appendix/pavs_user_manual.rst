@@ -126,7 +126,7 @@ have them received and executed by the turtle on the Local Computer, as depicted
 .. figure:: ../imgs/multi_machine_communicate.png
    :alt: multi_machine_communicate
    :align: center
-   :scale: 40%
+   :scale: 10%
 
    **Multi Machine Communicate**
 
