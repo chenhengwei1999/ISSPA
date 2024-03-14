@@ -77,19 +77,23 @@ The main idea is to define the master nodes and hostnames of the PAVS and the lo
 **Set PAVS**
 
 .. code-block:: bash
+
     export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
     export ROS_HOSTNAME=192.168.1.101                   # PAVS ip
 
 .. note::
+
 The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
 
 **Set Local Computer**
 
 .. code-block:: bash
+
     export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
     export ROS_HOSTNAME=192.168.1.27                    # Local Computer ip
 
 .. note::
+
     The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **Local Computer**.
 
 
@@ -102,12 +106,14 @@ This section will verify the correctness of the settings described above and dem
 In the terminal of PAVS, run the following command.
 
 .. code-block:: bash
+
     roscore
 
 **Local computer**
 In the terminal of Local Computer, run the following command.
 
 .. code-block:: bash
+
     rosrun turtlesim turtlesim_node         # a terminal
     rosrun turtlesim turtle_teleop_key       # another terminal
 
@@ -116,7 +122,7 @@ through the roscore on the PAVS, and ultimately,
 have them received and executed by the turtle on the Local Computer, as depicted in the diagram below.
 
 .. figure:: ../imgs/multi_machine_communicate.png
-   :alt:multi_machine_communicate
+   :alt: multi_machine_communicate
    :align: center
    :scale: 20%
 
