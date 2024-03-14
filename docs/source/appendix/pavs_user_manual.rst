@@ -68,21 +68,22 @@ Suppose the ip of your Local Computer and PAVS are as follows,
     192.168.1.27    # Local Computer
     192.168.1.101   # PAVS
 
-**Settings**
+Settings
+________
 
 Describe how to set up multi-machine communication through based on above environments description.
 The main idea is to define the master nodes and hostnames of the PAVS and the local computer.
 
-Set PAVS
+**Set PAVS**
 
 .. code-block:: bash
     export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
     export ROS_HOSTNAME=192.168.1.101                   # PAVS ip
 
 .. note::
-    The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
+The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
 
-    - Set Local Computer
+**Set Local Computer**
 
 .. code-block:: bash
     export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
@@ -92,19 +93,19 @@ Set PAVS
     The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **Local Computer**.
 
 
-- **Validation**
+Validation
+___________
 
 This section will verify the correctness of the settings described above and demonstrate the results of multi-machine communication.
 
-    - PAVS
-    In the terminal of PAVS, run the following command.
+**PAVS**
+In the terminal of PAVS, run the following command.
 
 .. code-block:: bash
     roscore
-.. note::
 
-    - Local computer
-    In the terminal of Local Computer, run the following command.
+**Local computer**
+In the terminal of Local Computer, run the following command.
 
 .. code-block:: bash
     rosrun turtlesim turtlesim_node         # a terminal
@@ -119,7 +120,7 @@ have them received and executed by the turtle on the Local Computer, as depicted
    :align: center
    :scale: 20%
 
-   **Multi-Machine Communicate**
+   **Multi Machine Communicate**
 
 
 Start the Vehicle Chassis and Sensors
