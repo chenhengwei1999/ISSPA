@@ -98,15 +98,16 @@ This section will verify the correctness of the settings described above and dem
     - PAVS
     In the terminal of PAVS, run the following command.
 
-    .. code-block:: bash
-        roscore
+.. code-block:: bash
+    roscore
+.. note::
 
     - Local computer
     In the terminal of Local Computer, run the following command.
 
-    .. code-block:: bash
-        rosrun turtlesim turtlesim_node         # a terminal
-        rosrun turtlesim turtle_teleop_key       # another terminal
+.. code-block:: bash
+    rosrun turtlesim turtlesim_node         # a terminal
+    rosrun turtlesim turtle_teleop_key       # another terminal
 
 Following the given commands, you'll be able to transmit commands from your Local Computer's keyboard 
 through the roscore on the PAVS, and ultimately, 
@@ -116,6 +117,8 @@ have them received and executed by the turtle on the Local Computer, as depicted
    :alt:multi-machine-communicate
    :align: center
    :scale: 20%
+
+   **Multi-Machine Communicate**
 
 
 Start the Vehicle Chassis and Sensors
