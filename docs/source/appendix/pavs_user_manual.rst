@@ -58,7 +58,8 @@ This section elaborates on the implementation of multi-machine communication,
 particularly between a `Local Computer` (personal computer) and `PAVS` (Physical Agents Vehicle Small). 
 For example, control instructions sent from the local terminal are received and executed by the vehicle.
 
-- **Environments Description**
+Environments Description
+______________________
 
 Suppose the ip of your Local Computer and PAVS are as follows,
 
@@ -67,12 +68,12 @@ Suppose the ip of your Local Computer and PAVS are as follows,
     192.168.1.27    # Local Computer
     192.168.1.101   # PAVS
 
-- **Settings**
+**Settings**
 
 Describe how to set up multi-machine communication through based on above environments description.
 The main idea is to define the master nodes and hostnames of the PAVS and the local computer.
 
-    - Set PAVS
+Set PAVS
 
 .. code-block:: bash
     export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
@@ -114,7 +115,7 @@ through the roscore on the PAVS, and ultimately,
 have them received and executed by the turtle on the Local Computer, as depicted in the diagram below.
 
 .. figure:: ../imgs/multi_machine_communicate.png
-   :alt:multi-machine-communicate
+   :alt:multi_machine_communicate
    :align: center
    :scale: 20%
 
