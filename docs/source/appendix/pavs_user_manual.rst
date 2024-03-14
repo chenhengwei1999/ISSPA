@@ -51,6 +51,72 @@ The command line usage of SSH is as follows:
 As soon as you have connected to the terminal inside the vehicle, you can start some programs 
 to run the vehicle.
 
+Multi-machine Communication
+---------------------------
+
+This section elaborates on the implementation of multi-machine communication, 
+particularly between a `Local Computer` (personal computer) and `PAVS` (Physical Agents Vehicle Small). 
+For example, control instructions sent from the local terminal are received and executed by the vehicle.
+
+- **Environments Description**
+
+Suppose the ip of your Local Computer and PAVS are as follows,
+
+.. code-block:: bash
+
+    192.168.1.27    # Local Computer
+    192.168.1.101   # PAVS
+
+- **Settings**
+
+Describe how to set up multi-machine communication through based on above environments description.
+The main idea is to define the master nodes and hostnames of the PAVS and the local computer.
+
+    - Set PAVS
+
+.. code-block:: bash
+    export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
+    export ROS_HOSTNAME=192.168.1.101                   # PAVS ip
+
+.. note::
+    The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
+
+    - Set Local Computer
+
+.. code-block:: bash
+    export ROS_MASTER_URI=http://192.168.1.101:11311    # PAVS ip
+    export ROS_HOSTNAME=192.168.1.27                    # Local Computer ip
+
+.. note::
+    The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **Local Computer**.
+
+
+- **Validation**
+
+This section will verify the correctness of the settings described above and demonstrate the results of multi-machine communication.
+
+    - PAVS
+    In the terminal of PAVS, run the following command.
+
+    .. code-block:: bash
+        roscore
+
+    - Local computer
+    In the terminal of Local Computer, run the following command.
+
+    .. code-block:: bash
+        rosrun turtlesim turtlesim_node         # a terminal
+        rosrun turtlesim turtle_teleop_key       # another terminal
+
+Following the given commands, you'll be able to transmit commands from your Local Computer's keyboard 
+through the roscore on the PAVS, and ultimately, 
+have them received and executed by the turtle on the Local Computer, as depicted in the diagram below.
+
+.. figure:: ../imgs/multi_machine_communicate.png
+   :alt:multi-machine-communicate
+   :align: center
+   :scale: 20%
+
 
 Start the Vehicle Chassis and Sensors
 -------------------------------------
