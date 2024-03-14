@@ -83,7 +83,7 @@ The main idea is to define the master nodes and hostnames of the PAVS and the lo
 
 .. note::
 
-The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
+    The `ROS_MASTER_URI` is ip of **PAVS**, and the ip of `ROS_HOSTNAME` is **PAVS**.
 
 **Set Local Computer**
 
@@ -126,7 +126,7 @@ have them received and executed by the turtle on the Local Computer, as depicted
 .. figure:: ../imgs/multi_machine_communicate.png
    :alt: multi_machine_communicate
    :align: center
-   :scale: 10%
+   :scale: 15%
 
    **Multi Machine Communicate**
 
