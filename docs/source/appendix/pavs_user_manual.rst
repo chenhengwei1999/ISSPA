@@ -103,6 +103,7 @@ ___________
 This section will verify the correctness of the settings described above and demonstrate the results of multi-machine communication.
 
 **PAVS**
+
 In the terminal of PAVS, run the following command.
 
 .. code-block:: bash
@@ -110,6 +111,7 @@ In the terminal of PAVS, run the following command.
     roscore
 
 **Local computer**
+
 In the terminal of Local Computer, run the following command.
 
 .. code-block:: bash
@@ -124,7 +126,7 @@ have them received and executed by the turtle on the Local Computer, as depicted
 .. figure:: ../imgs/multi_machine_communicate.png
    :alt: multi_machine_communicate
    :align: center
-   :scale: 20%
+   :scale: 40%
 
    **Multi Machine Communicate**
 
