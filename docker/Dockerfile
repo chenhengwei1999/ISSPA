@@ -38,5 +38,28 @@ RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; catkin_make VERBOSE=1'
 # 设置环境变量
 RUN echo "source /home/root/ISSPA/devel/setup.bash" >> ~/.bashrc
 RUN ln -s /usr/bin/python3 /usr/bin/python
+# SSH
+RUN apt-get install -y ros-noetic-rosbridge-server
+# ??????????OpenSSH???
+RUN apt-get install -y openssh-server && \
+    rm -rf /var/lib/apt/lists/*
+
+# ??SSH???????
+RUN mkdir /var/run/sshd
+
+# ???????????????????????
+RUN useradd -m -s /bin/bash username && \
+    echo "username:userpassword" | chpasswd
+
+# ??SSH??????????????????????
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
+# ??22??
+EXPOSE 22
+
+# ??SSH??
+# RUN service ssh start
+CMD ["service", "ssh", "start"]
+
 # 设置容器启动时执行的命令
 CMD ["bash"]
