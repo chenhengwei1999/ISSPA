@@ -1,4 +1,4 @@
-image: /home/jetson/ISSPA/src/isspa_mapping/mapping_baselines/maps/map.pgm
+image: /home/chw/Documents/ISSPA/src/isspa_mapping/mapping_baselines/maps/map.pgm
 resolution: 0.050000
 origin: [-20.000000, -20.000000, 0.000000]
 negate: 0
