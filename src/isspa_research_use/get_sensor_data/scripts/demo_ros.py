@@ -3,7 +3,8 @@
 import rospy
 from sensor_msgs.msg import PointCloud2
 from sensor_msgs.point_cloud2 import read_points
-from autoware_msgs.msg import DetectedObjectArray
+from autoware_msgs.msg import DetectedObjectArray, DetectedObject
+from visualization_msgs.msg import Marker, MarkerArray
 
 
 import numpy as np
@@ -18,6 +19,10 @@ import glob
 import torch
 
 
+import open3d as o3d
+
+
+
 class LidarDetector(object):
     def __init__(self, sub_topic,sub_type,
                  pub_topic, pub_type,
@@ -25,6 +30,7 @@ class LidarDetector(object):
                  ckpt_file=""):
         self.point_cloud_sub = rospy.Subscriber(sub_topic, sub_type, self.point_cloud_callback)
         self.detection_pub = rospy.Publisher(pub_topic, pub_type, queue_size=1)
+        self.marker_pub = rospy.Publisher("detection_markers", MarkerArray, queue_size=1)
 
         self.logger = common_utils.create_logger()
 
@@ -49,6 +55,15 @@ class LidarDetector(object):
         self.model.cuda()
         self.model.eval()
 
+        # Initialize Open3D visualizer
+        # self.vis = o3d.visualization.Visualizer()
+        # self.vis.create_window()
+        # self.pcd = o3d.geometry.PointCloud()
+        # self.vis.add_geometry(self.pcd)
+        # self.bbox_lines = []
+        # self.view_control = self.vis.get_view_control()
+
+
     def update_point_cloud(self, ):
         pass
 
@@ -64,11 +79,98 @@ class LidarDetector(object):
                 load_data_to_gpu(data_dict)
                 pred_dicts, _ = self.model.forward(data_dict)
 
-                print(pred_dicts)
+                # print(pred_dicts)
+                # print(data_dict['points'].shape)
+
+                # Extract point cloud and predictions
+                points = data_dict['points'][:, 1:].cpu().numpy()
+                pred_boxes = pred_dicts[0]['pred_boxes'].cpu().numpy()
+
+                # Update Open3D visualizer
+                # self.update_visualization(points, pred_boxes)
+
+                # Publish detection results
+                self.publish_detections(pred_boxes)
+
+    def update_visualization(self, points, pred_boxes):
+
+        # Save the current view parameters
+        view_params = self.view_control.convert_to_pinhole_camera_parameters()
+
+        self.pcd.points = o3d.utility.Vector3dVector(points[:, :3])
+        self.pcd.colors = o3d.utility.Vector3dVector(np.tile(points[:, 3:4], (1, 3)))
+
+        # Remove old bounding boxes
+        for bbox in self.bbox_lines:
+            self.vis.remove_geometry(bbox)
+        self.bbox_lines = []
+
+        # Add new bounding boxes
+        for box in pred_boxes:
+            bbox = o3d.geometry.OrientedBoundingBox()
+            bbox.center = box[:3]
+            bbox.extent = box[3:6]
+            bbox.color = (1, 0, 0)
+            self.bbox_lines.append(bbox)
+            self.vis.add_geometry(bbox)
+
+        self.vis.update_geometry(self.pcd)
+        self.vis.poll_events()
+        self.vis.update_renderer()
+
+        # Restore the view parameters
+        self.view_control.convert_from_pinhole_camera_parameters(view_params)
+
+
+    def publish_detections(self, pred_boxes):
+        detection_array = DetectedObjectArray()
+        detection_array.header.stamp = rospy.Time.now()
+        detection_array.header.frame_id = "laser"
+
+        marker_array = MarkerArray()
+
+        for i, box in enumerate(pred_boxes):
+            detected_object = DetectedObject()
+            detected_object.pose.position.x = box[0]
+            detected_object.pose.position.y = box[1]
+            detected_object.pose.position.z = box[2]
+            detected_object.dimensions.x = box[3]
+            detected_object.dimensions.y = box[4]
+            detected_object.dimensions.z = box[5]
+            detected_object.label = "detected_object"
+            detected_object.score = 1.0  # Assuming a confidence score of 1.0 for simplicity
+
+            detection_array.objects.append(detected_object)
+
+            # Create a marker for visualization
+            marker = Marker()
+            marker.header.frame_id = "laser"
+            marker.header.stamp = rospy.Time.now()
+            marker.ns = "detection"
+            marker.id = i
+            marker.type = Marker.CUBE
+            marker.action = Marker.ADD
+            marker.pose.position.x = box[0]
+            marker.pose.position.y = box[1]
+            marker.pose.position.z = box[2]
+            marker.scale.x = box[3]
+            marker.scale.y = box[4]
+            marker.scale.z = box[5]
+            marker.color.a = 0.5  # Transparency
+            marker.color.r = 1.0
+            marker.color.g = 0.0
+            marker.color.b = 0.0
+
+            marker_array.markers.append(marker)
+
+        self.detection_pub.publish(detection_array)
+        self.marker_pub.publish(marker_array)
+
+
 
     def point_cloud_callback(self, raw_point_cloud):
         self.points_xyzi = self.pointcloud2_to_xyzi(raw_point_cloud)
-        rospy.loginfo("Getting point cloud")
+        rospy.loginfo_once("Getting point cloud")
 
 
     def pointcloud2_to_xyzi(self, raw_point_cloud):
@@ -80,6 +182,8 @@ class LidarDetector(object):
             points_list.append([data[0], data[1], data[2], data[3]])
 
         points_list = np.asarray(points_list, dtype=np.float32).reshape(-1, 4)
+        points_list[:, 3] = points_list[:, 3] / 255
+
         return points_list
 
 
@@ -111,8 +215,8 @@ class DemoDataset(DatasetTemplate):
     
     def get_data(self, point_cloud):
 
-        print(point_cloud.shape)
-        print(point_cloud[0, :])
+        # print(point_cloud.shape)
+        # print(point_cloud[0, :])
 
         input_dict = {
             'points': point_cloud,
