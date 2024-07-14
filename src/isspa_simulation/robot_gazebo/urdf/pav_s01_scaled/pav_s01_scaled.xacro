@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="pav_s01_scaled"
+  xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find robot_description)/urdf/pav_s01_scaled/macros.xacro" />
+
+  <xacro:property name="PI" value="3.141592653589793" />
+
+  <link name="base_footprint"/>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="-0.2 0 0" rpy="0 0 0" />
+      <mass value="1200" />
+      <inertia ixx="186.25" ixy="0" ixz="0" iyy="1267.25" iyz="0" izz="1369.00" />
+    </inertial>
+    <visual>
+      <origin xyz="-0.24 0 -0.67" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/base_link.STL" scale="10 10 10"/>
+      </geometry>
+      <material name="">
+        <color rgba="0 0.62745 0.23529 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.2 0 -0.325" rpy="0 0 0" />
+      <geometry>
+        <box size="3.5 1.2 0.65" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0.9" rpy="0 0 0"/>
+  </joint>
+
+  <link name="shell_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="${PI / 2} 0 -${PI / 2}" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/shell_pav_s01.STL" scale="0.01 0.01 0.01"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="shell_link_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="shell_link"/>
+    <origin xyz="-0.2 0.0 -0.85" rpy="0 0 0"/>
+  </joint>
+
+
+  <link name="right_rear_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0 " rpy="0 0 0" />
+      <mass value="10" />
+      <inertia ixx="0.3396" ixy="0" ixz="0" iyy="0.3396" iyz="0" izz="0.6125" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/wheel_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.35" length="0.2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_rear_wheel_link_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="right_rear_wheel_link" />
+    <origin xyz="-1.39 -0.9 -0.55" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="1000000" velocity="1000" />
+  </joint>
+  <xacro:wheel_transmission name="right_rear_wheel_link" />
+
+  <link name="left_rear_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0 " rpy="0 0 0" />
+      <mass value="10" />
+      <inertia ixx="0.3396" ixy="0" ixz="0" iyy="0.3396" iyz="0" izz="0.6125" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/wheel_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.35" length="0.2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_rear_wheel_link_joint" type="continuous">
+    <parent link="base_link" />
+    <child link="left_rear_wheel_link" />
+    <origin xyz="-1.39 0.9 -0.55" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="1000000" velocity="1000" />
+  </joint>
+  <xacro:wheel_transmission name="left_rear_wheel_link" />
+
+  <link name="left_front_steer_hinge_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="5" />
+      <inertia ixx="0.01354" ixy="0" ixz="0" iyy="0.01354" iyz="0" izz="0.02500" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/steer_hinge_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0.0 0.0 0.0" rpy="${PI / 2} 0.0 0.0" />
+      <geometry>
+          <cylinder radius="0.01" length="0.005" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.082353 0.56078 0 1" />
+      </material>
+    </visual>
+    <collision>
+      <!-- <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.01" />
+      </geometry> -->
+      <geometry>
+          <cylinder radius="0.1" length="0.05" />
+      </geometry>
+      <origin xyz="0.0 0.0 0.0" rpy="${PI / 2} 0.0 0.0" />
+    </collision>
+  </link>
+
+  <joint name="left_front_steer_hinge_link_joint" type="revolute">
+    <origin xyz="0.95 0.65 -0.525" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_front_steer_hinge_link" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.6" upper="0.6" effort="100000" velocity="1000" />
+  </joint>
+  <xacro:steering_hinge_transmission name="left_front_steer_hinge_link" />
+
+
+
+  <link name="right_front_steer_hinge_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <mass value="5" />
+      <inertia ixx="0.01354" ixy="0" ixz="0" iyy="0.01354" iyz="0" izz="0.02500" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/steer_hinge_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0.0 0.0 0.0" rpy="${PI / 2} 0.0 0.0" />
+      <geometry>
+          <cylinder radius="0.01" length="0.005" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.082353 0.56078 0 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="0.004" length="0.01" />
+      </geometry>
+    </collision> -->
+      <collision>
+        <geometry>
+            <cylinder radius="0.1" length="0.05" />
+        </geometry>
+        <origin xyz="0.0 0.0 0.0" rpy="${PI / 2} 0.0 0.0" />
+      </collision>
+  </link>
+
+  <joint name="right_front_steer_hinge_link_joint" type="revolute">
+    <parent link="base_link" />
+    <child link="right_front_steer_hinge_link" />
+    <origin xyz="0.95 -0.65 -0.525" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.6" upper="0.6" effort="100000" velocity="1000" />
+  </joint>
+  <xacro:steering_hinge_transmission name="right_front_steer_hinge_link" />
+
+
+  <link name="right_front_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0 " rpy="0 0 0" />
+      <mass value="10" />
+      <inertia ixx="0.3396" ixy="0" ixz="0" iyy="0.3396" iyz="0" izz="0.6125" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/wheel_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.35" length="0.2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_front_wheel_link_joint" type="continuous">
+    <parent link="right_front_steer_hinge_link" />
+    <child link="right_front_wheel_link" />
+    <origin xyz="0 -0.25 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="1000000" velocity="1000" />
+  </joint>
+  <xacro:wheel_transmission name="right_front_wheel_link" />
+
+  <link name="left_front_wheel_link">
+    <inertial>
+      <origin xyz="0 0 0 " rpy="0 0 0" />
+      <mass value="10" />
+      <inertia ixx="0.3396" ixy="0" ixz="0" iyy="0.3396" iyz="0" izz="0.6125" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 ${PI}" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/wheel_link.STL" scale="10 10 10"/>
+      </geometry>
+      <!-- <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.035" length="0.02" />
+      </geometry> -->
+      <material name="">
+        <color rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="${PI / 2} 0 0" />
+      <geometry>
+        <cylinder radius="0.35" length="0.2" />
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_front_wheel_link_joint" type="continuous">
+    <parent link="left_front_steer_hinge_link" />
+    <child link="left_front_wheel_link" />
+    <origin xyz="0 0.25 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+    <limit effort="1000000" velocity="1000" />
+  </joint>
+  <xacro:wheel_transmission name="left_front_wheel_link" />
+
+  <link name="camera">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/camera.STL" scale="10 10 10"/>
+      </geometry>
+      <material name="">
+        <color rgba="0.082353 0.082353 0.082353 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera" />
+    <origin xyz="0.77 0 0.46" rpy="0 0 0" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="lidar_2d">
+    <visual>
+      <origin xyz="0 0 -0.3" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://robot_gazebo/models/robots/pav_s01/lidar_2d.STL" scale="10 10 10"/>
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="-0.2 0 1.2" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="lidar_2d" />
+    <axis xyz="0 0 0" />
+  </joint>
+
+  <link name="imu">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <material name="black">
+        <color rgba="0.0 0.0 0.0 1.0" />
+      </material>
+    </visual>
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu" />
+    <origin xyz="-1.0 0 0.1" />
+    <axis xyz="0 0 1" />
+  </joint>
+
+  <xacro:include filename="$(find robot_description)/urdf/pav_s01_scaled/pav_s01_scaled.gazebo" />
+
+</robot>
