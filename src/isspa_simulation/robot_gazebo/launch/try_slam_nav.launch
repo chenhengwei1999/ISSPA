@@ -1,0 +1,27 @@
+<launch>
+
+    <include file="$(find robot_gazebo)/launch/try_robot_sim.launch">
+        <arg name="robot_name" value="pav_s01"/>
+        <arg name="world" value="ROS-Academy"/>
+    </include>
+
+    <include file="$(find robot_gazebo)/launch/gmapping.launch" />
+
+    <!-- Map -->
+    <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find robot_gazebo)/maps/$(arg world).yaml" /> -->
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/move_base_params.yaml" command="load" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/base_global_planner_params.yaml" command="load" />
+        <rosparam file="$(find robot_gazebo)/config/move_base/teb/teb_local_planner_params.yaml" command="load" />
+    </node>
+
+    <!-- 运行rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find robot_gazebo)/rviz/nav.rviz"/>
+
+</launch>
