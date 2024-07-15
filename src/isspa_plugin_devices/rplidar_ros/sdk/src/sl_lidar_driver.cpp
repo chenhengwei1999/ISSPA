@@ -548,31 +548,31 @@ namespace sl {
   
             return SL_RESULT_OK;
         }
-       
+
         sl_result grabScanDataHq(sl_lidar_response_measurement_node_hq_t* nodebuffer, size_t& count, sl_u32 timeout = DEFAULT_TIMEOUT)
         {
-            switch (_dataEvt.wait(timeout))
+            switch (static_cast<long unsigned int>(_dataEvt.wait(timeout)))
             {
-            case rp::hal::Event::EVENT_TIMEOUT:
-                count = 0;
-                return SL_RESULT_OPERATION_TIMEOUT;
-            case rp::hal::Event::EVENT_OK:
-            {
-                if (_cached_scan_node_hq_count == 0) return SL_RESULT_OPERATION_TIMEOUT; //consider as timeout
+                case static_cast<long unsigned int>(rp::hal::Event::EVENT_TIMEOUT):
+                    count = 0;
+                    return SL_RESULT_OPERATION_TIMEOUT;
+                case rp::hal::Event::EVENT_OK: {
+                    if (_cached_scan_node_hq_count == 0) return SL_RESULT_OPERATION_TIMEOUT; //consider as timeout
 
-                rp::hal::AutoLocker l(_lock);
+                    rp::hal::AutoLocker l(_lock);
 
-                size_t size_to_copy = std::min(count, _cached_scan_node_hq_count);
-                memcpy(nodebuffer, _cached_scan_node_hq_buf, size_to_copy * sizeof(sl_lidar_response_measurement_node_hq_t));
+                    size_t size_to_copy = std::min(count, _cached_scan_node_hq_count);
+                    memcpy(nodebuffer, _cached_scan_node_hq_buf,
+                           size_to_copy * sizeof(sl_lidar_response_measurement_node_hq_t));
 
-                count = size_to_copy;
-                _cached_scan_node_hq_count = 0;
-            }
-            return SL_RESULT_OK;
+                    count = size_to_copy;
+                    _cached_scan_node_hq_count = 0;
+                }
+                    return SL_RESULT_OK;
 
-            default:
-                count = 0;
-                return SL_RESULT_OPERATION_FAIL;
+                default:
+                    count = 0;
+                    return SL_RESULT_OPERATION_FAIL;
             }
         }
 
