@@ -11,14 +11,6 @@ Firstly, install all the dependencies:
 sudo apt-get install ros-noetic-navigation ros-noetic-gmapping ros-noetic-teb-local-planner ros-noetic-ackermann-msgs ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control ros-noetic-joint-state-publisher-gui
 ```
 
-Then install this package:
-```
-mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src
-git clone --recurse-submodules <this repo>
-cd ~/catkin_ws && catkin_make
-source ~/catkin_ws/devel/setup.bash
-```
-
 ## Usage
 Try the robot in Gazebo:
 ```
@@ -28,7 +20,14 @@ Try SLAM & navigation using [ROS navigation stack](http://wiki.ros.org/navigatio
 ```
 roslaunch robot_gazebo try_slam_nav.launch robot_name:=pav_s01 world:=ROS-Academy
 ```
+Try SLAM & navigation use rostopic from yolov5:
+```
+roslaunch robot_gazebo slam_nav_yolov5_demo.launch robot_name:=pav_s01 world:=ROS-Academy
+```
 
+## issues
+
+when you run the launch, if the terminal return ignoring trasform from authority“unknown_publish” with frame_id and child_id because they are same, you’d better use your own conda environment or `pip install -r requirements.txt`
 ## Acknowledgement
 - [ackermann_gazebo](https://github.com/Lord-Z/ackermann_gazebo)
 - [velodyne_simulator](https://github.com/lmark1/velodyne_simulator)
