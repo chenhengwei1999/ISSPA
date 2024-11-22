@@ -88,13 +88,12 @@ After that, you also need to change the contents of ``CMakeLists.txt``:
 
 .. code-block:: cmake
 
-    ...
+    # uncomment these two lines 
 
     catkin_python_setup()
 
     catkin_package()
 
-    ...
 
 Finally, you need to build the package:
 
@@ -302,7 +301,7 @@ After that, you also need to change the contents of ``CMakeLists.txt`` within ``
 
 .. code-block:: cmake
 
-    ...
+    # modify this part
 
     find_package(catkin REQUIRED COMPONENTS
     roscpp
@@ -311,12 +310,11 @@ After that, you also need to change the contents of ``CMakeLists.txt`` within ``
     isspa
     )
 
-    ...
+    # and these lines
 
     add_executable(test_import_roscpp_library src/main.cpp)
     target_link_libraries(test_import_roscpp_library ${catkin_LIBRARIES})
 
-    ...
 
 And add a ``<depend>isspa</depend>`` tag inside the ``package.xml``.
 
