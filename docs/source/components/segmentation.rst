@@ -23,9 +23,6 @@ to select a safer detour.
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
 
-.. raw:: html
-
-    <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 Vehicle Segmentation
 ~~~~~~~~~~~~~~~~~~~~

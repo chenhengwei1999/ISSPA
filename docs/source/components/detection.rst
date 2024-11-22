@@ -5,9 +5,6 @@
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
 
-.. raw:: html
-
-    <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 Currently widely used sensing sensors in autonomous driving include LiDAR, cameras, radar, and event-based cameras (e.g., DVS).
 Based on such sensors, we can implement tasks such as object detection algorithms, instance segmentation algorithms, 
@@ -23,12 +20,6 @@ and drivable area detection. In ISSPA, we categorize detection tasks based on th
 **Camera Based**
 ----------------
 
-.. meta::
-   :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
-
-.. raw:: html
-
-    <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 Traffic light Recognition
 ~~~~~~~~~~~~~~~~~~~~~~~~~

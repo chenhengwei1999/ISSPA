@@ -65,10 +65,6 @@ Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation
 .. meta::
    :description lang=en: Documentation for ISSPA, the Intelligent Self-driving System empowering Physical Agents.
 
-.. Adds a hidden link for the purpose of validating Read the Docs' Mastodon profile
-.. raw:: html
-
-   <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 **ISSPA (Intelligent Self-driving System empowering Physical Agents)** is an experimental platform for 
 self-driving physical agents, which was originally designed to facilitate researchers by creating
