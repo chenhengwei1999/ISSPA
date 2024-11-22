@@ -1,5 +1,5 @@
 **Chassis**
-======================
+===========
 
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
@@ -9,7 +9,7 @@
     <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 **Preface**
----------
+-----------
 
 ISSPA's vehicle chassis primarily adopts **Ackermann steering design**, where the rear two wheels
 serve as drive wheels controlled by motors, while the front two wheels act as steering wheels 
@@ -57,7 +57,7 @@ In the context of intelligent vehicles, the roles of MCUs like STM32 include:
 
 
 **Wheel Encoders**
------------------
+------------------
 
 Wheel encoders in intelligent vehicles serve crucial functions in measuring and monitoring wheel motion, 
 playing a significant role in applications such as odometry estimation, and precise positioning. 
@@ -87,7 +87,7 @@ This enables precise navigation, control, and obstacle avoidance capabilities fo
    `Wheel Encoders example <https://www.baumer.com/us/en/product-overview/distance-measurement/measuring-wheel-encoders/c/292>`_
 
 **Ackermann Steering**
----------------------
+----------------------
 
 Ackermann steering is an engineering principle used in the design of vehicle steering systems, aiming to ensure that all wheels maintain a common
 turning radius during turns. This design method adjusts the steering angles of the vehicle's wheels, allowing the inner wheels to turn 

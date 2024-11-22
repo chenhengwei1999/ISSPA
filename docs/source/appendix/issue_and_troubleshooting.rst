@@ -5,7 +5,7 @@ During ISSPA'S Compilation
 --------------------------
 
 Issue A
-~~~~~~~~
+~~~~~~~
 
 When running ``catkin_make``, the local environment conflicts with the conda virtual environment.
 
@@ -35,7 +35,7 @@ When running ``catkin_make``, the local environment conflicts with the conda vir
 Since there is a Python environment in the locally installed anaconda, ``catkin_make`` uses python in the conda environment by default, which is incompatible with the python version required in the ros environment.
 
 Solution A
-~~~~~~~~~~~
+~~~~~~~~~~
 
 There are two ways to solve the above problem:
 

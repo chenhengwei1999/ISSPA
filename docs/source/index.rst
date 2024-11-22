@@ -1,9 +1,9 @@
 ISSPA Documentation
-===================================
+===================
 
 
 Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
--------------------------------------------------------------------------------
+-----------------------------------------------------------------------------
 
 .. figure:: imgs/isspa_logo.png
    :alt: ISSPA Overview
@@ -106,7 +106,7 @@ Here are some guidelines for you to get started:
 
 
 ISSPA COMPONENTS
-------------------------
+----------------
 
 Introduction to the core elements of ISSPA.
 
@@ -137,8 +137,8 @@ Documents such as user manuals (e.g. PAV-S) are categorized.
 - :doc:`/appendix/issue_and_troubleshooting` - Common issues and solutions.
 
 
-CONTRIBUTIND TO ISSPA
-------------------------
+CONTRIBUTING TO ISSPA
+---------------------
 
 Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
 please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.

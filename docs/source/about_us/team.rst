@@ -1,5 +1,5 @@
 **Team**
-=========
+========
 
 The team members have varied professional backgrounds and brief biographies are provided below:
 

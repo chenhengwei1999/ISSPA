@@ -1,5 +1,5 @@
 **Detection**
-======================
+=============
 
 
 .. meta::
@@ -21,7 +21,7 @@ and drivable area detection. In ISSPA, we categorize detection tasks based on th
 
 
 **Camera Based**
--------------------
+----------------
 
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
@@ -54,7 +54,7 @@ In ISSPA, we trained a classifier based on yolov5 that can recognize the color o
 
 
 **Lidar Based**
--------------------
+---------------
 
 Lidar plays a critical role in autonomous driving due to its high precision, real-time scanning capability, 360-degree perception, 
 and adaptability to diverse environmental conditions. As a key sensor, Lidar contributes significantly to the safe and reliable 

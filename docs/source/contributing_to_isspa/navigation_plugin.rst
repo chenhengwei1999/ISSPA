@@ -1,5 +1,5 @@
 **Navigation Plugin**
-======================
+=====================
 
 **Current Listings**
 --------------------
@@ -25,7 +25,7 @@ As of now, ISSPA has integrated some baseline algorithms as shown below:
 
 
 **Adding Plugins**
-------------------------------
+------------------
 
 The structure of the document has been designed in ISSPA and you can contribute to us by following the tutorials below.
 Just use `isspa_navigation_plugin` as the name of your algorithm:

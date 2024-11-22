@@ -1,5 +1,5 @@
 **Segmentation**
-======================
+================
 
 The solution for autonomous driving perception involves not only object detection but also segmentation. These two solutions are often 
 combined to provide a more comprehensive understanding of the environment. Vehicle segmentation is typically a subtask of semantic segmentation, 
@@ -18,7 +18,7 @@ to select a safer detour.
 
 
 **Camera Based**
--------------------
+----------------
 
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
@@ -28,7 +28,7 @@ to select a safer detour.
     <a style="display: none;" rel="me" href="https://fosstodon.org/@readthedocs">Mastodon</a>
 
 Vehicle Segmentation
-~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 Vehicle segmentation is a task in autonomous driving aimed at accurately separating the area occupied by vehicles from images or videos. 
 Its results can provide crucial perceptual information to autonomous driving systems, aiding vehicles in understanding the surrounding 

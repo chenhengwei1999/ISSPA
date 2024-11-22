@@ -24,7 +24,7 @@ To build packages with `rosbuild`, the command is:
 
 
 catkin_make
-------------
+-----------
 
 `catkin_make` is a commonly used command for building ROS workspaces. It is a convenient way to invoke calls to CMake and make in the standard CMake workflow. 
 The entire workspace is treated as a single CMake project, making incremental builds faster.
@@ -33,7 +33,7 @@ Limitations of `catkin_make` include its inability to **process plain CMake pack
 
 
 catkin_make_isolated
----------------------
+--------------------
 
 `catkin_make_isolated` improves on `catkin_make` by building isolated workspaces. Each software package is independently configured, built, and installed into 
 its own directory. This allows for the removal of the install artifacts of a single package by deleting its directory.
@@ -94,7 +94,7 @@ Alternatively, you can use the following command to recompile the entire project
 
 
 Conclusion
------------
+----------
 
 ROS build systems have undergone continuous evolution, from the traditional `rosbuild` to the current state-of-the-art `colcon`, enhancing efficiency and 
 flexibility in software development for robotics.

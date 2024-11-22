@@ -1,5 +1,5 @@
 **Navigation**
-======================
+==============
 
 .. meta::
    :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
@@ -31,7 +31,7 @@ control board to ensure responsiveness and meet real-time operational requiremen
 
 
 **List of Navigation  Algorithms**
------------------------------------
+----------------------------------
 
 ISSPA has deployed one or several benchmark algorithms for both planning and control tasks within the Navigation module. 
 For planning, it predominantly relies on the technology path provided by the ROS Navigation stack, 
@@ -169,7 +169,7 @@ Its outputs are:
 
 
 **Reference**
---------------
+-------------
 
 - `ros navigation stack ROS wiki <https://wiki.ros.org/navigation>`_.
 

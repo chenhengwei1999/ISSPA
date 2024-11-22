@@ -59,7 +59,7 @@ particularly between a `Local Computer` (personal computer) and `PAVS` (Physical
 For example, control instructions sent from the local terminal are received and executed by the vehicle.
 
 Environments Description
-______________________
+________________________
 
 Suppose the ip of your Local Computer and PAVS are as follows,
 
@@ -98,7 +98,7 @@ The main idea is to define the master nodes and hostnames of the PAVS and the lo
 
 
 Validation
-___________
+__________
 
 This section will verify the correctness of the settings described above and demonstrate the results of multi-machine communication.
 
