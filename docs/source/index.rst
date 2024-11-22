@@ -1,16 +1,3 @@
-ISSPA Documentation
-===================
-
-
-Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
----------------------------------------------------------------------------------
-
-.. figure:: imgs/isspa_logo.png
-   :alt: ISSPA Logo
-   :align: center
-
-   **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
-
 .. toctree::
    :maxdepth: 1
    :caption: HOME 
@@ -63,8 +50,22 @@ Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation
 
 
 .. meta::
-   :description lang=en: Documentation for ISSPA, the Intelligent Self-driving System empowering Physical Agents.
+   :description lang=en: ISSPA, the Intelligent Self-driving System empowering Physical Agents.
 
+
+
+ISSPA Documentation
+===================
+
+
+Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
+---------------------------------------------------------------------------------
+
+.. figure:: imgs/isspa_logo.png
+   :alt: ISSPA Logo
+   :align: center
+
+   **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
 
 **ISSPA (Intelligent Self-driving System empowering Physical Agents)** is an experimental platform for 
 self-driving physical agents, which was originally designed to facilitate researchers by creating
@@ -72,23 +73,31 @@ baseline solutions that are easy to use, algorithmically verifiable, and modular
 It is developed under the leadership of the `TIS Lab <https://tis.ios.ac.cn/>`_, of which the team members 
 are listed in :doc:`/about_us/team`.
 
-
 .. note::
 
    The ISSPA project is a branch of the `ISS <https://tis.ios.ac.cn/iss/>`_ project.
 
-**ISSPA has the following features:**
 
-- A collection of baseline solutions for autonomous driving.
-
-- Cloud platform that supports the remote use of physical vehicles.
-
+ISSPA architecture
+~~~~~~~~~~~~~~~~~~
 
 .. figure:: imgs/isspa_overview.jpg
    :alt: Overview of the ISSPA architecture.
    :align: center
 
-   **Overview of ISSPA**
+   **ISSPA architecture**
+
+
+The architecture of ISSPA is shown above. 
+ISSPA follows a hierarchical and modular architecture, which provides a clear structure for developing 
+intelligent self-driving systems where single components can be easily added, improved, and extended to 
+meet specific needs.
+
+Among others, ISSPA provides the following features:
+
+- A collection of baseline solutions for autonomous driving.
+- Cloud platform that supports the remote use of physical vehicles.
+
 
 
 TUTORIALS
