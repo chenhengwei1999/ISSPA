@@ -136,7 +136,7 @@ Below we add a simple ``test_import_python_package.py`` script under ``~/ISSPA/s
         rospy.init_node('test_import_python_package')
         test_log()
 
-And, run the following command to make the script executable:
+Then, we run the following command to make the script executable:
 
 .. code-block:: bash
 
@@ -162,8 +162,8 @@ ISSPA C++ Libraries
 
 The ROS library configuration for C++ is more complex than for python, so let's learn how to create it!
 
-Creataion Method
-~~~~~~~~~~~~~~~~
+Creation Method
+~~~~~~~~~~~~~~~
 
 Here's an example of creating a C++ library named ``isspa``, which also has the head file named ``util.h``.
 
@@ -198,9 +198,9 @@ The contents of the ``util.h`` file are as follows:
 
 .. note::
 
-    Don't misspell ``#ifndef`` as ``#ifdef``. , otherwise the contents of the header file will not be found during compilation.
+    Don't misspell ``#ifndef`` as ``#ifdef``, otherwise the contents of the header file will not be found during compilation.
 
-Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` folder with the following contents:
+Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` folder with the following content:
 
 .. code-block:: cpp
 
@@ -224,7 +224,7 @@ Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` folder with the follow
         ROS_INFO("Hello from util.cpp");
     }
 
-After that, you also need to change the contents of ``CMakeLists.txt`` within ``isspa`` package:
+After that, you also need to change the content of ``CMakeLists.txt`` within the ``isspa`` package:
 
 .. code-block:: cmake
 
@@ -297,7 +297,7 @@ A simple example is as follows:
         return 0;
     }
 
-After that, you also need to change the contents of ``CMakeLists.txt`` within ``test_import_roscpp_library`` package:
+After that, you also need to change the content of ``CMakeLists.txt`` within the ``test_import_roscpp_library`` package:
 
 .. code-block:: cmake
 
@@ -315,8 +315,7 @@ After that, you also need to change the contents of ``CMakeLists.txt`` within ``
     add_executable(test_import_roscpp_library src/main.cpp)
     target_link_libraries(test_import_roscpp_library ${catkin_LIBRARIES})
 
-
-And add a ``<depend>isspa</depend>`` tag inside the ``package.xml``.
+and add a ``<depend>isspa</depend>`` tag inside the ``package.xml``.
 
 Finally, you need to build the package:
 
