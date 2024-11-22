@@ -63,7 +63,7 @@ Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation
 
 
 .. meta::
-   :description lang=en: Automate building, version=0.1, and hosting of your technical documentation continuously on Read the Docs.
+   :description lang=en: Documentation for ISSPA, the Intelligent Self-driving System empowering Physical Agents.
 
 .. Adds a hidden link for the purpose of validating Read the Docs' Mastodon profile
 .. raw:: html
