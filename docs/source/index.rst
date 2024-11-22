@@ -144,7 +144,6 @@ Guide you on how to add plugins to ISSPA, if you have a better solution and are 
 please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
 
 .. image:: ./imgs/github_mark.png
-   
    :target: https://github.com/chenhengwei1999/ISSPA/
    :alt: GitHub Repository
    :align: center
