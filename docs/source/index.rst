@@ -2,11 +2,11 @@ ISSPA Documentation
 ===================
 
 
-Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
------------------------------------------------------------------------------
+Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
+---------------------------------------------------------------------------------
 
 .. figure:: imgs/isspa_logo.png
-   :alt: ISSPA Overview
+   :alt: ISSPA Logo
    :align: center
 
    **Logo of ISSPA (Intelligent Self-driving System empowering Physical Agents)**
@@ -47,7 +47,7 @@ Welcome to `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
 
 .. toctree::
    :maxdepth: 1
-   :caption: CONTRIBUTIND TO ISSPA
+   :caption: CONTRIBUTING TO ISSPA
    :hidden:
 
    /contributing_to_isspa/mapping_plugin.rst
