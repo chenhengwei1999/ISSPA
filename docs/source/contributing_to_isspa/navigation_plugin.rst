@@ -4,7 +4,7 @@
 **Current Listings**
 --------------------
 
-As of now, ISSPA has integrated some baseline algorithms as shown below:
+As of now, ISSPA has integrated the following baseline algorithms:
 
 
 +----------------------+----------------------+
