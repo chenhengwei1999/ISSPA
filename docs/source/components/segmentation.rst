@@ -10,14 +10,14 @@ The results of semantic segmentation can also help the system recognize the loca
 avoidance strategies during the path planning process. The system can choose to navigate around obstacles systematically or analyze semantic information 
 to select a safer detour.
 
-- `Camera based`_
+- :ref:`Camera based <seg_camera>`
 
 - LiDAR based
 
 - Fusion based
 
 
-.. _`Camera based`:
+.. _`seg_camera`:
 
 **Camera Based**
 ----------------
