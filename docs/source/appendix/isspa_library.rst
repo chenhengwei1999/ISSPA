@@ -3,35 +3,36 @@
 
 Some common tools will be integrated into ISSPA in the form of **Python Packages** or **CPP Libraries**, 
 the purpose of which is to interconnect ROS packages and give you a clearer insight into how ISSPA works. 
-In the meantime, you will also understand ISSPA's program logic and how it relates to each other. Let's start 
-following along with the tutorial.
+In the meantime, you will also understand ISSPA's program logic and how its components relate to each other. 
 
-The tutorial includes the following:
+The tutorial includes the following parts:
 
-- ISSPA Python Packages
+- `ISSPA Python package`_
 
-    - Creation Method
+    - :ref:`Creation method <pycm>`
 
-    - Usage Examples
+    - :ref:`Usage examples <pyue>`
 
-- ISSPA C++ Libraries
+- `ISSPA C++ library`_
 
-    - Creation Method
+    - :ref:`Creation method <ccm>`
 
-    - Usage Examples
+    - :ref:`Usage examples <cue>`
 
 
-ISSPA Python Packages
----------------------
+ISSPA Python Package
+--------------------
 
-First, you need to understand how to create a Python Package in ROS and how other ROS packages import it. 
-Second, you will be introduced to the basic usage of Python Package with code samples.
+First, you need to understand how to create a Python package in ROS and how other ROS packages import it. 
+Second, you will be introduced to the basic usage of Python package with code samples.
+
+.. _`pycm`:
 
 Creation Method
 ~~~~~~~~~~~~~~~
 
-Here's an example of creating a python package named ``isspa``, which also has the package name ``isspa``.
-Create a ``setup.py`` file in the root directory of the ROS package, i.e., the directory on a level with ``CMakeLists.txt``:
+Here's an example of creating a ROS package named ``isspa``, which contains a Python package also named ``isspa``.
+Create a ``setup.py`` file in the root directory of the ``isspa`` ROS package, i.e., the directory containing ``CMakeLists.txt``:
 
 .. code-block:: bash
 
@@ -44,7 +45,7 @@ Create a ``setup.py`` file in the root directory of the ROS package, i.e., the d
     touch scripts/isspa/logging_output.py
     chomd +x scripts/isspa/logging_output.py
 
-The contents of the ``setup.py`` file are as follows:
+The content of the ``setup.py`` file is the following:
 
 .. code-block:: python
 
@@ -60,20 +61,20 @@ The contents of the ``setup.py`` file are as follows:
 
     setup(**d)
 
-Only two sentences are important here, the rest are the same every time:
+Only two lines are important here, the rest are the same every time:
 
 .. code-block:: python
 
     packages=['isspa'],
     package_dir={'': 'scripts'},
 
-The first sentence indicates the name of the package, and the second sentence indicates the directory where the package is located.
+The first line indicates the name of the package, and the second line indicates the directory where the package is located.
 
 .. note::
 
-    The version should be consistent with the version of the package in the ``package.xml`` file.
+    The version should be consistent with the version of the ROS package in the ``package.xml`` file.
 
-The contents of the ``logging_output.py`` file are as follows:
+The content of the ``logging_output.py`` file is like the following:
 
 .. code-block:: python
 
@@ -108,8 +109,9 @@ If all goes well, you can try running the program in another package. A simple t
 
 .. code-block:: bash
 
-    # Open a new terminal
+    # Open a new terminal and run
     roscore
+    # after having sourced devel/setup.bash
 
     # Open another terminal, and create a script file
     cd  ~/ISSPA/src/
@@ -140,10 +142,10 @@ Then, we run the following command to make the script executable:
 
 .. code-block:: bash
 
-    # In another terminal
+    # In another terminal, after having sourced devel/setup.bash
     rosrun test_import_python_package test_import_python_package.py
 
-The following results will be output:
+If everything is working as expected, the following messages will be output:
 
 .. code-block:: bash
 
@@ -151,21 +153,25 @@ The following results will be output:
     [INFO] [1632938655.758263]: Welcome to ISSPA! This is a message from test_import_python_package.py
 
 
+.. _`pyue`:
+
 Usage Examples
 ~~~~~~~~~~~~~~
 
 *Needs to be replenished.*
 
 
-ISSPA C++ Libraries
--------------------
+ISSPA C++ Library
+-----------------
 
-The ROS library configuration for C++ is more complex than for python, so let's learn how to create it!
+The ROS library configuration for C++ is more complex than for Python, so let's learn how to create it!
+
+.. _`ccm`:
 
 Creation Method
 ~~~~~~~~~~~~~~~
 
-Here's an example of creating a C++ library named ``isspa``, which also has the head file named ``util.h``.
+Here's an example of creating a C++ library named ``isspa``, which also provides a header file named ``util.h``.
 
 .. code-block:: bash
 
@@ -176,7 +182,7 @@ Here's an example of creating a C++ library named ``isspa``, which also has the 
     mkdir include
     touch include/isspa/util.h
 
-The contents of the ``util.h`` file are as follows:
+The content of the ``util.h`` file is:
 
 .. code-block:: cpp
 
@@ -200,7 +206,7 @@ The contents of the ``util.h`` file are as follows:
 
     Don't misspell ``#ifndef`` as ``#ifdef``, otherwise the contents of the header file will not be found during compilation.
 
-Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` folder with the following content:
+Then create ``util.cpp`` in the ``~/ISSPA/src/isspa/src`` directory with the following content:
 
 .. code-block:: cpp
 
@@ -335,13 +341,15 @@ If all goes well, you can try running the program in another package. A simple t
     # In another terminal
     rosrun test_import_roscpp_library test_import_roscpp_library
 
-The following results will be output:
+The following messages are expected to be output:
 
 .. code-block:: bash
 
     [Welcome to ISSPA util] Hello from util.cpp
     [INFO] [1632938655.757961]: Hello from util.cpp
 
+
+.. _`cue`:
 
 Usage Examples
 ~~~~~~~~~~~~~~
