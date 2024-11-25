@@ -1,7 +1,7 @@
 **User Manual Collection**
 ==========================
 
-Once the workspace setup is complete, you can attempt to perform the following tasks, 
+Once the :ref:`workspace setup<WorkSpace Setup>` is complete, you can attempt to perform the following tasks, 
 including vehicle chassis start, sensors start, remote control, SLAM, and navigation. 
 
 Up to now, the following experimental vehicles are currently supported:
@@ -31,5 +31,6 @@ Refer :doc:`/appendix/pavs_user_manual` for documentation.
 Issue & Troubleshooting
 -----------------------
 
-In the process of compiling the program and using the hardware there may be many problems, some common problems can be referred to this document 
-to try to solve, if you do not find a solution at :doc:`here </appendix/issue_and_troubleshooting>`, you can leave a issue in the ISSPA repository.
+While compiling `ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ and using the PAV-S vehicle, you might face some problem. 
+The solution to a number of common problems can be find :doc:`here </appendix/issue_and_troubleshooting>`; 
+if your problem is not one of the known ones, we invite you to open an issue in the `ISSPA repository <https://github.com/chenhengwei1999/ISSPA/>`_.
