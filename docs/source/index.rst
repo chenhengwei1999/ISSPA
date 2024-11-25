@@ -12,6 +12,15 @@
 
 .. toctree::
    :maxdepth: 1
+   :caption: CONTRIBUTING TO ISSPA
+   :hidden:
+
+   /contributing_to_isspa/mapping_plugin.rst
+   /contributing_to_isspa/navigation_plugin.rst
+   /contributing_to_isspa/object_detection_plugin.rst
+
+.. toctree::
+   :maxdepth: 1
    :caption: ISSPA COMPONENTS
    :hidden:
 
@@ -31,15 +40,6 @@
    /appendix/isspa_library
    /appendix/compilation_tools
    /appendix/issue_and_troubleshooting
-
-.. toctree::
-   :maxdepth: 1
-   :caption: CONTRIBUTING TO ISSPA
-   :hidden:
-
-   /contributing_to_isspa/mapping_plugin.rst
-   /contributing_to_isspa/navigation_plugin.rst
-   /contributing_to_isspa/object_detection_plugin.rst
 
 .. toctree::
    :maxdepth: 1
