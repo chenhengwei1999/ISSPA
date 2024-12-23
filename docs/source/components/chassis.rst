@@ -5,7 +5,7 @@
 **Preface**
 -----------
 
-`ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_'s vehicle chassis primarily adopts the **Ackermann steering design**, 
+`ISSPA <https://github.com/iscas-tis/ISS-PA/>`_'s vehicle chassis primarily adopts the **Ackermann steering design**, 
 where the front two wheels act as steering wheels controlled by a servo motor while traction is provided by the rear two 
 wheels that serve as drive wheels controlled by motors. This configuration enables basic vehicle maneuvers, such as steering 
 and forward and reverse movement. 
