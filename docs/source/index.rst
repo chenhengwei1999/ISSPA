@@ -58,7 +58,7 @@ ISSPA Documentation
 ===================
 
 
-Welcome to the `ISSPA <https://github.com/chenhengwei1999/ISSPA>`_ documentation!
+Welcome to the `ISSPA <https://github.com/iscas-tis/ISS-PA>`_ documentation!
 ---------------------------------------------------------------------------------
 
 .. figure:: imgs/isspa_logo.png
@@ -146,10 +146,10 @@ CONTRIBUTING TO ISSPA
 ---------------------
 
 Guide you on how to add plugins to ISSPA, if you have a better solution and are willing to contribute to this project, 
-please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_.
+please do not hesitate to ``Pull & Request`` on `Github: ISSPA <https://github.com/iscas-tis/ISS-PA/>`_.
 
 .. image:: ./imgs/github_mark.png
-   :target: https://github.com/chenhengwei1999/ISSPA/
+   :target: https://github.com/iscas-tis/ISS-PA/
    :alt: GitHub Repository
    :align: center
    :width: 20%
