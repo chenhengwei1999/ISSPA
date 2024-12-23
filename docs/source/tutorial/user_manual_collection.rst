@@ -31,6 +31,6 @@ Refer :doc:`/appendix/pavs_user_manual` for documentation.
 Issue & Troubleshooting
 -----------------------
 
-While compiling `ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ and using the PAV-S vehicle, you might face some problem. 
+While compiling `ISSPA <https://github.com/iscas-tis/ISS-PA/>`_ and using the PAV-S vehicle, you might face some problem. 
 The solution to a number of common problems can be find :doc:`here </appendix/issue_and_troubleshooting>`; 
-if your problem is not one of the known ones, we invite you to open an issue in the `ISSPA repository <https://github.com/chenhengwei1999/ISSPA/>`_.
+if your problem is not one of the known ones, we invite you to open an issue in the `ISSPA repository <https://github.com/iscas-tis/ISS-PA/>`_.
