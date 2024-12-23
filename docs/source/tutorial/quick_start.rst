@@ -1,7 +1,7 @@
 **Quick Start**
 ===============
 
-In this tutorial, you will learn how to use the `ISSPA source code <https://github.com/chenhengwei1999/ISSPA>`_
+In this tutorial, you will learn how to use the `ISSPA source code <https://github.com/iscas-tis/ISS-PA/>`_
 and how PA (Pyhsical Agents) are launched! Specifically, we will guide you on how to setup your system with 
 respect to the following topics:
 
@@ -32,7 +32,7 @@ The following are some of the dependency libraries that you need to install befo
     sudo apt update
     sudo apt install libuvc-dev libgoogle-glog-dev ros-noetic-costmap-2d ros-noetic-nav-core libceres-dev
 
-You might also need to install ``git`` to clone the `ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ repository:
+You might also need to install ``git`` to clone the `ISSPA <https://github.com/iscas-tis/ISS-PA/>`_ repository:
 
 .. code-block:: bash
 
@@ -44,11 +44,11 @@ You might also need to install ``git`` to clone the `ISSPA <https://github.com/c
 WorkSpace Setup
 ---------------
 
-`ISSPA <https://github.com/chenhengwei1999/ISSPA/>`_ is our main repository; it is recommended that you first understand its directory structure, 
+`ISSPA <https://github.com/iscas-tis/ISS-PA/>`_ is our main repository; it is recommended that you first understand its directory structure, 
 which is necessary for later use and development.
 
 .. image:: ../imgs/github_mark.png
-   :target: https://github.com/chenhengwei1999/ISSPA/
+   :target: https://github.com/iscas-tis/ISS-PA/
    :alt: GitHub Repository
    :align: center
    :width: 20%
@@ -58,7 +58,7 @@ First, open a terminal and clone the source code inside your preferred directory
 .. code-block:: bash
 
   cd /home/$USER
-  git clone https://github.com/chenhengwei1999/ISSPA.git
+  git clone https://github.com/iscas-tis/ISS-PA.git
 
 .. note::
 
